@@ -8,7 +8,7 @@
         <%= render "hyrax/homepage/marketing" if controller_name == 'homepage' || controller_name == 'hyrax_contact_form' || controller_name == 'pages' %>
       </div>
       <div class="share-your-work-button">
-        <% if @presenter.display_share_button? %>
+        <% if @presenter&.display_share_button? %>
           <div class="institutional-repository home_share_work row">
             <div class="col-sm-12 text-center">
               <% if signed_in? %>
