@@ -194,6 +194,11 @@ module Hyrax
         result = response.documents.reject { |document| document["thumbnail_path_ss"].blank? || document["thumbnail_path_ss"].include?('no-files') }.map do |document|
           { id: document["thumbnail_path_ss"].split('/').last.gsub(/\?.*/, ''), text: document["title_tesim"].first }
         end
+        reset_thumbnail_option = {
+          id: '',
+          text: 'Default thumbnail'
+        }
+        result << reset_thumbnail_option
         render json: result
       end
 
