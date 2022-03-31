@@ -9,7 +9,7 @@ RUN apk --no-cache upgrade && \
     libxml2-dev \
     mediainfo \
     perl \
-    $EXTRA_APK_PACKAGES
+    postgresql-client \
 
 USER app
 
@@ -23,6 +23,7 @@ ENV PATH="${PATH}:/app/fits"
 
 COPY --chown=1001:101 $APP_PATH/Gemfile* /app/samvera/hyrax-webapp/
 RUN bundle install --jobs "$(nproc)"
+COPY --chown=1001:101 $APP_PATH/bin/db-migrate-seed.sh /app/samvera/
 
 COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
 
