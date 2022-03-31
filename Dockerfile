@@ -10,7 +10,7 @@ RUN apk --no-cache upgrade && \
     mediainfo \
     perl \
     postgresql-client \
-
+    $EXTRA_APK_PACKAGES
 USER app
 
 RUN mkdir -p /app/fits && \
