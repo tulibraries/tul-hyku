@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Taken from https://codeburst.io/service-workers-rails-middleware-841d0194144d
 class NoCacheMiddleware
   # pass controllers when we register this middleware.

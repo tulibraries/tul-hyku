@@ -1,5 +1,6 @@
-# OVERRIDE Hyrax 2.9.0 to make collection thumbnails uploadable
+# frozen_string_literal: true
 
+# OVERRIDE Hyrax 2.9.0 to make collection thumbnails uploadable
 module Hyrax
   module IndexesThumbnails
     extend ActiveSupport::Concern
@@ -8,7 +9,7 @@ module Hyrax
       class_attribute :thumbnail_path_service
       self.thumbnail_path_service = ThumbnailPathService
       class_attribute :thumbnail_field
-      self.thumbnail_field = 'thumbnail_path_ss'.freeze
+      self.thumbnail_field = 'thumbnail_path_ss'
     end
 
     # Adds thumbnail indexing to the solr document
