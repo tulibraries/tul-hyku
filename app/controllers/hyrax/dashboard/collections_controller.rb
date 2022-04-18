@@ -215,10 +215,19 @@ module Hyrax
       def files
         params[:q] = '' unless params[:q]
         builder = Hyrax::CollectionMemberSearchBuilder.new(scope: self, collection: collection, search_includes_models: :works)
+        # get the default work image because we do not want to show any works in this dropdown that only have the default work image. this indicates that they have no files attached, and will throw an error if selected.
+        default_work_thumbnail_path = Site.instance.default_work_image&.url.presence || ActionController::Base.helpers.image_path('default.png')
+        work_with_no_files_thumbnail_path = ActionController::Base.helpers.image_path('work.png')
         response = repository.search(builder.where(params[:q]).query)
-        result = response.documents.reject { |document| document["thumbnail_path_ss"].blank? }.map do |document|
+        # only return the works that have files, because these will be the only ones with a viable thumbnail
+        result = response.documents.reject { |document| document["thumbnail_path_ss"].blank? || document["thumbnail_path_ss"].include?(default_work_thumbnail_path) || document["thumbnail_path_ss"].include?(work_with_no_files_thumbnail_path) }.map do |document|
           { id: document["thumbnail_path_ss"].split('/').last.gsub(/\?.*/, ''), text: document["title_tesim"].first }
         end
+        reset_thumbnail_option = {
+          id: '',
+          text: 'Default thumbnail'
+        }
+        result << reset_thumbnail_option
         render json: result
       end
 
