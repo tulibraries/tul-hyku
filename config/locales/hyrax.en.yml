@@ -809,6 +809,7 @@ en:
         link: View all collections
         tab_label: Explore Collections
         title: Explore Collections
+        thumbnail: Thumbnail
       featured_researcher:
         missing: No researchers have been featured.
         tab_label: Featured Researcher
@@ -824,6 +825,11 @@ en:
         no_works: No works have been featured
         tab_label: Featured Works
         title: Featured Works
+      featured_collections:
+        no_collections: No collections have been featured.
+        title: Featured Collections
+        document:
+          title_label: Title
       recently_uploaded:
         depositor: Depositor
         details: Details
