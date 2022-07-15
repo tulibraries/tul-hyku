@@ -51,7 +51,7 @@
           <% end %>
 
           <% unless @account.search_only? %>
-            <h3><%= t(".datacite_endpoint") %></h3>
+            <h3><%= t(".data_cite_endpoint") %></h3>
 					  <%= f.simple_fields_for :data_cite_endpoint do |s| %>
 						  <%= s.input :mode, collection: ['test', 'production'], required: false  %>
 						  <%= s.input :prefix, required: false  %>
