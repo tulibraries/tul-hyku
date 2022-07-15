@@ -91,6 +91,7 @@ module Proprietor
       end
 
       # Never trust parameters from the scary internet, only allow the permitted parameters through.
+      # rubocop:disable Style/SymbolArray
       def edit_account_params
         params.require(:account).permit(:name,
                                         :cname,
@@ -103,10 +104,11 @@ module Proprietor
                                                                                  :_destroy,
                                                                                  :full_account_id,
                                                                                  full_account_attributes: [:id]],
-                                        solr_endpoint_attributes: %i[id url],
-                                        fcrepo_endpoint_attributes: %i[id url base_path],
-                                        data_cite_endpoint_attributes: %i[mode prefix username password])
+                                        solr_endpoint_attributes: [:id, :url],
+                                        fcrepo_endpoint_attributes: [:id, :url, :base_path],
+                                        data_cite_endpoint_attributes: [:mode, :prefix, :username, :password])
       end
+      # rubocop: enable Style/SymbolArray
 
       def account_params
         params.require(:account).permit(
