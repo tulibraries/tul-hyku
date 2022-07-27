@@ -54,7 +54,6 @@ test:
     DB_NAME: hyku
     DB_URL: postgres://postgres:postgres@db/hyku
     DB_USER: postgres
-    DB_HOST: db
     DB_PORT: 5432
     FCREPO_HOST: fcrepo
     FCREPO_PORT: 8081
