@@ -6,19 +6,19 @@
   <div class="form-group">
     <label class="radio">
       <%# OVERRIDE BEGIN: added check if true %>
-      <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, checked: @collection.open_access? %>
+      <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, checked: @collection&.open_access? %>
       <%# OVERRIDE END %>
       <strong><%= t('hyrax.visibility.open.text') %></strong> - <%= t('hyrax.visibility.open.note_html') %>
     </label>
     <label class="radio">
       <%# OVERRIDE BEGIN: added check if true %>
-      <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED, checked: @collection.authenticated_only_access? %>
+      <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED, checked: @collection&.authenticated_only_access? %>
       <%# OVERRIDE END %>
       <strong><%= t('hyrax.visibility.authenticated.text', institution: institution_name) %></strong> - <%= t('hyrax.visibility.authenticated.note_html', institution: institution_name) %>
     </label>
     <label class="radio">
       <%# OVERRIDE BEGIN: added check if true %>
-      <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, checked: @collection.private_access? %>
+      <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, checked: @collection&.private_access? %>
       <%# OVERRIDE END %>
       <strong><%= t('hyrax.visibility.restricted.text') %></strong>- <%= t('hyrax.visibility.restricted.note_html') %>
     </label>
