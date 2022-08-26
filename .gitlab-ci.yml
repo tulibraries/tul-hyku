@@ -67,7 +67,7 @@ test:
     REDIS_HOST: redis
     SOLR_ADMIN_PASSWORD: admin
     SOLR_ADMIN_USER: admin
-    SOLR_ADMIN_USERNAME: admin
+    SOLR_ADMIN_USER: admin
     SOLR_CLOUD_BOOTSTRAP: "yes"
     SOLR_COLLECTION_NAME: hyku-test
     SOLR_CONFIGSET_NAME: hyku
