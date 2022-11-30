@@ -421,16 +421,14 @@ module Hyrax
           end
 
           def block_for(name, dynamic_default = nil)
-            block = ContentBlock.find_by(name: name)
-            has_value = block&.value.present?
-            has_value ? block.value : DEFAULT_VALUES[name] || dynamic_default
+            ContentBlock.block_for(name: name, fallback_value: DEFAULT_VALUES[name] || dynamic_default)
           end
 
           # Persist a key/value tuple as a ContentBlock
           # @param [Symbol] name the identifier for the ContentBlock
           # @param [String] value the value to set
           def update_block(name, value)
-            ContentBlock.find_or_create_by(name: name.to_s).update!(value: value)
+            ContentBlock.update_block(name: name, value: value)
           end
 
           def format_font_names(font_style)
