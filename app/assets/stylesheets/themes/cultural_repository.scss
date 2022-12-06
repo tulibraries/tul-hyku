@@ -194,6 +194,11 @@
     }
   }
 
+  // prevent cultural repository theme override to the workflow actions header background
+  .panel-default .panel-workflow .panel-heading {
+    background-color: #e6ab5f !important;
+  }
+
   // Note: copied over to override /* line 7, /usr/local/bundle/gems/bootstrap-sass-3.4.1/assets/stylesheets/bootstrap/_panels.scss */
   .panel {
     background-color: #fff !important;
