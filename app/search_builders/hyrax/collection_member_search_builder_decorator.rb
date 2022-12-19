@@ -6,7 +6,7 @@ module Hyrax
     Hyrax::CollectionMemberSearchBuilder.default_processor_chain += [:show_works_or_works_that_contain_files]
 
     # These methods include the filesets in the search results
-    def show_works_or_works_that_contain_files(solr_parameters)      
+    def show_works_or_works_that_contain_files(solr_parameters)
       return if blacklight_params[:q].blank?
       solr_parameters[:user_query] = blacklight_params[:q]
       solr_parameters[:q] = new_query
