@@ -139,3 +139,5 @@ redis:
   password: staging
 solr:
   enabled: true
+
+externalFcrepoHost: fcrepo.staging-fcrepo.svc.cluster.local
