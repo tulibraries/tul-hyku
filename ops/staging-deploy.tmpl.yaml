@@ -64,11 +64,11 @@ extraEnvVars: &envVars
   - name: FCREPO_BASE_PATH
     value: /hykudemo
   - name: FCREPO_HOST
-    value: fcrepo.staging-fcrepo.svc.cluster.local:8080
-  - name: FCREPO_PATH
-    value: /rest
-  - name: FCREPO_URL
-    value: http://fcrepo.staging-fcrepo.svc.cluster.local:8080/rest
+    value: fcrepo.staging-fcrepo.svc.cluster.local
+  - name: FCREPO_PORT
+    value: "8080"
+  - name: FCREPO_REST_PATH
+    value: rest
   - name: INITIAL_ADMIN_EMAIL
     value: support@notch8.com
   - name: INITIAL_ADMIN_PASSWORD
@@ -178,6 +178,7 @@ solr:
   enabled: false
 
 externalFcrepoHost: fcrepo.staging-fcrepo.svc.cluster.local
+
 externalPostgresql:
   host: pg-postgresql.staging-postgres.svc.cluster.local
   username: postgres
