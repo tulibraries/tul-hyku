@@ -1,6 +1,6 @@
 #!/usr/local/bin/ruby
 
-if ENV['DATABASE_URL'] && !ENV['DATABASE_URL'].empty?
+if ENV['DATABASE_URL'].present?
   ENV['DATABASE_URL'] = ENV['DATABASE_URL'].gsub('pool=5', 'pool=30')
 else
   puts 'DATABASE_URL not set, no pool change needed'
