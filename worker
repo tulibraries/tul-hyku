@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #!/usr/local/bin/ruby
 
 if ENV['DATABASE_URL'].present?
