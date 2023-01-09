@@ -232,11 +232,15 @@ Once you run this script the value is on your local computers clipboard. You wil
 | DB_PORT | Port for database connections | 5432 | no |
 | DB_TEST_NAME | name of database on database host for tests to run against. Should be different than the development database name or your tests will clobber your dev set up | hyku_test | yes |
 | DB_USER | username for the database connection | postgres | no |
-| FCREPO_DEVELOPMENT_PORT | Port used for fedora dev instance, only if FCREPO_URL is blank | 8984 | yes
-| FCREPO_HOST | host name for the fedora repo | ? | no |
+| FCREPO_BASE_PATH | Fedora root path | /hykudemo | no
+| FCREPO_DEV_BASE_PATH | Fedora root path used for dev instance | /dev | yes
+| FCREPO_DEVELOPMENT_PORT | Port used for fedora dev instance | 8984 | yes
+| FCREPO_HOST | host name for the fedora repo | fcrepo | no |
 | FCREPO_PORT | port for the fedora repo | 8080 | no |
-| FCREPO_TEST_PORT | Test port for the fedora repo, only if FCREPO_URL is blank | 8986 | yes |
-| FCREPO_URL | URL of the fedora repo, including port and prefix, but not repo name. | http://fcrepo:8080/rest | no |
+| FCREPO_REST_PATH | Fedora REST endpoint | rest | no
+| FCREPO_STAGING_BASE_PATH | Fedora root path used for dev instance | /staging | no
+| FCREPO_TEST_BASE_PATH | Fedora root path used for test instance | /test | yes
+| FCREPO_TEST_PORT | Test port for the fedora repo  8986 | yes |
 | GOOGLE_ANALYTICS_ID | The Google Analytics account id. Disabled if not set | - | no |
 | GOOGLE_OAUTH_APP_NAME | The name of the application. | - | no |
 | GOOGLE_OAUTH_APP_VERSION | The version of application. | - | no |
