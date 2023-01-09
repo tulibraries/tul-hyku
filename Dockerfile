@@ -32,4 +32,4 @@ RUN RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DB_
 
 FROM hyku-base as hyku-worker
 ENV MALLOC_ARENA_MAX=2
-CMD bundle exec sidekiq
+CMD ./bin/worker
