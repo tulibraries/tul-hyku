@@ -46,6 +46,14 @@ extraEnvVars: &envVars
     value: hyku-$CI_MERGE_REQUEST_ID.example.com
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/conf"
+  - name: FCREPO_BASE_PATH
+    value: /hykudemo
+  - name: FCREPO_HOST
+    value: fcrepo.staging-fcrepo.svc.cluster.local
+  - name: FCREPO_PORT
+    value: "8080"
+  - name: FCREPO_REST_PATH
+    value: rest
   - name: INITIAL_ADMIN_EMAIL
     value: samvera@example.com
   - name: INITIAL_ADMIN_PASSWORD
@@ -131,3 +139,5 @@ redis:
   password: staging
 solr:
   enabled: true
+
+externalFcrepoHost: fcrepo.staging-fcrepo.svc.cluster.local
