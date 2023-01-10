@@ -159,7 +159,8 @@ To enable analytics tracking and reporting features within Hyku, please follow t
   - Note Google Universal Analytics ID number
 - Add service account email  as User, and grant "View" access: https://support.google.com/analytics/answer/1009702?hl=en#Add&zippy=%2Cin-this-article
 - Enable the "Google Analytics API": https://developers.google.com/identity/protocols/oauth2/web-server#enable-apis
-- Enable the "IAM Service Account Credentials API": 
+- Enable the "IAM Service Account Credentials API": https://developers.google.com/identity/protocols/oauth2/web-server#enable-apis
+
 ### Set the Environment Variables
 In Hyku there are a few areas to set the environment variables needed for each of your environments development/staging/prodeuction/etc.
 
