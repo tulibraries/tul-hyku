@@ -150,15 +150,16 @@ Note: Google has announced they will stop processing data using the Universal An
 To enable analytics tracking and reporting features within Hyku, please follow the directions below.
 
 ### Setup a Google Analytics Account
-- Create an Analytics account: https://support.google.com/analytics/answer/10269537?hl=en
-- Enable the "Google Analytics API": https://developers.google.com/identity/protocols/oauth2/web-server#enable-apis
-- Create a Service Account: 
-  - https://developers.google.com/identity/protocols/oauth2/service-account#creatinganaccount
-  - Please select the p12 format when making your service account key.
-  - Note the private key secret so we can add as an env variable in the subsequent steps below.
-- Configure OAuth 2.0 consent screen: https://support.google.com/cloud/answer/10311615?hl=en&ref_topic=3473162
+- Create a Service Account: https://cloud.google.com/iam/docs/creating-managing-service-accounts
+  - Note the service account email
+  - When making a service account key, make sure the key type is set to p12
+  - Note the service account private key secret
 - Create an OAuth 2.0 Client ID: https://developers.google.com/identity/protocols/oauth2/web-server#creatingcred
-
+- Create an Analytics account: https://support.google.com/analytics/answer/10269537?hl=en
+  - Note Google Universal Analytics ID number
+- Add service account email  as User, and grant "View" access: https://support.google.com/analytics/answer/1009702?hl=en#Add&zippy=%2Cin-this-article
+- Enable the "Google Analytics API": https://developers.google.com/identity/protocols/oauth2/web-server#enable-apis
+- Enable the "IAM Service Account Credentials API": 
 ### Set the Environment Variables
 In Hyku there are a few areas to set the environment variables needed for each of your environments development/staging/prodeuction/etc.
 

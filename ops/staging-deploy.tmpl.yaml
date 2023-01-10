@@ -13,6 +13,9 @@ uploadsVolume:
   storageClass: aws-efs
   size: 200Gi
 
+# imagePullSecrets:
+#  - name: github
+
 extraVolumeMounts: &volMounts
   - name: uploads
     mountPath: /app/samvera/hyrax-webapp/tmp/imports
@@ -82,7 +85,7 @@ extraEnvVars: &envVars
   - name: GOOGLE_OAUTH_PRIVATE_KEY_VALUE
     value: $GOOGLE_OAUTH_PRIVATE_KEY_VALUE
   - name: GOOGLE_OAUTH_CLIENT_EMAIL
-    value: set-me@email.com
+    value: hyku-demo@hyku-demo.iam.gserviceaccount.com
   - name: INITIAL_ADMIN_EMAIL
     value: support@notch8.com
   - name: INITIAL_ADMIN_PASSWORD
