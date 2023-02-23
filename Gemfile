@@ -83,12 +83,14 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-gem 'bulkrax', '~> 3.5.0'
+gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git', branch: 'main'
 
 gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
 
 gem 'hyrax', '~> 3.5.0'
+# gem 'iiif_print', git: 'https://github.com/scientist-softserv/iiif_print.git', branch: 'fix-indexer-bugs'
+gem 'iiif_print', path: 'vendor/engines/iiif_print'
 
 gem 'bolognese', '>= 1.9.10'
 gem 'hyrax-doi', git: 'https://github.com/samvera-labs/hyrax-doi.git', branch: 'hyrax_upgrade'
