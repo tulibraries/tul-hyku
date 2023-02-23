@@ -1,5 +1,5 @@
-name: "Build Lint"
-run-name: Build Lint of ${{ github.ref_name }} by @${{ github.actor }}
+name: "Build"
+run-name: Build of ${{ github.ref_name }} by @${{ github.actor }}
 on:
   push:
     branches:
@@ -24,8 +24,3 @@ jobs:
       target: hyku-web
       worker: true
       workerTarget: hyku-worker
-  lint:
-    needs: build
-    uses: scientist-softserv/actions/.github/workflows/lint.yaml@v0.0.6
-    with:
-      worker: true
