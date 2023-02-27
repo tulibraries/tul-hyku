@@ -24,9 +24,6 @@ build:
   stage: build
   extends: .build_image
   image: $HARBOR/gitlab-ci/docker:latest
-  services:
-    - name: $HARBOR/gitlab-ci/docker:23-dind
-    - command: ["--tls=false"]
   script:
     - *check_atc_harbor
     - docker info
@@ -46,5 +43,4 @@ scan:
   allow_failure: true
   variables:
     THRESHOLD: 10
-  except:
-    - tags
+
