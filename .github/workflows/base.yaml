@@ -16,4 +16,4 @@ jobs:
     with:
       platforms: "linux/amd64" # "linux/amd64,linux/arm64"
       target: hyku-base
-      image_name: hyku/base
+      image_name: samvera/hyku/base
