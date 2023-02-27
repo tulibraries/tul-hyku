@@ -20,7 +20,7 @@ jobs:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.9
     secrets: inherit
     with:
-      platforms: "linux/amd64,linux/arm64"
+      platforms: "linux/amd64" # "linux/amd64,linux/arm64"
       target: hyku-web
       solr: true
       worker: true
