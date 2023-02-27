@@ -1,4 +1,3 @@
----
 include:
   - project: "infrastructure-engineering-shared/gitlab-ci-templates"
     file: 
