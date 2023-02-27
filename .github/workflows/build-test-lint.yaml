@@ -17,10 +17,11 @@ on:
 
 jobs:
   build:
-    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.6
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.9
     secrets: inherit
     with:
-      platforms: "linux/amd64"
+      platforms: "linux/amd64,linux/arm64"
       target: hyku-web
+      solr: true
       worker: true
       workerTarget: hyku-worker

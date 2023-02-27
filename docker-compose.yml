@@ -56,7 +56,7 @@ services:
       timeout: "8s"
 
   solr:
-    image: hyku/solr:8
+    image: hyku/solr:8v1
     build:
       context: solr
       dockerfile: Dockerfile
