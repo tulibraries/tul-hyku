@@ -2,6 +2,7 @@
 include:
   - project: "infrastructure-engineering-shared/gitlab-ci-templates"
     file: 
+      - "build_docker.yaml"
       - "security_scan.yaml"
       - "kubectl_commands.yaml"
 
@@ -12,71 +13,39 @@ variables:
   HELM_EXPERIMENTAL_OCI: "1"
 
 before_script:
-  - export TAG=${CI_COMMIT_SHORT_SHA}
-  - export BRANCH=${CI_COMMIT_REF_NAME}
+  - source .env
+  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
 stages:
   - build
   - scan
-  - tag
   - deploy
 
 build:
   stage: build
+  extends: .build_image
+  image: $HARBOR/gitlab-ci/docker:latest
+  services:
+    - name: $HARBOR/gitlab-ci/docker:23-dind
+    - command: ["--tls=false"]
   script:
+    - *check_atc_harbor
+    - docker info
+    - echo "$HARBOR_TOKEN" | docker login -u $HARBOR_USERNAME --password-stdin $HARBOR
     - docker-compose build web
     - docker-compose build worker
     - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:${VERSION}"
     - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:${VERSION}"
-    - docker-compose push "${HARBOR}/${IMAGE}/web:${VERSION}"
-    - docker-compose push  "${HARBOR}/${IMAGE}/worker:${VERSION}"
+    - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:latest"
+    - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:latest"
+    - docker push "${HARBOR}/${IMAGE}/web:${VERSION}"
+    - docker push "${HARBOR}/${IMAGE}/worker:${VERSION}"
 
-hyku.dev:
-  stage: deploy
-  extends:
-    - .deploy
-  environment:
-    name: hyku.dev
-    url: http://hyku-dev.example.com
-  only:
-    refs:
-      - main
+scan:
+  stage: scan
+  extends: .scanimage_high
+  allow_failure: true
   variables:
-    DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
-    DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
-    WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
-    HELM_EXPERIMENTAL_OCI: 1
-    HELM_EXTRA_ARGS: >
-      --values ops/dev-deploy.yaml
-  script:
-    - envsubst < ops/dev-deploy.tmpl.yaml > ops/dev-deploy.yaml
-    - ./bin/helm_deploy hyku-dev dev
-  tags:
-    - kubernetes
-
-hyku.production:
-  stage: deploy
-  extends:
-    - .deploy
-  environment:
-    name: hyku.production
-    url: http://hyku-production.example.com
-  only:
-    refs:
-      - main
-  when: manual
-  variables:
-    DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
-    DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
-    WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
-    HELM_EXPERIMENTAL_OCI: 1
-    HELM_EXTRA_ARGS: >
-      --values ops/production-deploy.yaml
-  script:
-    - envsubst < ops/production-deploy.tmpl.yaml > ops/production-deploy.yaml
-    - ./bin/helm_deploy hyku-production production
-  tags:
-    - kubernetes
-
-.deploy:
-  image: dtzar/helm-kubectl:3.5.3
+    THRESHOLD: 10
+  except:
+    - tags
