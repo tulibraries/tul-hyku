@@ -20,6 +20,17 @@ stages:
   - scan
   - deploy
 
+.check_atc_harbor: &check_atc_harbor
+  - echo "Checking ATC for harbor status"
+  - RESULT=$(curl -s https://$ATC/api/v1/status/harbor)
+  - SUCCESS=$(echo $RESULT | jq .success)  
+  - INMAINT=$(echo $RESULT | jq .inMaintenance)
+  - DEPMAINT=$(echo $RESULT | jq .dependenciesInMaintenance)
+  - ERROR=$(echo $RESULT | jq .error)
+  - if [ $SUCCESS != 1 ]; then echo "Could not check harbor maintenance status - $ERROR"; exit 1; fi
+  - if [ $INMAINT != "false" ]; then echo "Harbor is in maintenance mode - aborting."; exit 1; fi
+  - if [ $DEPMAINT != "false" ]; then echo "One of Harbor's dependencies is in maintenance mode - aborting."; exit 1; fi
+
 build:
   stage: build
   extends: .build_image
