@@ -2,21 +2,18 @@
 include:
   - project: "infrastructure-engineering-shared/gitlab-ci-templates"
     file: 
-      - "lint_docker.yaml"
-      - "build_docker.yaml"
       - "security_scan.yaml"
       - "kubectl_commands.yaml"
 
 variables:
   IMAGE: "tulibraries/tul-hyku"
   HARBOR: "harbor.k8s.temple.edu"
+  HYKU: "ghcr.io/samvera/hyku"
   HELM_EXPERIMENTAL_OCI: "1"
 
 before_script:
   - export TAG=${CI_COMMIT_SHORT_SHA}
   - export BRANCH=${CI_COMMIT_REF_NAME}
-  - export REGISTRY_HOST=${CI_REGISTRY}
-  - export REGISTRY_URI="/${CI_PROJECT_PATH}"
 
 stages:
   - build
@@ -24,20 +21,15 @@ stages:
   - tag
   - deploy
 
-hyku.build:
+build:
   stage: build
   script:
-    - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
     - docker-compose build web
     - docker-compose build worker
-    - docker-compose push web
-    - docker-compose push worker
-  only:
-    refs:
-      - merge_requests
-      - main
-  tags:
-    - local
+    - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:${VERSION}"
+    - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:${VERSION}"
+    - docker-compose push "${HARBOR}/${IMAGE}/web:${VERSION}"
+    - docker-compose push  "${HARBOR}/${IMAGE}/worker:${VERSION}"
 
 hyku.dev:
   stage: deploy
