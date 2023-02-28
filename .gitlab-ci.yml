@@ -34,13 +34,12 @@ stages:
 build:
   stage: build
   extends: .build_image
-  image: $HARBOR/gitlab-ci/docker:latest
   script:
     - *check_atc_harbor
     - docker info
     - echo "$HARBOR_TOKEN" | docker login -u $HARBOR_USERNAME --password-stdin $HARBOR
-    - docker-compose build web
-    - docker-compose build worker
+    - docker-compose --network host build web
+    - docker-compose --network host build worker
     - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:${VERSION}"
     - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:${VERSION}"
     - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:latest"
