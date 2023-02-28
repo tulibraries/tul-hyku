@@ -171,7 +171,7 @@
         <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
       </analyzer>
     </fieldType>
-  
+
     <!-- BEGIN Blacklight IIIF Search autocomplete config -->
     <fieldType name="textSuggestTokenizer" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
@@ -380,7 +380,7 @@
  -->
 
   <!-- BEGIN Blacklight IIIF Search autocomplete config -->
-  <copyField source="text" dest="iiif_suggest"/>
+  <copyField source="all_text_tsimv" dest="iiif_suggest"/>
   <!-- END Blacklight IIIF Search autocomplete config -->
 
 </schema>
