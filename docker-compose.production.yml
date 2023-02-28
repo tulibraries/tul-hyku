@@ -1,12 +1,6 @@
 version: '3.8'
 
 x-app: &app
-  build:
-    context: .
-    target: hyku-web
-    cache_from:
-      - ghcr.io/samvera/hyku/base:${TAG:-latest}
-      - ghcr.io/samvera/hyku:${TAG:-latest}
   image: ghcr.io/samvera/hyku:${TAG:-latest}
   env_file:
     - .env
@@ -56,10 +50,7 @@ services:
       timeout: "8s"
 
   solr:
-    image: ghcr.io/samvera/hyku/solr:${TAG:-latest}
-    build:
-      context: solr
-      dockerfile: Dockerfile
+    image: hyku/solr:8
     environment:
       - OOM=script
       - SOLR_ADMIN_USER=solr
@@ -101,7 +92,7 @@ services:
     environment:
       - VIRTUAL_PORT=8080
       - VIRTUAL_HOST=fcrepo.hyku.test
-      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
+      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/jdbc-postgresql/repository.json" -Dfcrepo.postgresql.host=db -Dfcrepo.postgresql.username=${DB_USER} -Dfcrepo.postgresql.password=${DB_PASSWORD:-hyku} -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/fcrepo.binary.directory" -Djava.io.tmpdir="/data/tmp"
     expose:
       - 8080
     networks:
@@ -122,14 +113,6 @@ services:
     networks:
       internal:
 
-  # Used exclusively for building and caching the base image to reduce build times
-  base:
-    <<: *app
-    image: ghcr.io/samvera/hyku/base:${TAG:-latest}
-    build:
-      context: .
-      target: hyku-base
-
   web:
     <<: *app
     environment:
@@ -148,8 +131,6 @@ services:
         condition: service_started
       check_volumes:
         condition: service_started
-      chrome:
-        condition: service_started
       worker:
         condition: service_started
       initialize_app:
@@ -160,13 +141,6 @@ services:
   worker:
     <<: *app
     image: ghcr.io/samvera/hyku/worker:${TAG:-latest}
-    build:
-      context: .
-      target: hyku-worker
-      cache_from:
-        - ghcr.io/samvera/hyku:${TAG:-latest}
-        - ghcr.io/samvera/hyku/worker:${TAG:-latest}
-    command: bundle exec sidekiq
     depends_on:
       check_volumes:
         condition: service_completed_successfully
@@ -223,18 +197,3 @@ services:
       - redis:/data
     networks:
       internal:
-
-  chrome:
-    # password is 'secret'
-    image: seleniarm/standalone-chromium:latest
-    logging:
-      driver: none
-    volumes:
-      - /dev/shm:/dev/shm
-    shm_size: 3G
-    networks:
-      internal:
-    environment:
-      - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
-      - VIRTUAL_PORT=7900
-      - VIRTUAL_HOST=chrome.hyku.test
