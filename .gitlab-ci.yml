@@ -1,56 +1,56 @@
-include:
-  - project: "infrastructure-engineering-shared/gitlab-ci-templates"
-    file: 
-      - "build_docker.yaml"
-      - "security_scan.yaml"
-      - "kubectl_commands.yaml"
+# include:
+#   - project: "infrastructure-engineering-shared/gitlab-ci-templates"
+#     file: 
+#       - "build_docker.yaml"
+#       - "security_scan.yaml"
+#       - "kubectl_commands.yaml"
 
-variables:
-  IMAGE: "tulibraries/tul-hyku"
-  HARBOR: "harbor.k8s.temple.edu"
-  HYKU: "ghcr.io/samvera/hyku"
-  HELM_EXPERIMENTAL_OCI: "1"
+# variables:
+#   IMAGE: "tulibraries/tul-hyku"
+#   HARBOR: "harbor.k8s.temple.edu"
+#   HYKU: "ghcr.io/samvera/hyku"
+#   HELM_EXPERIMENTAL_OCI: "1"
 
-before_script:
-  - source .env
-  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+# before_script:
+#   - source .env
+#   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
-stages:
-  - build
-  - scan
-  - deploy
+# stages:
+#   - build
+#   - scan
+#   - deploy
 
-.check_atc_harbor: &check_atc_harbor
-  - echo "Checking ATC for harbor status"
-  - RESULT=$(curl -s https://$ATC/api/v1/status/harbor)
-  - SUCCESS=$(echo $RESULT | jq .success)  
-  - INMAINT=$(echo $RESULT | jq .inMaintenance)
-  - DEPMAINT=$(echo $RESULT | jq .dependenciesInMaintenance)
-  - ERROR=$(echo $RESULT | jq .error)
-  - if [ $SUCCESS != 1 ]; then echo "Could not check harbor maintenance status - $ERROR"; exit 1; fi
-  - if [ $INMAINT != "false" ]; then echo "Harbor is in maintenance mode - aborting."; exit 1; fi
-  - if [ $DEPMAINT != "false" ]; then echo "One of Harbor's dependencies is in maintenance mode - aborting."; exit 1; fi
+# .check_atc_harbor: &check_atc_harbor
+#   - echo "Checking ATC for harbor status"
+#   - RESULT=$(curl -s https://$ATC/api/v1/status/harbor)
+#   - SUCCESS=$(echo $RESULT | jq .success)  
+#   - INMAINT=$(echo $RESULT | jq .inMaintenance)
+#   - DEPMAINT=$(echo $RESULT | jq .dependenciesInMaintenance)
+#   - ERROR=$(echo $RESULT | jq .error)
+#   - if [ $SUCCESS != 1 ]; then echo "Could not check harbor maintenance status - $ERROR"; exit 1; fi
+#   - if [ $INMAINT != "false" ]; then echo "Harbor is in maintenance mode - aborting."; exit 1; fi
+#   - if [ $DEPMAINT != "false" ]; then echo "One of Harbor's dependencies is in maintenance mode - aborting."; exit 1; fi
 
-build:
-  stage: build
-  extends: .build_image
-  script:
-    - *check_atc_harbor
-    - docker info
-    - echo "$HARBOR_TOKEN" | docker login -u $HARBOR_USERNAME --password-stdin $HARBOR
-    - docker-compose build web
-    - docker-compose build worker
-    - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:${VERSION}"
-    - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:${VERSION}"
-    - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:latest"
-    - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:latest"
-    - docker push "${HARBOR}/${IMAGE}/web:${VERSION}"
-    - docker push "${HARBOR}/${IMAGE}/worker:${VERSION}"
+# build:
+#   stage: build
+#   extends: .build_image
+#   script:
+#     - *check_atc_harbor
+#     - docker info
+#     - echo "$HARBOR_TOKEN" | docker login -u $HARBOR_USERNAME --password-stdin $HARBOR
+#     - docker-compose build web
+#     - docker-compose build worker
+#     - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:${VERSION}"
+#     - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:${VERSION}"
+#     - docker tag ${HYKU}  "${HARBOR}/${IMAGE}/web:latest"
+#     - docker tag "${HYKU}/worker"  "${HARBOR}/${IMAGE}/worker:latest"
+#     - docker push "${HARBOR}/${IMAGE}/web:${VERSION}"
+#     - docker push "${HARBOR}/${IMAGE}/worker:${VERSION}"
 
-scan:
-  stage: scan
-  extends: .scanimage_high
-  allow_failure: true
-  variables:
-    THRESHOLD: 10
+# scan:
+#   stage: scan
+#   extends: .scanimage_high
+#   allow_failure: true
+#   variables:
+#     THRESHOLD: 10
 

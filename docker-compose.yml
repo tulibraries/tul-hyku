@@ -126,7 +126,6 @@ services:
   base:
     <<: *app
     image: ghcr.io/samvera/hyku/base:${TAG:-latest}
-    network_mode: host
     build:
       context: .
       target: hyku-base
