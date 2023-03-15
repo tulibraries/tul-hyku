@@ -101,4 +101,12 @@ class Ability
   def featured_collection_abilities
     can %i[create destroy update], FeaturedCollection if admin?
   end
+
+  def can_import_works?
+    can_create_any_work?
+  end
+
+  def can_export_works?
+    can_create_any_work?
+  end
 end
