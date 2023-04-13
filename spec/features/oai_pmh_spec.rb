@@ -71,16 +71,16 @@ RSpec.describe "OAI PMH Support", type: :feature do
         before do
           # Mock two public file set ids returned by Solr
           allow(ActiveFedora::SolrService)
-              .to receive(:query)
-                      .and_return([{ 'id' => 'my-file-set-id-1' }, { 'id' => 'my-file-set-id-2' }])
+            .to receive(:query)
+            .and_return([{ 'id' => 'my-file-set-id-1' }, { 'id' => 'my-file-set-id-2' }])
         end
 
         it 'adds download links' do
           expect(xml.to_s).not_to include('my-file-set-id-1', 'my-file-set-id-2')
 
           OAI::Provider::MetadataFormat::HykuDublinCore
-              .send(:new)
-              .add_public_file_urls(xml, record)
+            .send(:new)
+            .add_public_file_urls(xml, record)
 
           expect(xml.to_s).to include('<file_url>https://test.example.com/downloads/my-file-set-id-1</file_url>')
           expect(xml.to_s).to include('<file_url>https://test.example.com/downloads/my-file-set-id-2</file_url>')
@@ -91,16 +91,16 @@ RSpec.describe "OAI PMH Support", type: :feature do
         before do
           # Mock zero public file set ids returned by Solr
           allow(ActiveFedora::SolrService)
-              .to receive(:query)
-                      .and_return([])
+            .to receive(:query)
+            .and_return([])
         end
 
         it 'does not add download links' do
           expect(xml.to_s).not_to include('my-file-set-id-1', 'my-file-set-id-2')
 
           OAI::Provider::MetadataFormat::HykuDublinCore
-              .send(:new)
-              .add_public_file_urls(xml, record)
+            .send(:new)
+            .add_public_file_urls(xml, record)
 
           expect(xml.to_s).not_to include('<file_url>https://test.example.com/downloads/my-file-set-id-1</file_url>')
           expect(xml.to_s).not_to include('<file_url>https://test.example.com/downloads/my-file-set-id-2</file_url>')
@@ -111,16 +111,16 @@ RSpec.describe "OAI PMH Support", type: :feature do
         before do
           # Mock one public file set ids returned by Solr
           allow(ActiveFedora::SolrService)
-              .to receive(:query)
-                      .and_return([{ 'id' => 'my-file-set-id-1' }])
+            .to receive(:query)
+            .and_return([{ 'id' => 'my-file-set-id-1' }])
         end
 
         it 'adds public download links' do
           expect(xml.to_s).not_to include('my-file-set-id-1', 'my-file-set-id-2')
 
           OAI::Provider::MetadataFormat::HykuDublinCore
-              .send(:new)
-              .add_public_file_urls(xml, record)
+            .send(:new)
+            .add_public_file_urls(xml, record)
 
           expect(xml.to_s).to include('<file_url>https://test.example.com/downloads/my-file-set-id-1</file_url>')
           expect(xml.to_s).not_to include('<file_url>https://test.example.com/downloads/my-file-set-id-2</file_url>')
