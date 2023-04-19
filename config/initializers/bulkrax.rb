@@ -53,7 +53,16 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
     # Add to, or change existing mappings as follows
     #   e.g. to exclude date
     #   config.field_mappings["Bulkrax::OaiDcParser"]["date"] = { from: ["date"], excluded: true  }
-
+    config.field_mappings["Bulkrax::CsvParser"]['parents'] = { from: ['parents'], related_parents_field_mapping: true }
+    config.field_mappings["Bulkrax::CsvParser"]['children'] = { from: ['children'], related_children_field_mapping: true }
+    config.field_mappings["Bulkrax::OaiDcParser"]['parents'] = { from: ['parents'], related_parents_field_mapping: true }
+    config.field_mappings["Bulkrax::OaiDcParser"]['children'] = { from: ['children'], related_children_field_mapping: true }
+    config.field_mappings["Bulkrax::OaiQualifiedDcParser"]['parents'] = { from: ['parents'], related_parents_field_mapping: true }
+    config.field_mappings["Bulkrax::OaiQualifiedDcParser"]['children'] = { from: ['children'], related_children_field_mapping: true }
+    config.field_mappings["Bulkrax::BagitParser"]['parents'] = { from: ['parents'], related_parents_field_mapping: true }
+    config.field_mappings["Bulkrax::BagitParser"]['children'] = { from: ['children'], related_children_field_mapping: true }
+    config.field_mappings["Bulkrax::XmlParser"]['parents'] = { from: ['parents'], related_parents_field_mapping: true }
+    config.field_mappings["Bulkrax::XmlParser"]['children'] = { from: ['children'], related_children_field_mapping: true }
     # To duplicate a set of mappings from one parser to another
     #   config.field_mappings["Bulkrax::OaiOmekaParser"] = {}
     #   config.field_mappings["Bulkrax::OaiDcParser"].each {|key,value| config.field_mappings["Bulkrax::OaiOmekaParser"][key] = value }
