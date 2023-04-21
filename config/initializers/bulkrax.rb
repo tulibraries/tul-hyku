@@ -53,6 +53,17 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
     # Add to, or change existing mappings as follows
     #   e.g. to exclude date
     #   config.field_mappings["Bulkrax::OaiDcParser"]["date"] = { from: ["date"], excluded: true  }
+    Bulkrax.field_mappings['Bulkrax::XmlParser'] = {
+      'title' => { from: ['TitleLargerEntity'] },
+      'abstract' => { from: ['Abstract'] },
+      'source' => { from: ['DrisUnique'], source_identifier: true }
+    }
+    Bulkrax.field_mappings['Bulkrax::BagitParser'] = {
+      'title' => { from: ['title'] },
+      'identifier' => { from: ['source_identifier'], source_identifier: true }
+    }
+    config.field_mappings["Bulkrax::OaiDcParser"]["identifier"] = { from: ['identifier'], source_identifier: true }
+    config.field_mappings["Bulkrax::OaiQualifiedDcParser"]["identifier"] = { from: ['identifier'], source_identifier: true }
     config.field_mappings["Bulkrax::CsvParser"]['parents'] = { from: ['parents'], related_parents_field_mapping: true }
     config.field_mappings["Bulkrax::CsvParser"]['children'] = { from: ['children'], related_children_field_mapping: true }
     config.field_mappings["Bulkrax::OaiDcParser"]['parents'] = { from: ['parents'], related_parents_field_mapping: true }
