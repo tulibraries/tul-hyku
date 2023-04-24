@@ -47,12 +47,12 @@ module OAI
 
           fs_ids = record[:file_set_ids_ssim].join('" OR "')
           public_fs_ids = ActiveFedora::SolrService.query(
-              "id:(\"#{fs_ids}\") AND " \
-            "has_model_ssim:FileSet AND " \
-            "visibility_ssi:#{Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC}",
-              fl: ["id"],
-              method: :post,
-              rows: 1024 # maximum
+            "id:(\"#{fs_ids}\") AND " \
+          "has_model_ssim:FileSet AND " \
+          "visibility_ssi:#{Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC}",
+            fl: ["id"],
+            method: :post,
+            rows: 1024 # maximum
           )
           return if public_fs_ids.blank?
 
@@ -64,12 +64,12 @@ module OAI
 
         def header_specification
           {
-              'xmlns:oai_dc' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
-              'xmlns:oai_hyku' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
-              'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
-              'xmlns:dcterms' => "http://purl.org/dc/terms/",
-              'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
-              'xsi:schemaLocation' => "http://dublincore.org/schemas/xmls/qdc/dcterms.xsd"
+            'xmlns:oai_dc' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
+            'xmlns:oai_hyku' => "http://www.openarchives.org/OAI/2.0/oai_dc/",
+            'xmlns:dc' => "http://purl.org/dc/elements/1.1/",
+            'xmlns:dcterms' => "http://purl.org/dc/terms/",
+            'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
+            'xsi:schemaLocation' => "http://dublincore.org/schemas/xmls/qdc/dcterms.xsd"
           }
         end
       end
