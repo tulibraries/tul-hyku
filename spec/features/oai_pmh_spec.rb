@@ -21,19 +21,19 @@ RSpec.describe "OAI PMH Support", type: :feature do
       context "with the #{metadata_prefix} prefix" do
         it 'retrieves a list of records' do
           visit oai_catalog_path(verb: 'ListRecords', metadataPrefix: metadata_prefix)
-          expect(page).to have_content("#{Settings.oai.prefix}:#{identifier}")
+          expect(page).to have_content("hyku:#{identifier}")
           expect(page).to have_content(work.title.first)
         end
 
         it 'retrieves a single record' do
           visit oai_catalog_path(verb: 'GetRecord', metadataPrefix: metadata_prefix, identifier: identifier)
-          expect(page).to have_content("#{Settings.oai.prefix}:#{identifier}")
+          expect(page).to have_content("hyku:#{identifier}")
           expect(page).to have_content(work.title.first)
         end
 
         it 'retrieves a list of identifiers' do
           visit oai_catalog_path(verb: 'ListIdentifiers', metadataPrefix: metadata_prefix)
-          expect(page).to have_content("#{Settings.oai.prefix}:#{identifier}")
+          expect(page).to have_content("hyku:#{identifier}")
           expect(page).not_to have_content(work.title.first)
         end
       end
