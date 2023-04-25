@@ -48,8 +48,8 @@ module OAI
           fs_ids = record[:file_set_ids_ssim].join('" OR "')
           public_fs_ids = ActiveFedora::SolrService.query(
             "id:(\"#{fs_ids}\") AND " \
-          "has_model_ssim:FileSet AND " \
-          "visibility_ssi:#{Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC}",
+            "has_model_ssim:FileSet AND " \
+            "visibility_ssi:#{Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC}",
             fl: ["id"],
             method: :post,
             rows: 1024 # maximum

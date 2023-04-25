@@ -33,7 +33,6 @@ module OAI
           title: :title
         }
       end
-      # rubocop:enable Metrics/MethodLength
     end
   end
 end
