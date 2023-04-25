@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
-
   Bulkrax.setup do |config|
     # Add local parsers
     # config.parsers += [
@@ -53,6 +52,31 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
     # Add to, or change existing mappings as follows
     #   e.g. to exclude date
     #   config.field_mappings["Bulkrax::OaiDcParser"]["date"] = { from: ["date"], excluded: true  }
+
+    default_field_mapping = {
+      'parents' => { from: ['parents'], related_parents_field_mapping: true },
+      'children' => { from: ['children'], related_children_field_mapping: true }
+    }
+
+    config.field_mappings["Bulkrax::BagitParser"] = default_field_mapping.merge({
+      # add or remove custom mappings for this parser here
+    })
+
+    config.field_mappings["Bulkrax::CsvParser"] = default_field_mapping.merge({
+      # add or remove custom mappings for this parser here
+    })
+
+    config.field_mappings["Bulkrax::OaiDcParser"] = default_field_mapping.merge({
+      # add or remove custom mappings for this parser here
+    })
+
+    config.field_mappings["Bulkrax::OaiQualifiedDcParser"] = default_field_mapping.merge({
+      # add or remove custom mappings for this parser here
+    })
+
+    config.field_mappings["Bulkrax::XmlParser"] = default_field_mapping.merge({
+      # add or remove custom mappings for this parser here
+    })
 
     # To duplicate a set of mappings from one parser to another
     #   config.field_mappings["Bulkrax::OaiOmekaParser"] = {}
