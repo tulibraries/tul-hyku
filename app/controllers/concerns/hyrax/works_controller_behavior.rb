@@ -141,6 +141,10 @@ module Hyrax
       presenter
     end
 
+    def json_manifest
+      iiif_manifest_builder.manifest_for(presenter: iiif_manifest_presenter)
+    end
+
     private
 
       def iiif_manifest_presenter
