@@ -24,11 +24,11 @@ module Hyrax
 
         def image_content
           return nil unless latest_file_id
-
           url = Hyrax.config.iiif_image_url_builder.call(
             latest_file_id,
             request.base_url,
-            Hyrax.config.iiif_image_size_default
+            Hyrax.config.iiif_image_size_default,
+            object.mime_type
           )
 
           # Serving up only prezi 3
