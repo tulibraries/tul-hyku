@@ -1,6 +1,5 @@
 # This file contains overrides to Hyrax::FileSetDerivativesService to increase the size of thumbnails
 
-
 # Hyrax v3.5.0
 Hyrax::FileSetDerivativesService.class_eval do
   # @see https://github.com/samvera/hydra-derivatives/blob/main/lib/hydra/derivatives/processors/video/config.rb#L59
