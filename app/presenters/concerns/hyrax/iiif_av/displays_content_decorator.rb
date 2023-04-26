@@ -40,8 +40,6 @@ module Hyrax
         def video_display_content(_url, label = '')
           width = solr_document.width&.try(:to_i) || 320
           height = solr_document.height&.try(:to_i) || 240
-          # width = Array(solr_document.width).first.try(:to_i) || 320
-          # height = Array(solr_document.height).first.try(:to_i) || 240
           duration = conformed_duration_in_seconds
           # rubocop:disable Metrics/LineLength
           IIIFManifest::V3::DisplayContent.new(Hyrax::IiifAv::Engine.routes.url_helpers.iiif_av_content_url(solr_document.id, label: label, host: request.base_url),
