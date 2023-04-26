@@ -39,8 +39,6 @@ module Hyrax
 
     module DisplayImagePresenterDecorator
       include Hyrax::IiifAv::DisplaysContent
-      # override Hyrax method to avoid double items in the manifest
-      def display_image; end
     end
   end
 end
