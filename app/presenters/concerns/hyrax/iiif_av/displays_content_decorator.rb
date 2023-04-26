@@ -41,26 +41,34 @@ module Hyrax
           width = solr_document.width&.try(:to_i) || 320
           height = solr_document.height&.try(:to_i) || 240
           duration = conformed_duration_in_seconds
-          # rubocop:disable Metrics/LineLength
-          IIIFManifest::V3::DisplayContent.new(Hyrax::IiifAv::Engine.routes.url_helpers.iiif_av_content_url(solr_document.id, label: label, host: request.base_url),
-                                               label: label,
-                                               width: width,
-                                               height: height,
-                                               duration: duration,
-                                               type: 'Video',
-                                               format: solr_document.mime_type)
-          # rubocop:enable Metrics/LineLength
+          IIIFManifest::V3::DisplayContent.new(
+            Hyrax::IiifAv::Engine.routes.url_helpers.iiif_av_content_url(
+              solr_document.id,
+              label: label,
+              host: request.base_url
+            ),
+            label: label,
+            width: width,
+            height: height,
+            duration: duration,
+            type: 'Video',
+            format: solr_document.mime_type
+          )
         end
 
         def audio_display_content(_url, label = '')
           duration = conformed_duration_in_seconds
-          # rubocop:disable Metrics/LineLength
-          IIIFManifest::V3::DisplayContent.new(Hyrax::IiifAv::Engine.routes.url_helpers.iiif_av_content_url(solr_document.id, label: label, host: request.base_url),
-                                               label: label,
-                                               duration: duration,
-                                               type: 'Sound',
-                                               format: solr_document.mime_type)
-          # rubocop:enable Metrics/LineLength
+          IIIFManifest::V3::DisplayContent.new(
+            Hyrax::IiifAv::Engine.routes.url_helpers.iiif_av_content_url(
+              solr_document.id,
+              label: label,
+              host: request.base_url
+            ),
+            label: label,
+            duration: duration,
+            type: 'Sound',
+            format: solr_document.mime_type
+          )
         end
 
         def conformed_duration_in_seconds

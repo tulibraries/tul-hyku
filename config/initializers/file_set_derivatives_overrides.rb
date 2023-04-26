@@ -1,10 +1,11 @@
 # This file contains overrides to Hyrax::FileSetDerivativesService to increase the size of thumbnails
 
-# @see https://github.com/samvera/hydra-derivatives/blob/main/lib/hydra/derivatives/processors/video/config.rb#L59
-DEFAULT_VIDEO_SIZE = '320x240'
 
-# Hyrax v2.9.0
+# Hyrax v3.5.0
 Hyrax::FileSetDerivativesService.class_eval do
+  # @see https://github.com/samvera/hydra-derivatives/blob/main/lib/hydra/derivatives/processors/video/config.rb#L59
+  DEFAULT_VIDEO_SIZE = '320x240'
+  
   # OVERRIDE: increase size of thumbnails for better viewing in Neutral theme home page
   def create_pdf_derivatives(filename)
     Hydra::Derivatives::PdfDerivatives.create(filename,
