@@ -43,7 +43,7 @@ RSpec.describe Hyku::WorkShowPresenter do
       it { is_expected.to be true }
     end
   end
-  
+
   context "when the work has valid doi and isbns" do
     # the values are set in generic_works factory
     describe "#doi" do

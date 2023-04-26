@@ -10,7 +10,6 @@ module Hyku
     include Hyrax::IiifAv::DisplaysIiifAv
     Hyrax::MemberPresenterFactory.file_presenter_class = Hyrax::IiifAv::IiifFileSetPresenter
 
-
     delegate :title_or_label, :extent, to: :solr_document
 
     # OVERRIDE Hyrax v2.9.0 here to make featured collections work
@@ -69,17 +68,17 @@ module Hyku
 
     private
 
-    def iiif_media?(presenter: representative_presenter)
-      presenter.image? || presenter.video? || presenter.audio?
-    end
-
-    def members_include_viewable?
-      file_set_presenters.any? do |presenter|
-        iiif_media?(presenter: presenter) && current_ability.can?(:read, presenter.id)
+      def iiif_media?(presenter: representative_presenter)
+        presenter.image? || presenter.video? || presenter.audio?
       end
-    end
-    
-    def extract_from_identifier(rgx)
+
+      def members_include_viewable?
+        file_set_presenters.any? do |presenter|
+          iiif_media?(presenter: presenter) && current_ability.can?(:read, presenter.id)
+        end
+      end
+
+      def extract_from_identifier(rgx)
         if solr_document['identifier_tesim'].present?
           ref = solr_document['identifier_tesim'].map do |str|
             str.scan(rgx)

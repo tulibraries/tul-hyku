@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Hyrax::IiifManifestPresenter::DisplayImagePresenter do
   let(:presenter) { described_class.new(work) }
 

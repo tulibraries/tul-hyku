@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hyrax
   module IiifAv
     # main reasons for this decorator is to override variable names from hyrax-iiif_av
@@ -39,6 +41,7 @@ module Hyrax
           width = Array(solr_document.width).first.try(:to_i) || 320
           height = Array(solr_document.height).first.try(:to_i) || 240
           duration = conformed_duration_in_seconds
+          # rubocop:disable Metrics/LineLength
           IIIFManifest::V3::DisplayContent.new(Hyrax::IiifAv::Engine.routes.url_helpers.iiif_av_content_url(solr_document.id, label: label, host: request.base_url),
                                                label: label,
                                                width: width,
@@ -46,15 +49,18 @@ module Hyrax
                                                duration: duration,
                                                type: 'Video',
                                                format: solr_document.mime_type)
+          # rubocop:enable Metrics/LineLength
         end
 
         def audio_display_content(_url, label = '')
           duration = conformed_duration_in_seconds
+          # rubocop:disable Metrics/LineLength
           IIIFManifest::V3::DisplayContent.new(Hyrax::IiifAv::Engine.routes.url_helpers.iiif_av_content_url(solr_document.id, label: label, host: request.base_url),
                                                label: label,
                                                duration: duration,
                                                type: 'Sound',
                                                format: solr_document.mime_type)
+          # rubocop:enable Metrics/LineLength
         end
 
         def conformed_duration_in_seconds

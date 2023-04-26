@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Hyrax::IiifManifestPresenter do
   subject(:presenter) { described_class.new(work) }
 
