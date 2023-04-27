@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# OVERRIDE Hyrax 3.4.0 to add inject_show_theme_views - Hyku theming and correct hostname of manifests
+# OVERRIDE: Hyrax 3.4.0 to add inject_show_theme_views - Hyku theming and correct hostname of manifests
+# OVERRIDE: Hyrax 3.4.0 to add Hyrax IIIF AV
 require 'iiif_manifest'
 
 # rubocop:disable Metrics/ModuleLength
@@ -11,6 +12,9 @@ module Hyrax
     include Blacklight::Base
     include Blacklight::AccessControls::Catalog
 
+    # Adds behaviors for hyrax-iiif_av plugin and provides #manifest and #iiif_manifest_builder
+    include Hyrax::IiifAv::ControllerBehavior
+
     included do
       with_themed_layout :decide_layout
       copy_blacklight_config_from(::CatalogController)
@@ -20,9 +24,9 @@ module Hyrax
       self.show_presenter = Hyku::WorkShowPresenter
       self.work_form_service = Hyrax::WorkFormService
       self.search_builder_class = WorkSearchBuilder
-      self.iiif_manifest_builder = (
-        Flipflop.cache_work_iiif_manifest? ? Hyrax::CachingIiifManifestBuilder.new : Hyrax::ManifestBuilderService.new
-      )
+      # Set to nil for the #iiif_manifest_builder (provided by Hyrax::IiifAv) to work
+      self.iiif_manifest_builder = nil
+
       attr_accessor :curation_concern
       helper_method :curation_concern, :contextual_path
 
@@ -137,22 +141,11 @@ module Hyrax
       presenter
     end
 
-    def manifest
-      headers['Access-Control-Allow-Origin'] = '*'
-
-      json = iiif_manifest_builder.manifest_for(presenter: iiif_manifest_presenter)
-
-      respond_to do |wants|
-        wants.json { render json: json }
-        wants.html { render json: json }
-      end
+    def json_manifest
+      iiif_manifest_builder.manifest_for(presenter: iiif_manifest_presenter)
     end
 
     private
-
-      def iiif_manifest_builder
-        self.class.iiif_manifest_builder
-      end
 
       def iiif_manifest_presenter
         IiifManifestPresenter.new(search_result_document(id: params[:id])).tap do |p|
