@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 1ffcb75359051d7a0cb35463547a4ce8637d9fa8
+  revision: 44d96c8e8e633ed56d286851648e9fbdf3feb880
   branch: main
   specs:
     iiif_print (1.0.0)
