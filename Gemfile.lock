@@ -22,10 +22,10 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: 4f6b67276b57bf4648866408eb136905ca644e34
+  revision: 44d96c8e8e633ed56d286851648e9fbdf3feb880
   branch: main
   specs:
-    iiif_print (0.0.1)
+    iiif_print (1.0.0)
       blacklight_iiif_search (~> 1.0)
       dry-monads (~> 1.4.0)
       hyrax (>= 2.5, < 4.0)
@@ -824,8 +824,8 @@ GEM
       nokogiri (~> 1.6)
       rails (>= 5.0, < 7.1)
       rdf
-    racc (1.6.2)
-    rack (2.2.6.2)
+    racc (1.6.1)
+    rack (2.2.7)
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
     rails (5.2.8.1)

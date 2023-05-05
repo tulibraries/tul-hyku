@@ -5,8 +5,6 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
   concern :iiif_search, BlacklightIiifSearch::Routes.new
-
-  concern :iiif_search, BlacklightIiifSearch::Routes.new
   concern :oai_provider, BlacklightOaiProvider::Routes.new
   
   mount Hyrax::IiifAv::Engine, at: '/'
