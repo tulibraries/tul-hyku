@@ -1,0 +1,52 @@
+.temple_libraries_repository {
+
+  ////// Basic Apperance Styles //////
+
+  .mt-40 {
+    margin-top: 40px;
+  }
+
+  .mb-40 {
+    margin-bottom: 40px;
+  }
+
+  .pt-30 {
+    padding-top: 30px;
+  }
+
+  .pb-30 {
+    padding-bottom: 30px;
+  }
+
+  .pb-40 {
+    padding-bottom: 40px;
+  }
+
+  // removes the blur on the banner image
+  .image-masthead .background-container {
+    -webkit-filter: none;
+    filter: none;
+  }
+
+  .container-fluid {
+    background-color: #910C22;
+  }
+
+  body.public-facing .navbar-inverse {
+    background-color: #A41E35;
+  }
+
+  .navbar-collapse {
+    background-color: #A41E35;
+  }
+
+  footer.navbar {
+    background-color: #910C22;
+  }
+}
+
+// Admin
+.container-fluid {
+  background-color: #A41E35;
+}
+
