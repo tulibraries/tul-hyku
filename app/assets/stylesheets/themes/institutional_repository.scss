@@ -28,6 +28,14 @@
     filter: none;
   }
 
+  body.public-facing .navbar-inverse {
+    background-color: #A41E35;
+  }
+
+   .navbar-collapse {
+    background-color: #A41E35;
+  }
+
   ////// Navbar //////
 
   // styles the top nav menu application name that is centered
@@ -57,6 +65,10 @@
   // line 2, /home/app/webapp/app/assets/stylesheets/hyku.scss
   #masthead #logo {
     margin-left: 0 !important;
+  }
+
+  #masthead {
+    background-color: #A41E35;
   }
 
   // for the navbar to sit 100% width for the columns to play responsively
