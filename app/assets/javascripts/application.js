@@ -16,6 +16,8 @@
 //= require jquery3
 //= require jquery_ujs
 //= require jquery.fontselect
+//= require cropper.min
+
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require stat_slider

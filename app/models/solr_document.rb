@@ -45,4 +45,24 @@ class SolrDocument
     title: 'title_tesim',
     type: 'human_readable_type_tesim'
   )
+
+  def show_pdf_viewer
+    self['show_pdf_viewer_tesim']
+  end
+
+  def show_pdf_download_button
+    self['show_pdf_download_button_tesim']
+  end
+
+  # @return [Array<SolrDocument>] a list of solr documents in no particular order
+  def load_parent_docs
+    query("member_ids_ssim: #{id}", rows: 1000)
+      .map { |res| ::SolrDocument.new(res) }
+  end
+
+  # Query solr using POST so that the query doesn't get too large for a URI
+  def query(query, **opts)
+    result = Hyrax::SolrService.post(query, **opts)
+    result.fetch('response').fetch('docs', [])
+  end
 end

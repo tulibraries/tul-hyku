@@ -296,7 +296,7 @@ zh:
     background_attribution_html: ''
     base:
       citations:
-        header: 引文：
+        header: 引文
       form_child_work_relationships:
         actions:
           remove: 从这项工作中删除
@@ -359,6 +359,8 @@ zh:
         title: 标题
         unauthorized: 此%{type}中没有公开可用的项目。
         visibility: 能见度
+      part_of:
+        label: 部分：
       relationships:
         empty: 该%{type}当前不在任何集合中。
         header: 人际关系

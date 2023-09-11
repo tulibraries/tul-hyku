@@ -166,7 +166,9 @@ en:
         show:
           forms:
             banner_image:
-              hint: "To use an image as a masthead background, you should use an image (JPG, GIF or PNG) that is at least 120 pixels tall and 1200 pixels wide. For best results, use an image at least 1800 pixels wide."
+              hint: |
+                To use an image as a masthead background, you should use an image (JPG, GIF or PNG) that is at least 120 pixels tall and 1200 pixels wide. For best results, use an image at least 1800 pixels wide.<br/>
+                Image can be cropped after upload, but be aware that the banner dynamically resizes with the window size. To restore full image after cropping, it is necessary to reupload the initial image.
             custom_css:
               confirm: "Custom CSS will always override other theming selections. Proceed?"
               warning: "If your theming customizations don't appear to be applying correctly, verify that they aren't being overwritten by Custom CSS."
@@ -183,6 +185,8 @@ en:
               hint: "Favicons need to be png files and must be square. The max size used is 228px x 228px."
             navbar_background_color:
               hint: 'At 40% opacity.'
+            navbar_link_background_color:
+              hint: 'Applies to the Home, About, Contact and Help button background color'
             navbar_link_background_hover_color:
               hint: 'Applies to the Home, About, Contact and Help buttons on those specific pages only (at 15% opacity).'
             link_color:

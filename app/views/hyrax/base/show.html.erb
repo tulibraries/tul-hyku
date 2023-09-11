@@ -19,11 +19,16 @@
             <div class="col-sm-12">
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
+          <% elsif @presenter.show_pdf_viewer? %>
+            <div class="col-sm-12">
+              <%= render 'pdf_js', file_set_presenter: @presenter.file_set_presenters.first %>
+            </div>
           <% end %>
           <div class="col-sm-3 text-center">
-            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
+            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? || @presenter.show_pdf_viewer? %>
+            <%= render('download_pdf', presenter: @presenter, file_set_id: @presenter.file_set_presenters.first.id) if @presenter.show_pdf_download_button? %>
             <%= render 'citations', presenter: @presenter %>
-            <%= render 'social_media' %>
+            <%= render 'analytics_button', presenter: @presenter %>
           </div>
           <div class="col-sm-9">
             <%= render 'work_description', presenter: @presenter %>

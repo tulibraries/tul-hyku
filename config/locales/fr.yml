@@ -185,6 +185,8 @@ fr:
               hint: Pour utiliser une image comme logo, vous devez utiliser une image (JPG, GIF ou PNG) qui n'est pas plus haute que l'en-tête et pas plus large que 400 pixels de large.
             navbar_background_color:
               hint: À 40% d'opacité.
+            navbar_link_background_color:
+              hint: S'applique à la couleur d'arrière-plan des boutons Accueil, À propos, Contact et Aide.
             navbar_link_background_hover_color:
               hint: S'applique aux boutons Accueil, À propos, Contact et Aide de ces pages spécifiques uniquement (à 15 % d'opacité).
             primary_button_hover_color:

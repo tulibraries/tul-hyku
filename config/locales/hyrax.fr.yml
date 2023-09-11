@@ -294,7 +294,7 @@ fr:
     background_attribution_html: ''
     base:
       citations:
-        header: 'Citations:'
+        header: 'Citation'
       form_child_work_relationships:
         actions:
           remove: Supprimer de ce travail
@@ -357,6 +357,8 @@ fr:
         title: Titre
         unauthorized: Il n'y a aucun élément accessible au public dans ce %{type}.
         visibility: Visibilité
+      part_of:
+        label: 'Partie de:'
       relationships:
         empty: Ce %{type} n'est actuellement dans aucune collection.
         header: Des relations

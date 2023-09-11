@@ -55,7 +55,12 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: "search",
       rows: 10,
-      qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_timv"
+      qf: "title_tesim alternative_title_tesim description_tesim creator_tesim contributor_tesim related_url_tesim learning_resource_type_tesim education_level_tesim audience_tesim degree_name_tesim degree_discipline_tesim degree_grantor_tesim date_tesim table_of_contents_tesim rights_statement_tesim license_tesim rights_holder_tesim publisher_tesim identifier_tesim keyword_tesim subject_tesim language_tesim resource_type_tesim date_created_tesim date_uploaded_tesim date_modified_tesim accessibility_feature_tesim accessibility_hazard_tesim accessibility_summary_tesim format_tesim extent_tesim all_text_timv",
+      "hl": true,
+      "hl.simple.pre": "<span class='highlight'>",
+      "hl.simple.post": "</span>",
+      "hl.snippets": 30,
+      "hl.fragsize": 100
     }
 
     # Specify which field to use in the tag cloud on the homepage.

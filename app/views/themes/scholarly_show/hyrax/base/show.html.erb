@@ -16,7 +16,7 @@
       <div class="panel-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% if @presenter.universal_viewer? %>
+          <% if @presenter.iiif_viewer? %>
             <div class="col-sm-12">
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
@@ -24,10 +24,14 @@
               <div class="image-show-description">
                 <%= render 'work_description', presenter: @presenter %>
               </div>
-            </div> 
+            </div>
+          <% elsif @presenter.show_pdf_viewer? %>
+            <div class="col-sm-12">
+              <%= render 'pdf_js', file_set_presenter: pdf_file_set_presenter(@presenter) %>
+            </div>
           <% else %>
             <div class="col-sm-3 mb-1">
-              <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
+              <%= render 'representative_media', presenter: @presenter, viewer: false %>
             </div>
             <div class="col-sm-9">
               <%= render 'work_description', presenter: @presenter %>
@@ -35,10 +39,18 @@
           <% end %>
         </div>
         <div class="row">
-          <div class="col-sm-12 image-show-metadata">  
+          <div class="col-sm-9 image-show-metadata">
             <%= render 'metadata', presenter: @presenter %>
           </div>
-          <div class="col-sm-12">
+          <div class="col-sm-3">
+            <%= render('download_pdf', presenter: @presenter, file_set_id: @presenter.file_set_presenters.first.id) if @presenter.show_pdf_download_button? %>
+            <%= render 'citations', presenter: @presenter %>
+            <!-- analytics_button is disabled until future fix -->
+            <%#= render 'analytics_button', presenter: @presenter %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
             <%= render 'relationships', presenter: @presenter %>
             <%= render 'items', presenter: @presenter %>
             <%# TODO: we may consider adding these partials in the future %>

@@ -3,7 +3,7 @@ fr:
   simple_form:
     cancel: Annuler
     error_notification:
-      default_message: 'Veuillez examiner les problèmes ci-dessous:'
+      default_message: 'Veuillez examiner les problèmes ci-dessous :'
     hints:
       account:
         admin_emails: Entrez une adresse e-mail à la fois
@@ -22,6 +22,13 @@ fr:
         file_acl: Désactiver si vous utilisez un système de fichiers comme samba ou nfs qui ne prend pas en charge la définition de listes de contrôle d'accès
         file_size_limit: Il doit être défini sur au moins 536870912000
         geonames_username: Inscrivez-vous sur http://www.geonames.org/manageaccount
+        google_analytics_id: L'ID de votre compte Google Analytics
+        google_oauth_app_name: Le nom de l'application Google dans la console API de Google
+        google_oauth_app_version: La version de l'application Google dans la console API de Google
+        google_oauth_private_key_value: La valeur du fichier p12 avec cryptage base64. (Vous pouvez utiliser la valeur de la clé privée OU le chemin ; la valeur prime)
+        google_oauth_private_key_path: Le chemin complet vers votre fichier p12, fichier clé. (Vous pouvez utiliser la valeur de la clé privée OU le chemin ; la valeur prime)
+        google_oauth_private_key_secret: Le secret fourni lorsque vous avez créé la clé p12
+        google_oauth_client_email: Adresse e-mail du client OAuth        
         gtm_id: L'identifiant de votre compte Google Tag Manager
         is_public: Les utilisateurs peuvent-ils découvrir votre site sur la page d'accueil ou accéder à vos pages sans nom d'utilisateur/mot de passe particulier ?
         locale_name: 'Le nom du suffixe de paramètres régionaux spécifiques au locataire ajouté à leurs fichiers locale.yml. Seuls les caractères alphabétiques doivent être ajoutés, pas de symboles ni de chiffres, ceux-ci seront alors en majuscules.
@@ -31,45 +38,54 @@ fr:
         name: Nom unique ou un trait d'union utilisé pour les aspects techniques du référentiel (par exemple, "acme" ou "acme-bibliothèque").
         oai_admin_email: Adresse e-mail de contact du point de terminaison OAI
         shared_login: Activer ou désactiver la connexion partagée
-        ssl_configured: Définissez-le sur vrai si vous utilisez https
-        weekly_email_list: Liste des adresses e-mail pour envoyer le rapport hebdomadaire. Laissez un seul espace entre chaque email
-        yearly_email_list: Liste des adresses e-mail pour envoyer le rapport annuel. Laissez un seul espace entre chaque email
+        file_size_limit: Ceci doit être réglé à au moins 536870912000
+        locale_name: |
+          Le nom du suffixe de locale spécifique au locataire ajouté à leurs fichiers locale.yml. Seuls les caractères alphabétiques doivent être ajoutés, pas de symboles ou de chiffres, ceux-ci seront alors mis en majuscule.
+        oai_admin_email: Adresse e-mail de contact du point d'accès OAI
+        doi_reader: Afficher la capacité à lire depuis Datacite pour remplir les enregistrements. WIP ne pas utiliser
+        doi_writer: Écrire des DOIs pour les enregistrements. WIP ne pas utiliser
+        cache_api: Active le cache pour les points d'accès API. Expérimental
+        email_subjet_prefix: Chaîne à mettre devant les sujets des e-mails système.
+        contact_email_to: L'adresse e-mail à partir de laquelle les notifications système seront envoyées. Une configuration supplémentaire est nécessaire pour ajouter une adresse provenant de domaines autres que le domaine du site
+        geonames_username: Inscrivez-vous sur http://www.geonames.org/manageaccount
+        file_acl: Désactivez si vous utilisez un système de fichiers comme samba ou nfs qui ne prend pas en charge les listes de contrôle d'accès
+        ssl_configured: Mettez-le sur vrai si vous utilisez https
       hyku_group:
         description: Un bref résumé du rôle du groupe
       user:
-        email: Entrez une adresse e-mail à la fois. Vous pouvez également renvoyer une invitation via ce formulaire.
+        email: Entrez une adresse e-mail à la fois. Vous pouvez également renvoyer une invitation via ce formulaire. Les rôles ne s'appliquent qu'à ce locataire.
     labels:
       account:
-        admin_emails: Ajouter ou inviter un nouvel administrateur (par courrier électronique)
-        cname: Locataire CNAME
+        admin_emails: Ajouter ou inviter un nouvel administrateur (par e-mail)
+        cname: Nom de domaine principal
         fcrepo_endpoint:
           base_path: Chemin de base
           url: URL
-        gtm_id: Gestionnaire de balises Google
         name: Nom court
         solr_endpoint:
           url: URL
         tenant: UUID du locataire
+        gtm_id: Google Tag Manager
       add_user_to_group:
         user_ids: Identifiant d'utilisateur
       domain_names:
         cname: Nom de domaine
       group_search:
-        q: Chercher
+        q: Recherche
       hyku_group:
-        description: La description
+        description: Description
       page_size:
-        per: Montrer
+        per: Afficher
       user:
-        display_name: votre nom
-        email: Adresse électronique
+        display_name: Votre nom
+        email: Adresse e-mail
       user_search:
         uq: Recherche d'utilisateur
-    'no': Non
+    'no': 'Non'
     placeholders:
       user_search:
         uq: Nom ou nom d'utilisateur
     required:
       mark: "*"
-      text: Champs obligatoires
-    'yes': Oui
+      text: requis
+    'yes': 'Oui'

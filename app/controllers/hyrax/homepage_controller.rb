@@ -33,17 +33,13 @@ module Hyrax
 
     # override hyrax v2.9.0 added @home_text - Adding Themes
     def index
-      @presenter = presenter_class.new(current_ability, collections)
       @featured_researcher = ContentBlock.for(:researcher)
-      @marketing_text = ContentBlock.for(:marketing)
       @home_text = ContentBlock.for(:home_text)
       @featured_work_list = FeaturedWorkList.new
       # OVERRIDE here to add featured collection list
       @featured_collection_list = FeaturedCollectionList.new
-      @announcement_text = ContentBlock.for(:announcement)
+      load_shared_info
       recent
-      ir_counts if home_page_theme == 'institutional_repository'
-
       # override hyrax v2.9.0 added for facets on homepage - Adding Themes
       (@response, @document_list) = search_results(params)
 
@@ -65,11 +61,7 @@ module Hyrax
     def browserconfig; end
 
     def all_collections
-      @presenter = presenter_class.new(current_ability, collections)
-      @marketing_text = ContentBlock.for(:marketing)
-      @announcement_text = ContentBlock.for(:announcement)
-      @collections = collections(rows: 100_000)
-      ir_counts if home_page_theme == 'institutional_repository'
+      load_shared_info
     end
 
     # Added from Blacklight 6.23.0 to change url for facets on home page
@@ -84,6 +76,26 @@ module Hyrax
       end
 
     private
+
+      # shared methods for index and all_collections routes
+      def load_shared_info
+        @presenter = presenter_class.new(current_ability, collections)
+        @marketing_text = ContentBlock.for(:marketing)
+        @announcement_text = ContentBlock.for(:announcement)
+        @collections = collections(rows: 100_000)
+        # rubocop:disable Style/GuardClause
+        # TODO: Why not make these helper methods?  As is we rely on a theme to set instance
+        # variables.  Which is fragile.
+        if home_page_theme == 'institutional_repository'
+          ir_counts
+          @top_level_collections ||= load_top_level_collections(@collections)
+        end
+        # rubocop:enable Style/GuardClause
+      end
+
+      def load_top_level_collections(colls)
+        colls.select { |c| c['member_of_collection_ids_ssim'].nil? }
+      end
 
       # Return 6 collections
       def collections(rows: 6)
@@ -120,7 +132,6 @@ module Hyrax
           prepend_view_path(home_theme_view_path)
           yield
           # rubocop:disable Lint/UselessAssignment, Layout/SpaceAroundOperators, Style/RedundantParentheses
-          # Do NOT change this line. This is calling the Rails view_paths=(paths) method and not a variable assignment.
           view_paths=(original_paths)
           # rubocop:enable Lint/UselessAssignment, Layout/SpaceAroundOperators, Style/RedundantParentheses
         else

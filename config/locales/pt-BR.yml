@@ -185,6 +185,8 @@ pt-BR:
               hint: Para usar uma imagem como logotipo, use uma imagem (JPG, GIF ou PNG) que não seja mais alta que o cabeçalho e que não tenha mais que 400 pixels de largura.
             navbar_background_color:
               hint: Com 40% de opacidade.
+            navbar_link_background_color:
+              hint: Aplica-se à cor de fundo dos botões Página inicial, Sobre, Contato e Ajuda
             navbar_link_background_hover_color:
               hint: Aplica-se apenas aos botões Início, Sobre, Contato e Ajuda nessas páginas específicas (com 15% de opacidade).
             primary_button_hover_color:

@@ -185,6 +185,8 @@ zh:
               hint: 要将图像用作徽标，应使用不大于标题且宽度不超过400像素的图像（JPG，GIF或PNG）。
             navbar_background_color:
               hint: 不透明度为 40%。
+            navbar_link_background_color:
+              hint: 适用于“主页”、“关于”、“联系人”和“帮助”按钮背景颜色
             navbar_link_background_hover_color:
               hint: 仅适用于这些特定页面上的“主页”、“关于”、“联系方式”和“帮助”按钮（不透明度为 15%）。
             primary_button_hover_color:

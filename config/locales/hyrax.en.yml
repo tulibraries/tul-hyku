@@ -304,7 +304,7 @@ en:
     background_attribution_html: ""
     base:
       citations:
-        header: "Citations:"
+        header: "Citation"
       form_child_work_relationships:
         actions:
           remove: Remove from this work
@@ -373,6 +373,8 @@ en:
         title: Title
         unauthorized: There are no publicly available items in this %{type}.
         visibility: Visibility
+      part_of:
+        label: "Part of:"
       relationships:
         empty: This %{type} is not currently in any collections.
         header: Relationships

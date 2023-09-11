@@ -3,7 +3,7 @@ es:
   simple_form:
     cancel: Cancelar
     error_notification:
-      default_message: 'Repase los problemas abajo, por favor:'
+      default_message: 'Por favor, revise los problemas a continuación:'
     hints:
       account:
         admin_emails: Introduce una dirección de correo electrónico a la vez
@@ -17,41 +17,44 @@ es:
         email_subjet_prefix: Cadena para colocar delante de los asuntos de correo electrónico del sistema.
         enable_oai_metadata: Habilitar o deshabilitar el enlace OAI
         fcrepo_endpoint:
-          base_path: Fedora base ruta debe comenzar con una barra y no terminar con una barra
+          base_path: La ruta base de Fedora debe comenzar con una barra y NO terminar con una barra
           url: La URL de Fedora no debe terminar con una barra
         file_acl: Desactívelo si usa un sistema de archivos como samba o nfs que no admita la configuración de listas de control de acceso
         file_size_limit: Esto debe establecerse en al menos 536870912000
         geonames_username: Regístrese en http://www.geonames.org/manageaccount
         gtm_id: El ID de su cuenta de Google Tag Manager
         is_public: "¿Los usuarios pueden descubrir su sitio en la página de inicio o acceder a sus páginas sin un nombre de usuario/contraseña especiales?"
-        locale_name: 'El nombre del sufijo de configuración regional específico del arrendatario agregado a sus archivos locale.yml. Solo se deben agregar caracteres alfabéticos, sin símbolos ni números, estos se escribirán en mayúscula.
-
-          '
-        monthly_email_list: Lista de direcciones de correo electrónico para enviar por correo electrónico el informe mensual. Deje un solo espacio entre cada correo electrónico
+        locale_name: 'El nombre del sufijo de configuración regional específico del arrendatario agregado a sus archivos locale.yml. Solo se deben agregar caracteres alfabéticos, sin símbolos ni números, estos se escribirán en mayúscula.'
         name: Un nombre único o con guión utilizado para los aspectos técnicos del repositorio (por ejemplo, "acme" o "acme-library").
         oai_admin_email: Dirección de correo electrónico de contacto del terminal OAI
         shared_login: Habilitar o deshabilitar el inicio de sesión compartido
         ssl_configured: Establézcalo en verdadero si usa https
-        weekly_email_list: Lista de direcciones de correo electrónico para enviar por correo electrónico el informe semanal. Deje un solo espacio entre cada correo electrónico
-        yearly_email_list: Lista de direcciones de correo electrónico para enviar por correo electrónico el informe anual. Deje un solo espacio entre cada correo electrónico
+        google_analytics_id: La ID de su cuenta de Google Analytics
+        google_oauth_app_name: El nombre de la aplicación de Google en la consola de API de Google
+        google_oauth_app_version: La versión de la aplicación de Google en la consola de API de Google
+        google_oauth_private_key_value: El valor del archivo p12 con cifrado base64. (Puede usar el valor de la clave privada O el camino; el valor tiene prioridad)
+        google_oauth_private_key_path: La ruta completa a su archivo p12, archivo clave. (Puede usar el valor de la clave privada O el camino; el valor tiene prioridad)
+        google_oauth_private_key_secret: El secreto proporcionado cuando creó la clave p12
+        google_oauth_client_email: Dirección de correo electrónico del cliente OAuth
+        shared_login: Habilitar o deshabilitar inicio de sesión compartido
       hyku_group:
-        description: Un breve resumen de la función del grupo
+        description: Un breve resumen del papel del grupo
       user:
-        email: Introduzca una dirección de correo electrónico a la vez. También puede reenviar una invitación a través de este formulario.
+        email: Introduzca una dirección de correo electrónico a la vez. También puede reenviar una invitación a través de este formulario. Los roles solo se aplican a este inquilino.
     labels:
       account:
-        admin_emails: Agregar o invitar al nuevo administrador (por correo electrónico)
-        cname: Inquilino CNAME
+        admin_emails: Añadir o invitar a un nuevo administrador (por correo electrónico)
+        cname: Nombre de dominio principal
         fcrepo_endpoint:
           base_path: Ruta base
           url: URL
-        gtm_id: Administrador de etiquetas de Google
         name: Nombre corto
         solr_endpoint:
           url: URL
-        tenant: Inquilino UUID
+        tenant: UUID del inquilino
+        gtm_id: Google Tag Manager
       add_user_to_group:
-        user_ids: Identidad de usuario
+        user_ids: ID de usuario
       domain_names:
         cname: Nombre de dominio
       group_search:
@@ -61,7 +64,7 @@ es:
       page_size:
         per: Mostrar
       user:
-        display_name: Tu nombre
+        display_name: Su nombre
         email: Dirección de correo electrónico
       user_search:
         uq: Buscar usuario
@@ -71,5 +74,5 @@ es:
         uq: Nombre o nombre de usuario
     required:
       mark: "*"
-      text: obligatorio
-    'yes': Sí
+      text: requerido
+    'yes': 'Sí'

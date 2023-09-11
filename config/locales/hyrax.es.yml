@@ -296,7 +296,7 @@ es:
     background_attribution_html: ''
     base:
       citations:
-        header: 'Citas:'
+        header: 'Citación'
       form_child_work_relationships:
         actions:
           remove: Eliminar de este trabajo
@@ -359,6 +359,8 @@ es:
         title: Título
         unauthorized: No hay elementos disponibles públicamente en este %{type}.
         visibility: Visibilidad
+      part_of:
+        label: 'Parte de:'
       relationships:
         empty: Este %{type} no se encuentra actualmente en ninguna colección.
         header: Relaciones

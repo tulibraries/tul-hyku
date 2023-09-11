@@ -64,6 +64,7 @@ gem 'puma', '~> 5.6' # Use Puma as the app server
 gem 'rack-test', '0.7.0', group: %i[test] # rack-test >= 0.71 does not work with older Capybara versions (< 2.17). See #214 for more details
 gem 'rails-controller-testing', group: %i[test]
 gem 'rdf', '~> 3.1.15' # rdf 3.2.0 removed SerializedTransaction which ldp requires
+gem 'redcarpet' # for Markdown constant
 gem 'redlock', '>= 0.1.2', '< 2.0' # lock redlock per https://github.com/samvera/hyrax/pull/5961
 gem 'riiif', '~> 1.1'
 gem 'rolify'

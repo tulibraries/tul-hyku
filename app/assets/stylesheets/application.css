@@ -18,5 +18,6 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require bootstrap-datepicker
  *= require single_signon
+ *= require cropper.min
  *= require_self
  */

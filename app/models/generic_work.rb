@@ -2,10 +2,13 @@
 
 class GenericWork < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include PdfBehavior
   include ::Hyrax::BasicMetadata
+
   if ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_IIIF_PRINT', false))
     include IiifPrint.model_configuration(
-      pdf_split_child_model: self
+      pdf_split_child_model: GenericWork,
+      pdf_splitter_service: IiifPrint::TenantConfig::PdfSplitter
     )
   end
 

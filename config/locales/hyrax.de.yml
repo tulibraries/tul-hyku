@@ -295,7 +295,7 @@ de:
     background_attribution_html: ''
     base:
       citations:
-        header: 'Zitate:'
+        header: 'Zitate'
       form_child_work_relationships:
         actions:
           remove: Aus dieser Arbeit entfernen
@@ -358,6 +358,8 @@ de:
         title: Titel
         unauthorized: Es gibt keine öffentlich verfügbaren Artikel in diesem %{type}.
         visibility: Sichtweite
+      part_of:
+        label: 'Teil von:'
       relationships:
         empty: Dieses %{type} befindet sich derzeit in keiner Sammlung.
         header: Beziehungen
