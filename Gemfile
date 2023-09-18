@@ -16,7 +16,7 @@ gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
 gem 'bolognese', '>= 1.9.10'
 gem 'bootstrap-datepicker-rails'
-gem 'bulkrax', '~> 5.0'
+gem 'bulkrax', '~> 5.3'
 gem 'byebug', group: %i[development test]
 gem 'capybara', group: %i[test]
 gem 'capybara-screenshot', '~> 1.0', group: %i[test]
@@ -90,4 +90,9 @@ gem 'turbolinks', '~> 5'
 gem 'web-console', '>= 3.3.0', group: %i[development] # <%= console %> in views
 gem 'webdrivers', '~> 4.7.0', group: %i[test]
 gem 'webmock', group: %i[test]
+
+# This gem does nothing by default, but is instead a tool to ease developer flow
+# and place overrides, themes and deployment code.
+gem 'hyku_knapsack', github: 'samvera-labs/hyku_knapsack', branch: 'upstream_main'
+
 # rubocop:enable Metrics/LineLength

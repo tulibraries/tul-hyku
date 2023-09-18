@@ -1,4 +1,5 @@
 ARG HYRAX_IMAGE_VERSION=hyrax-v4.0.0.rc1
+ARG RUBY_VERSION=2.7.7
 FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as hyku-base
 
 USER root
@@ -84,7 +85,8 @@ RUN ln -sf /usr/lib/libmediainfo.so.0 /app/fits/tools/mediainfo/linux/libmediain
 ONBUILD COPY --chown=1001:101 $APP_PATH/bin/db-migrate-seed.sh /app/samvera/
 
 ONBUILD COPY --chown=1001:101 $APP_PATH/Gemfile* /app/samvera/hyrax-webapp/
-ONBUILD RUN bundle install --jobs "$(nproc)"
+ONBUILD RUN git config --global --add safe.directory /app/samvera && \
+  bundle install --jobs "$(nproc)"
 
 ONBUILD COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
 
