@@ -58,6 +58,7 @@ services:
     build:
       context: solr
       dockerfile: Dockerfile
+      target: hyku-solr
     environment:
       - OOM=script
       - SOLR_ADMIN_USER=solr
