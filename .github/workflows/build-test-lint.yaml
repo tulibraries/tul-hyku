@@ -22,7 +22,5 @@ jobs:
     with:
       platforms: "linux/amd64" # "linux/amd64,linux/arm64"
       webTarget: hyku-web
-      solr: true
-      solrTarget:
-      worker: true
+      solrTarget: hyku-solr
       workerTarget: hyku-worker
