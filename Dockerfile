@@ -82,8 +82,9 @@ COPY --chown=1001:101 ./ops/exiftool_image_to_fits.xslt /app/fits/xml/exiftool/e
 RUN ln -sf /usr/lib/libmediainfo.so.0 /app/fits/tools/mediainfo/linux/libmediainfo.so.0 && \
   ln -sf /usr/lib/libzen.so.0 /app/fits/tools/mediainfo/linux/libzen.so.0
 
-ONBUILD COPY --chown=1001:101 $APP_PATH/bin/db-migrate-seed.sh /app/samvera/
+COPY --chown=1001:101 ./bin/db-migrate-seed.sh /app/samvera/
 
+ONBUILD ARG APP_PATH=.
 ONBUILD COPY --chown=1001:101 $APP_PATH/Gemfile* /app/samvera/hyrax-webapp/
 ONBUILD RUN git config --global --add safe.directory /app/samvera && \
   bundle install --jobs "$(nproc)"
