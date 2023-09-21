@@ -9,7 +9,7 @@ module Hydra
         protected
 
           # When resizing images, it is necessary to flatten any layers, otherwise the background
-          # may be completely black. This happens especially with PDFs. See #110
+          # may be completely black. This happens especially with PDFs. See https://github.com/samvera/hydra-derivatives/issues/110
           def create_resized_image
             create_image do |xfrm|
               if size
