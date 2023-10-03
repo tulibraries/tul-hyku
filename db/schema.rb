@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_202855) do
+ActiveRecord::Schema.define(version: 2023_08_04_073106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_202855) do
     t.datetime "last_succeeded_at"
     t.string "importerexporter_type", default: "Bulkrax::Importer"
     t.integer "import_attempts", default: 0
+    t.index ["identifier"], name: "index_bulkrax_entries_on_identifier"
+    t.index ["importerexporter_id", "importerexporter_type"], name: "bulkrax_entries_importerexporter_idx"
+    t.index ["type"], name: "index_bulkrax_entries_on_type"
   end
 
   create_table "bulkrax_exporter_runs", force: :cascade do |t|
@@ -152,7 +155,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_202855) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order", default: 0
+    t.index ["child_id"], name: "index_bulkrax_pending_relationships_on_child_id"
     t.index ["importer_run_id"], name: "index_bulkrax_pending_relationships_on_importer_run_id"
+    t.index ["parent_id"], name: "index_bulkrax_pending_relationships_on_parent_id"
   end
 
   create_table "bulkrax_statuses", force: :cascade do |t|
@@ -166,6 +171,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_202855) do
     t.string "runnable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["error_class"], name: "index_bulkrax_statuses_on_error_class"
+    t.index ["runnable_id", "runnable_type"], name: "bulkrax_statuses_runnable_idx"
+    t.index ["statusable_id", "statusable_type"], name: "bulkrax_statuses_statusable_idx"
   end
 
   create_table "checksum_audit_logs", id: :serial, force: :cascade do |t|
@@ -349,6 +357,16 @@ ActiveRecord::Schema.define(version: 2023_01_31_202855) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "humanized_name"
+  end
+
+  create_table "identity_providers", force: :cascade do |t|
+    t.string "name"
+    t.string "provider"
+    t.jsonb "options"
+    t.string "logo_image"
+    t.string "logo_image_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "iiif_print_derivative_attachments", id: :serial, force: :cascade do |t|
@@ -822,6 +840,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_202855) do
     t.integer "invited_by_id"
     t.string "invited_by_type"
     t.string "preferred_locale"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -22,7 +22,7 @@ pt-BR:
         accept_until: Este convite será devido em %{due_date}.
         hello: Olá %{email}
         ignore: |-
-          Se você não deseja aceitar o convite, ignore este e-mail. <br />
+          Se você não deseja aceitar o convite, ignore este e-mail. 
           Sua conta não será criada até você acessar o link acima e definir sua senha.
         someone_invited_you: Alguém convidou você para %{url}, você pode aceitá-lo através do link abaixo.
         subject: Instruções de convite

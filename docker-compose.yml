@@ -1,12 +1,13 @@
 version: '3.8'
-
 x-app: &app
   build:
     context: .
     target: hyku-web
+    args:
+      BUILDKIT_INLINE_CACHE: 1
     cache_from:
-      - ghcr.io/samvera/hyku/base:${TAG:-latest}
-      - ghcr.io/samvera/hyku:${TAG:-latest}
+      - ghcr.io/samvera/hyku/base:latest
+      - ghcr.io/samvera/hyku:latest
   image: ghcr.io/samvera/hyku:${TAG:-latest}
   env_file:
     - .env
@@ -57,6 +58,7 @@ services:
     build:
       context: solr
       dockerfile: Dockerfile
+      target: hyku-solr
     environment:
       - OOM=script
       - SOLR_ADMIN_USER=solr
@@ -126,6 +128,10 @@ services:
     build:
       context: .
       target: hyku-base
+      cache_from:
+        - ghcr.io/samvera/hyku/base:latest
+      args:
+        BUILDKIT_INLINE_CACHE: 1
 
   web:
     <<: *app
@@ -153,6 +159,8 @@ services:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
+    # ports:
+    #   - 3000:3000
     expose:
       - 3000
 
@@ -162,9 +170,12 @@ services:
     build:
       context: .
       target: hyku-worker
+      args:
+        BUILDKIT_INLINE_CACHE: 1
       cache_from:
-        - ghcr.io/samvera/hyku:${TAG:-latest}
-        - ghcr.io/samvera/hyku/worker:${TAG:-latest}
+        - ghcr.io/samvera/hyku/base:latest
+        - ghcr.io/samvera/hyku:latest
+        - ghcr.io/samvera/hyku/worker:latest
     command: bundle exec sidekiq
     depends_on:
       check_volumes:
