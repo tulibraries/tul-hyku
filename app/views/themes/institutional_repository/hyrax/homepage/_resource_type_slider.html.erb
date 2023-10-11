@@ -1,3 +1,8 @@
+<%# Add content_for block to clear caching so IR icons don't duplicate unintentionally %>
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <div class="carousel institutional-repository-carousel slide" id="carousel-tilenav" data-interval="false">
   <div class="carousel-inner">
     <% resource_types.each.with_index do |(k,v), i| %>
