@@ -18,4 +18,54 @@ RSpec.describe 'Creating a new Work', type: :feature, clean: true do
     click_link "Share Your Work"
     expect(page).to have_button "Create work"
   end
+
+  context 'as a user with no roles' do
+    let(:user) { create(:user) }
+
+    it 'cannot see the add new work button' do
+      visit '/dashboard/my/works'
+      expect(page).not_to have_link "Add New Work"
+    end
+
+    context 'who has deposit access for a specific admin set' do
+      let(:admin_set_2) do
+        create(:admin_set, title: ["Another Admin Set"],
+                           description: ["A description"])
+      end
+
+      before do
+        create(:permission_template_access,
+               :deposit,
+               permission_template: create(:permission_template, source_id: admin_set_2.id, with_admin_set: true, with_active_workflow: true),
+               agent_type: 'user',
+               agent_id: user.user_key)
+      end
+
+      it 'can see the add new work button' do
+        visit '/dashboard/my/works'
+        expect(page).to have_link "Add New Work"
+      end
+    end
+
+    context 'who belongs to a group with deposit access for a specific admin set' do
+      let(:admin_set_3) do
+        create(:admin_set, title: ["Yet Another Admin Set"],
+                           description: ["A description"])
+      end
+      let(:depositors_group) { create(:depositors_group, name: 'deposit', member_users: [user]) }
+
+      before do
+        create(:permission_template_access,
+               :deposit,
+               permission_template: create(:permission_template, source_id: admin_set_3.id, with_admin_set: true, with_active_workflow: true),
+               agent_type: 'group',
+               agent_id: depositors_group.name)
+      end
+
+      it 'can see the add new work button' do
+        visit '/dashboard/my/works'
+        expect(page).to have_link "Add New Work"
+      end
+    end
+  end
 end
