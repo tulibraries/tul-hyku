@@ -18,21 +18,21 @@ module Hyrax
         elsif work_depositor? || admin_set_with_deposit?
           can %i[create], all_work_types_and_files
         end
+      end
 
-        # OVERRIDE HYRAX 3.5.0 to return false if no ids are found
-        # @return [Boolean] true if the user has at least one admin set they can deposit into.
-        def admin_set_with_deposit?
-          ids = PermissionTemplateAccess.for_user(ability: self,
-                                                  access: ['deposit', 'manage'])
-                                        .joins(:permission_template)
-                                        .select(:source_id)
-                                        .distinct
-                                        .pluck(:source_id)
+      # OVERRIDE HYRAX 3.5.0 to return false if no ids are found
+      # @return [Boolean] true if the user has at least one admin set they can deposit into.
+      def admin_set_with_deposit?
+        ids = PermissionTemplateAccess.for_user(ability: self,
+                                                access: ['deposit', 'manage'])
+                                      .joins(:permission_template)
+                                      .select(:source_id)
+                                      .distinct
+                                      .pluck(:source_id)
 
-          return false if ids.empty?
+        return false if ids.empty?
 
-          Hyrax.custom_queries.find_ids_by_model(model: Hyrax::AdministrativeSet, ids: ids).any?
-        end
+        Hyrax.custom_queries.find_ids_by_model(model: Hyrax::AdministrativeSet, ids: ids).any?
       end
     end
   end
