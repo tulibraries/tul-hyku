@@ -25,7 +25,7 @@
                       @invite_roles_options.map { |r| [r.titleize, r ]},
                       { prompt: 'Select a role...' },
                       required: false,
-                      class: 'form-control' %> 
+                      class: 'form-control' %>
           <%= f.submit t('.add'), class: 'btn btn-primary' %>
         </div>
       <% end %>
@@ -87,7 +87,10 @@
               <td><%= user.accepted_or_not_invited? ? t('.status.active') : t('.status.pending') %></td>
               <% if can? :destroy, User %>
                 <td>
-                  <%= link_to t('.delete'),  main_app.admin_user_path(user), class: 'btn btn-danger btn-sm action-delete', method: :delete, data: { confirm: t('hyrax.admin.users.destroy.confirmation', user: user.email) } %>
+                  <%= link_to t('.delete'), main_app.admin_user_path(user), class: 'btn btn-danger btn-sm action-delete', method: :delete, data: { confirm: t('hyrax.admin.users.destroy.confirmation', user: user.email) } %>
+                  <% if user.invited_to_sign_up? %>
+                    <%= link_to t('.activate'), main_app.activate_admin_user_path(user.id), class: 'btn btn-primary btn-sm', method: :post, data: { confirm: t('hyrax.admin.users.activate.confirmation', user: user.email) } %>
+                  <% end %>
                 </td>
               <% end %>
             </tr>

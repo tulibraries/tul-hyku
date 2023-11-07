@@ -132,6 +132,8 @@ extraEnvVars: &envVars
     value: "true"
   - name: HYKU_ROOT_HOST
     value: hyku-staging.$BASE_URL
+  - name: HYKU_USER_DEFAULT_PASSWORD
+    value: password
   - name: NEGATIVE_CAPTCHA_SECRET
     value: $NEGATIVE_CAPTCHA_SECRET
   - name: SMTP_ENABLED
@@ -152,7 +154,7 @@ extraEnvVars: &envVars
     value: admin
   - name: SOLR_ADMIN_PASSWORD
     value: $SOLR_ADMIN_PASSWORD
- - name: SOLR_COLLECTION_NAME
+  - name: SOLR_COLLECTION_NAME
     value: hyku-staging
   - name: SOLR_CONFIGSET_NAME
     value: hyku-staging

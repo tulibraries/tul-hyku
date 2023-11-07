@@ -114,6 +114,14 @@ zh:
       work_types: 可用的工作类型
     footer:
       admin_login: 管理员登录
+    identity_provider:
+      header: 身份验证身份提供商
+      label:
+        logo_image: SSO 页面的图像
+        logo_image_alt_text: 图像的替代文本
+        name: 名称或描述
+        optoins: 选项
+        provider: 提供者
     proprietor:
       accounts:
         nav: 帐号
@@ -207,6 +215,10 @@ zh:
         repository_activity: 存储库活动
         system_status: 系统状态
       users:
+        activate:
+          confirmation: 您确定要激活用户“%{user}”吗？
+          failure: 无法激活用户“%{user}”。
+          success: 用户“%{user}”已成功激活。
         destroy:
           confirmation: 您确定要删除用户“%{user}”吗？这一行动是不可逆转的。
           failure: 无法删除用户“%{user}”。
@@ -275,6 +287,9 @@ zh:
         edit: 編輯
         header: 管理用户
         update: 更新
+  single_signon:
+    index:
+      sign_in_with_provider: 使用 %{provider} 登录
   status:
     index:
       services: 服务

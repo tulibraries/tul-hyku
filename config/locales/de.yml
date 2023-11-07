@@ -114,6 +114,14 @@ de:
       work_types: Verfügbare Arbeitstypen
     footer:
       admin_login: Administratorenlogin
+    identity_provider:
+      header: Authentifizierungsidentitätsanbieter
+      label:
+        logo_image: Bild für die SSO-Seite
+        logo_image_alt_text: Alternativtext für Bild
+        name: Name oder Beschreibung
+        optoins: Optionen
+        provider: Anbieter
     proprietor:
       accounts:
         nav: Konten
@@ -210,6 +218,10 @@ de:
         roles_and_permissions: Benutzer und Gruppen
         system_status: Systemstatus
       users:
+        activate:
+          confirmation: Sind Sie sicher, dass Sie den Benutzer „%{user}“ aktivieren möchten?
+          failure: Benutzer „%{user}“ konnte nicht aktiviert werden.
+          success: Benutzer „%{user}“ wurde erfolgreich aktiviert.
         destroy:
           confirmation: Möchten Sie den Benutzer "%{user}" wirklich löschen? Diese Aktion lässt sich nicht rückgängig machen.
           failure: Benutzer "%{user}" konnte nicht gelöscht werden.
@@ -278,6 +290,9 @@ de:
         edit: Bearbeiten
         header: Benutzer verwalten
         update: Aktualisieren
+  single_signon:
+    index:
+      sign_in_with_provider: Melden Sie sich mit %{provider} an
   status:
     index:
       services: Dienste

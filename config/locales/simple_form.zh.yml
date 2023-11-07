@@ -9,8 +9,8 @@ zh:
         admin_emails: 一次输入一个电子邮件地址
         allow_signup: 允许用户注册到您的存储库
         cache_api: 为 API 端点打开缓存。实验性的
-        contact_email: 通过联系表发送的邮件的电子邮件收件人
-        contact_email_to: 应接收联系电子邮件的电子邮件地址
+        contact_email: 应接收联系电子邮件的电子邮件地址
+        contact_email_to: 通过联系表发送的邮件的电子邮件收件人
         doi_reader: 显示从 Datacite 读取数据以填充记录的能力。 WIP 不使用
         doi_writer: 为记录写 DOI。 WIP 不使用
         email_format: 设置允许注册此存储库的电子邮件域列表，例如 (@ubiquitypress.com @gmail.com)。在每个域之间留一个空格。
