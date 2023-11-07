@@ -1,3 +1,8 @@
+<%# Add content_for block to clear caching so IR icons don't duplicate unintentionally %>
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <div class="carousel institutional-repository-carousel slide" id="carousel-tilenav" data-interval="false">
   <div class="carousel-inner">
     <% resource_types.each.with_index do |(k,v), i| %>
@@ -5,9 +10,11 @@
       <div class="item <%= i.zero? ? 'active' : '' %>">
         <div class="col-xs-12 col-sm-3 col-md-2">
           <div class="text-center">
-            <i class='<%= "#{v[1]}" %>' aria-hidden="true"></i>
-            <h5><%= k %></h5>
-            <p><%= v[0] %></p>
+            <%= link_to "/catalog?f[resource_type_sim][]=#{k}", style: "color: inherit;" do %>
+              <i class='<%= "#{v[1]}" %>' aria-hidden="true"></i>
+              <h5><%= k %></h5>
+              <p><%= v[0] %></p>
+            <% end %>
           </div>
         </div>
       </div>
