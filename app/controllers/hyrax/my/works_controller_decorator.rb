@@ -6,7 +6,7 @@
 module Hyrax
   module My
     module WorksControllerDecorator
-      def collection_service
+      def collections_service
         cloned = clone
         cloned.params = {}
         Hyrax::CollectionsService.new(cloned)
