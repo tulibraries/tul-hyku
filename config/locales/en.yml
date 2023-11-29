@@ -1,5 +1,8 @@
 ---
 en:
+  single_signon:
+   index:
+     sign_in_with_provider: Sign in with %{provider}
   activerecord:
     attributes:
       site:
@@ -114,6 +117,14 @@ en:
           user_reader: Can read any User in this tenant
       title: Administration
       work_types: Available Work Types
+    identity_provider:
+      header: Authentication Identity Provider
+      label:
+        name: Name or Description
+        provider: Provider
+        optoins: Options
+        logo_image: Image for SSO Page
+        logo_image_alt_text: Alt Text for Image
     footer:
       admin_login: Administrator login
     proprietor:
@@ -170,6 +181,20 @@ en:
               confirm: "If your theme doesn't appear to be applying correctly, verify that it isn't being overwritten by Custom CSS."
             favicon:
               hint: "Favicons need to be png files and must be square. The max size used is 228px x 228px."
+            navbar_background_color:
+              hint: 'At 40% opacity.'
+            navbar_link_background_hover_color:
+              hint: 'Applies to the Home, About, Contact and Help buttons on those specific pages only (at 15% opacity).'
+            link_color:
+              hint: 'Affects links on the home and work pages including: breadcrumbs, tabs, titles and terms of service.'
+            primary_button_hover_color:
+              hint: 'Share, search and collection interaction (edit, feature, etc.) buttons. The border of these buttons will also be this color.'
+            default_button_background_color:
+              hint: 'Work interaction (edit, feature, etc.) buttons; work views on collection page and search filter button.'
+            facet_panel_background_color:
+              hint: 'Applies to facets and additional section headers on the work pages in some themes.'
+            facet_panel_text_color:
+              hint: 'Also applies to the color of the caret next to the text and the work title on some themes.'
           tabs:
             banner_image: "Banner Image"
             directory_image: "Directory Image"
@@ -180,12 +205,18 @@ en:
             fonts: "Fonts"
             themes: "Themes"
       sidebar:
+        account: Account
         accounts: Accounts
         activity_summary: Activity Summary
         labels: Labels
         manage_groups: Manage Groups
+        repository_activity: Repository Activity
         system_status: System Status
       users:
+        activate:
+          confirmation: Are you sure you want to activate the user "%{user}"?
+          failure: User "%{user}" could not be activated.
+          success: User "%{user}" has been successfully activated.
         destroy:
           confirmation: Are you sure you wish to delete the user "%{user}"? This action is irreversible.
           failure: User "%{user}" could not be deleted.

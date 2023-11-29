@@ -9,7 +9,34 @@ groups = Rails.groups
 Bundler.require(*groups)
 
 module Hyku
+  # Providing a common method to ensure consistent UTF-8 encoding.  Also removing the tricksy Byte
+  # Order Marker character which is an invisible 0 space character.
+  #
+  # @note In testing, we encountered errors with the file's character encoding
+  #       (e.g. `Encoding::UndefinedConversionError`).  The following will force the encoding to
+  #       UTF-8 and replace any invalid or undefined characters from the original encoding with a
+  #       "?".
+  #
+  #       Given that we still have the original, and this is a derivative, the forced encoding
+  #       should be acceptable.
+  #
+  # @param [String]
+  # @return [String]
+  #
+  # @see https://sentry.io/organizations/scientist-inc/issues/3773392603/?project=6745020&query=is%3Aunresolved&referrer=issue-stream
+  # @see https://github.com/samvera-labs/bulkrax/pull/689
+  # @see https://github.com/samvera-labs/bulkrax/issues/688
+  # @see https://github.com/scientist-softserv/adventist-dl/issues/179
+  def self.utf_8_encode(string)
+    string
+      .encode(Encoding.find('UTF-8'), invalid: :replace, undef: :replace, replace: "?")
+      .delete("\xEF\xBB\xBF")
+  end
+
   class Application < Rails::Application
+    # Add this line to load the lib folder first because we need
+    config.autoload_paths.unshift("#{Rails.root}/lib")
+
     config.active_record.yaml_column_permitted_classes = [
       Symbol,
       ActiveSupport::HashWithIndifferentAccess,
@@ -36,17 +63,35 @@ module Hyku
         config.active_elastic_job.secret_key_base = Rails.application.secrets[:secret_key_base]
       end
     end
-    
+
     config.to_prepare do
-      # Allows us to use decorator files in the app directory
+
+      # Add any extra services before IiifPrint::PluggableDerivativeService to enable processing
+      Hyrax::DerivativeService.services = [IiifPrint::PluggableDerivativeService]
+
+      # When you are ready to use the derivative rodeo instead of the pluggable uncomment the
+      # following and comment out the preceding Hyrax::DerivativeService.service
+      #
+      # Hyrax::DerivativeService.services = [
+      #   Adventist::TextFileTextExtractionService,
+      #   IiifPrint::DerivativeRodeoService,
+      #   Hyrax::FileSetDerivativesService]
+
+      DerivativeRodeo::Generators::HocrGenerator.additional_tessearct_options = "-l eng_best"
+
+      # Allows us to use decorator files
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")).sort.each do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
-    end
 
-    # OAI additions
-    Dir.glob(File.join(File.dirname(__FILE__), "../lib/oai/**/*.rb")).sort.each do |c|
-      Rails.configuration.cache_classes ? require(c) : load(c)
+      Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*_decorator*.rb")).sort.each do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+
+      # OAI additions
+      Dir.glob(File.join(File.dirname(__FILE__), "../lib/oai/**/*.rb")).sort.each do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
     end
 
     # resolve reloading issue in dev mode
@@ -63,6 +108,30 @@ module Hyku
       end
 
       Object.include(AccountSwitch)
+    end
+
+    # copies tinymce assets directly into public/assets
+    config.tinymce.install = :copy
+    ##
+    # Psych Allow YAML Classes
+    #
+    # The following configuration addresses errors of the following form:
+    #
+    # ```
+    # Psych::DisallowedClass: Tried to load unspecified class: ActiveSupport::HashWithIndifferentAccess
+    # ```
+    #
+    # Psych::DisallowedClass: Tried to load unspecified class: <Your Class Name Here>
+    config.after_initialize do
+      config.active_record.yaml_column_permitted_classes = [
+        Symbol,
+        Hash,
+        Array,
+        ActiveSupport::HashWithIndifferentAccess,
+        ActiveModel::Attribute.const_get(:FromDatabase),
+        User,
+        Time
+      ]
     end
   end
 end

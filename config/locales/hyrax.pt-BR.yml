@@ -203,6 +203,7 @@ pt-BR:
         configuration: Configuração
         contact: Contato
         content_blocks: Blocos de Conteúdo
+        identity_provider: Provedor de identidade
         notifications: Notificações
         pages: Páginas
         profile: Perfil
@@ -694,6 +695,7 @@ pt-BR:
         sr:
           batch_checkbox: Marque para adicionar a uma coleção ou editar uma lista
           check_all_label: Selecione todos os arquivos a serem adicionados a uma coleção ou editados
+          collections_batch_checkbox: Marque para excluir coleções em lote.
           detail_label: Exibir detalhes resumidos de
           listing: Lista de itens nos quais você depositou
           press_to: Pressione para
@@ -810,7 +812,7 @@ pt-BR:
       groups_description:
         description_html: A lista de grupos no menu suspenso marcado "Selecionar um grupo" é uma lista de Grupos gerenciados por usuários dos quais você é membro. Você pode selecionar um grupo específico e atribuir um nível de acesso a um arquivo no %{application_name}, da mesma forma que adiciona níveis de acesso do usuário.
     footer:
-      copyright_html: "<strong>Copyright © 2017 Samvera Licenciado</strong> sob a Licença Apache, Versão 2.0"
+      copyright_html: "<strong>Copyright © 2019 - %{current_year} Samvera Licenciado</strong> sob a Licença Apache, Versão 2.0"
       service_html: Um serviço de <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a> .
     help:
       header: Suporte ao usuário
@@ -1161,13 +1163,29 @@ pt-BR:
         based_near: Localização
         creator: O Criador
         date_created: Data Criada
+        default_button_background_color: Cor de fundo do botão padrão
+        default_button_border_color: Cor padrão da borda do botão
+        default_button_text_color: Cor padrão do texto do botão
         description: Descrição
         embargo_release_date: até
+        facet_panel_background_color: Cor de fundo do painel de facetas
+        facet_panel_text_color: Cor do texto do painel de facetas
         files: Enviar um arquivo
+        footer_link_color: Cor do link do rodapé
+        footer_link_hover_color: Cor do foco do link do rodapé
+        header_and_footer_background_color: Cor de fundo do cabeçalho e rodapé
+        header_and_footer_text_color: Cor do texto do cabeçalho e rodapé
         keyword: Palavra-chave
         lease_expiration_date: até
         license: Licença
+        link_color: Cor do link
+        link_hover_color: Cor do foco do link
         member_of_collection_ids: Adicionar a coleção
+        navbar_background_color: Cor de fundo da barra de navegação
+        navbar_link_background_hover_color: Cor de foco do plano de fundo do link da barra de navegação
+        navbar_link_text_color: Cor do texto do link da barra de navegação
+        navbar_link_text_hover_color: Cor do foco do texto do link da barra de navegação
+        primary_button_hover_color: Cor principal do foco do botão
         related_url: URL relacionado
         rights_statement: Declaração de direitos
         title: Título

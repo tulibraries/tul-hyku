@@ -114,6 +114,14 @@ zh:
       work_types: 可用的工作类型
     footer:
       admin_login: 管理员登录
+    identity_provider:
+      header: 身份验证身份提供商
+      label:
+        logo_image: SSO 页面的图像
+        logo_image_alt_text: 图像的替代文本
+        name: 名称或描述
+        optoins: 选项
+        provider: 提供者
     proprietor:
       accounts:
         nav: 帐号
@@ -158,15 +166,29 @@ zh:
             custom_css:
               confirm: 自定义CSS将始终覆盖其他主题选择。继续？
               warning: 如果您的主题自定义设置似乎无法正确应用，请确认自定义CSS不会覆盖它们。
+            default_button_background_color:
+              hint: 工作交互（编辑、功能等）按钮；收藏页面和搜索过滤器按钮上的工作视图。
             default_images:
               alert: 请至少上传一个文件，然后再提交。
               hint: 对于默认图像，您应该使用高度和宽度尺寸（宽度为100像素，高度为100像素）的图像（JPG，GIF或PNG）
             directory_image:
-              hint: 要将图像用作目录图像，应使用不大于标题且宽度不超过400像素的图像（JPG，GIF或PNG）。
+              hint: 要将图像用作目录图像，应使用高度不超过标题且宽度不超过 400 像素的图像（JPG、GIF 或 PNG）。
+            facet_panel_background_color:
+              hint: 适用于某些主题中工作页面上的分面和附加节标题。
+            facet_panel_text_color:
+              hint: 也适用于文本旁边插入符号的颜色和某些主题的作品标题。
             favicon:
               hint: Favicons 需要是 png 文件并且必须是方形的。使用的最大尺寸为 228px x 228px
+            link_color:
+              hint: 影响主页和工作页面上的链接，包括：面包屑、标签、标题和服务条款。
             logo_image:
               hint: 要将图像用作徽标，应使用不大于标题且宽度不超过400像素的图像（JPG，GIF或PNG）。
+            navbar_background_color:
+              hint: 不透明度为 40%。
+            navbar_link_background_hover_color:
+              hint: 仅适用于这些特定页面上的“主页”、“关于”、“联系方式”和“帮助”按钮（不透明度为 15%）。
+            primary_button_hover_color:
+              hint: 共享、搜索和收藏交互（编辑、功能等）按钮。这些按钮的边框也将是这种颜色。
             themes:
               confirm: 如果您的主题似乎没有正确应用，请确认该主题未被Custom CSS覆盖。
           hints:
@@ -185,12 +207,18 @@ zh:
             fonts: 字形
             themes: 主题
       sidebar:
+        account: 帐户
         accounts: 帐号
         activity_summary: 活动摘要
         labels: 标签
         manage_groups: 管理组
+        repository_activity: 存储库活动
         system_status: 系统状态
       users:
+        activate:
+          confirmation: 您确定要激活用户“%{user}”吗？
+          failure: 无法激活用户“%{user}”。
+          success: 用户“%{user}”已成功激活。
         destroy:
           confirmation: 您确定要删除用户“%{user}”吗？这一行动是不可逆转的。
           failure: 无法删除用户“%{user}”。
@@ -259,6 +287,9 @@ zh:
         edit: 編輯
         header: 管理用户
         update: 更新
+  single_signon:
+    index:
+      sign_in_with_provider: 使用 %{provider} 登录
   status:
     index:
       services: 服务

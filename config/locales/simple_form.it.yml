@@ -9,8 +9,8 @@ it:
         admin_emails: Inserisci un indirizzo email alla volta
         allow_signup: Consenti agli utenti di registrarsi al tuo repository
         cache_api: Attiva la cache per gli endpoint API. Sperimentale
-        contact_email: Email destinatario dei messaggi inviati tramite il modulo di contatto
-        contact_email_to: Indirizzo e-mail che dovrebbe ricevere le e-mail di contatto
+        contact_email: Indirizzo e-mail che dovrebbe ricevere le e-mail di contatto
+        contact_email_to: Email destinatario dei messaggi inviati tramite il modulo di contatto
         doi_reader: Mostra la capacità di leggere da Datacite per popolare i record. WIP non utilizzare
         doi_writer: Scrivi DOI per i record. WIP non utilizzare
         email_format: Impostare un elenco di domini di posta elettronica a cui è consentito registrarsi a questo repository, ad esempio (@ubiquitypress.com @gmail.com). Lascia un singolo spazio tra ogni dominio.

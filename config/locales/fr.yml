@@ -114,6 +114,14 @@ fr:
       work_types: Types de travail disponibles
     footer:
       admin_login: Connexion Administrateur
+    identity_provider:
+      header: Fournisseur d'identité d'authentification
+      label:
+        logo_image: Image de la page SSO
+        logo_image_alt_text: Texte alternatif pour l'image
+        name: Nom ou description
+        optoins: Possibilités
+        provider: Fournisseur
     proprietor:
       accounts:
         nav: Comptes
@@ -158,15 +166,29 @@ fr:
             custom_css:
               confirm: Le CSS personnalisé remplacera toujours les autres sélections de thèmes. Procéder?
               warning: Si vos personnalisations de thème ne semblent pas s'appliquer correctement, vérifiez qu'elles ne sont pas écrasées par CSS personnalisé.
+            default_button_background_color:
+              hint: Boutons d'interaction de travail (édition, fonctionnalité, etc.) ; vues de travail sur la page de collection et le bouton de filtre de recherche.
             default_images:
               alert: Veuillez télécharger au moins un fichier avant de soumettre.
               hint: Pour les images par défaut, vous devez utiliser une image (JPG, GIF ou PNG) qui a des dimensions de hauteur et de largeur égales (100 pixels de large et 100 pixels de haut)
             directory_image:
-              hint: Pour utiliser une image comme image de répertoire, vous devez utiliser une image (JPG, GIF ou PNG) qui n'est pas plus haute que l'en-tête et pas plus large que 400 pixels de large.
+              hint: Pour utiliser une image comme image de répertoire, vous devez utiliser une image (JPG, GIF ou PNG) qui ne dépasse pas l'en-tête et ne dépasse pas 400 pixels de large.
+            facet_panel_background_color:
+              hint: S'applique aux facettes et aux en-têtes de section supplémentaires sur les pages de travail dans certains thèmes.
+            facet_panel_text_color:
+              hint: S'applique également à la couleur du caret à côté du texte et du titre de l'ouvrage sur certains thèmes.
             favicon:
               hint: Les favicons doivent être des fichiers png et doivent être carrés. La taille maximale utilisée est de 228px x 228px.
+            link_color:
+              hint: 'Affecte les liens sur les pages d''accueil et de travail, notamment : les fils d''Ariane, les onglets, les titres et les conditions d''utilisation.'
             logo_image:
               hint: Pour utiliser une image comme logo, vous devez utiliser une image (JPG, GIF ou PNG) qui n'est pas plus haute que l'en-tête et pas plus large que 400 pixels de large.
+            navbar_background_color:
+              hint: À 40% d'opacité.
+            navbar_link_background_hover_color:
+              hint: S'applique aux boutons Accueil, À propos, Contact et Aide de ces pages spécifiques uniquement (à 15 % d'opacité).
+            primary_button_hover_color:
+              hint: Boutons de partage, de recherche et d'interaction de collecte (édition, fonctionnalité, etc.). La bordure de ces boutons sera également de cette couleur.
             themes:
               confirm: Si votre thème ne semble pas s'appliquer correctement, vérifiez qu'il n'est pas écrasé par le CSS personnalisé.
           hints:
@@ -185,6 +207,7 @@ fr:
             fonts: Les Polices
             themes: Thèmes
       sidebar:
+        account: Compte
         accounts: Comptes
         activity_summary: Résumé de l'activité
         content_blocks: Blocs de contenu
@@ -197,6 +220,10 @@ fr:
         system_status: État du système
         technical: Technique
       users:
+        activate:
+          confirmation: Etes-vous sûr de vouloir activer l'utilisateur "%{user}" ?
+          failure: L'utilisateur "%{user}" n'a pas pu être activé.
+          success: L'utilisateur "%{user}" a été activé avec succès.
         destroy:
           confirmation: Voulez-vous vraiment supprimer l'utilisateur "%{user}"? Cette action est irréversible.
           failure: L'utilisateur "%{user}" n'a pas pu être supprimé.
@@ -265,6 +292,9 @@ fr:
         edit: Modifier
         header: Gérer l'utilisateur
         update: Mettre à jour
+  single_signon:
+    index:
+      sign_in_with_provider: Connectez-vous avec %{provider}
   status:
     index:
       services: Prestations de service

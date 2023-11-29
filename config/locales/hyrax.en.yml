@@ -9,7 +9,7 @@ en:
     directory:
       suffix: "@hydrainabox.org"
     footer:
-      copyright_html: "<strong>Copyright &copy; 2019 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      copyright_html: "<strong>Copyright &copy; 2019 - %{current_year} Samvera</strong> Licensed under the Apache License, Version 2.0"
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
     account_label: User
     activefedora:
@@ -207,6 +207,7 @@ en:
       sidebar:
         activity: Activity
         appearance: Appearance
+        identity_provider: Identity Provider
         collection_types: Collection Types
         collections: Collections
         configuration: Configuration
@@ -707,6 +708,7 @@ en:
         shared: Works Shared with Me
         sr:
           batch_checkbox: Check to add to a collection or edit list
+          collections_batch_checkbox: Check to batch delete collections.
           check_all_label: Select all files to be added to a collection or edited
           detail_label: Display summary details of
           listing: Listing of items you have deposited in
@@ -1164,13 +1166,29 @@ en:
         based_near: Location
         creator: Creator
         date_created: Date Created
+        default_button_background_color: Default button background color
+        default_button_border_color: Default button border color
+        default_button_text_color: Default button text color
         description: Description
         embargo_release_date: until
+        facet_panel_background_color: Facet panel background color
+        facet_panel_text_color: Facet panel text color
         files: Upload a file
+        footer_link_color: Footer link color
+        footer_link_hover_color: Footer link hover color
+        header_and_footer_background_color: Header and footer background color
+        header_and_footer_text_color: Header and footer text color
         keyword: Keyword
         lease_expiration_date: until
         license: License
+        link_color: Link color
+        link_hover_color: Link hover color
         member_of_collection_ids: Add to collection
+        navbar_background_color: Navbar background color
+        navbar_link_background_hover_color: Navbar link background hover color
+        navbar_link_text_color: Navbar link text color
+        navbar_link_text_hover_color: Navbar link text hover color
+        primary_button_hover_color: Primary button hover color
         related_url: Related URL
         rights_statement: Rights statement
         title: Title

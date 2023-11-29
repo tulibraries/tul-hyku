@@ -9,8 +9,8 @@ fr:
         admin_emails: Entrez une adresse e-mail à la fois
         allow_signup: Autoriser les utilisateurs à s'inscrire à votre référentiel
         cache_api: Active le cache pour les points de terminaison d'API. Expérimental
-        contact_email: Email destinataire des messages envoyés via le formulaire de contact
-        contact_email_to: Adresse e-mail qui doit recevoir les e-mails de contact
+        contact_email: Adresse e-mail qui doit recevoir les e-mails de contact
+        contact_email_to: Email destinataire des messages envoyés via le formulaire de contact
         doi_reader: Afficher la possibilité de lire à partir de Datacite pour remplir les enregistrements. WIP ne pas utiliser
         doi_writer: Rédigez des DOI pour les enregistrements. WIP ne pas utiliser
         email_format: Définissez une liste de domaines de messagerie autorisés à s'inscrire à ce référentiel, par exemple (@ubiquitypress.com @gmail.com). Laissez un seul espace entre chaque domaine.

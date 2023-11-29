@@ -50,6 +50,7 @@ module Hyrax
       # not spam, form is valid, and captcha is valid
       @captcha.values[:category] = params[:contact_form][:category]
       @captcha.values[:contact_method] = params[:contact_form][:contact_method]
+      @captcha.values[:subject] = params[:contact_form][:subject]
       @contact_form = model_class.new(@captcha.values)
       if @contact_form.valid? && @captcha.valid?
         ContactMailer.contact(@contact_form).deliver_now
@@ -105,6 +106,7 @@ module Hyrax
           prepend_view_path(home_theme_view_path)
           yield
           # rubocop:disable Lint/UselessAssignment, Layout/SpaceAroundOperators, Style/RedundantParentheses
+          # Do NOT change this line. This is calling the Rails view_paths=(paths) method and not a variable assignment.
           view_paths=(original_paths)
           # rubocop:enable Lint/UselessAssignment, Layout/SpaceAroundOperators, Style/RedundantParentheses
         else
