@@ -7,55 +7,34 @@ de:
     hints:
       account:
         admin_emails: Geben Sie jeweils eine E-Mail-Adresse ein
-        allow_signup: Erlauben Sie Benutzern, sich bei Ihrem Repository anzumelden
-        cache_api: Aktiviert den Cache für API-Endpunkte. Experimental
-        contact_email: E-Mail-Adresse, die Kontakt-E-Mails erhalten soll
-        contact_email_to: E-Mail-Empfänger von Nachrichten, die über das Kontaktformular gesendet werden
-        doi_reader: Zeigen Sie die Fähigkeit, aus Datacite zu lesen, um Datensätze zu füllen. WIP nicht verwenden
-        doi_writer: Schreiben Sie DOIs für Datensätze. WIP nicht verwenden
-        email_format: Legen Sie eine Liste von E-Mail-Domains fest, die sich bei diesem Repository anmelden dürfen, z. B. (@ubiquitypress.com @gmail.com). Lassen Sie zwischen jeder Domäne ein einzelnes Leerzeichen.
-        email_subjet_prefix: Zeichenfolge, die den System-E-Mail-Betreffs vorangestellt werden soll.
+        allow_signup: Benutzern erlauben, sich für Ihr Repository anzumelden
+        cache_api: Cache für API-Endpunkte aktivieren. Experimentell
+        contact_email: Die E-Mail-Adresse, von der Systembenachrichtigungen gesendet werden. Eine zusätzliche Konfiguration ist erforderlich, um eine Adresse von anderen Domänen als der Domäne der Website hinzuzufügen
+        contact_email_to: Die E-Mail-Adresse, an die über die Kontaktseite gesendete Nachrichten gesendet werden
+        doi_reader: Zeigen Sie die Fähigkeit an, von Datacite zu lesen, um Datensätze zu füllen. WIP nicht verwenden
+        doi_writer: DOIs für Datensätze schreiben. WIP nicht verwenden
+        email_format: Legen Sie eine Liste von E-Mail-Domänen fest, die sich für dieses Repository anmelden dürfen, z. B. (@ubiquitypress.com @gmail.com). Lassen Sie jeweils ein Leerzeichen zwischen den Domänen.
+        email_subjet_prefix: Zeichenfolge, die vor System-E-Mail-Betreffs eingefügt wird.
         enable_oai_metadata: OAI-Link aktivieren oder deaktivieren
-        fcrepo_endpoint:
-          base_path: Fedora-Basispfad sollte mit einem Schrägstrich beginnen und nicht mit einem Schrägstrich enden
-          url: Fedora-URL sollte nicht mit einem Schrägstrich enden
-        file_acl: Deaktivieren Sie diese Option, wenn Sie ein Dateisystem wie Samba oder NFS verwenden, das das Festlegen von Zugriffssteuerungslisten nicht unterstützt
-        file_size_limit: Dieser sollte mindestens auf 536870912000 eingestellt sein
-        geonames_username: Registrieren Sie sich unter http://www.geonames.org/manageaccount
-        gtm_id: Die ID Ihres Google Tag Manager-Kontos
-        is_public: 'Können Benutzer Ihre Seite auf der Startseite entdecken oder auf Ihre Seiten zugreifen, ohne einen speziellen Benutzernamen / Passwort?'
         fcrepo_endpoint:
           base_path: Der Fedora-Basispfad sollte mit einem Schrägstrich beginnen UND nicht mit einem Schrägstrich enden
           url: Die Fedora-URL sollte nicht mit einem Schrägstrich enden
-        name: Ein einzelner oder mit Bindestrichen versehener Name, der für technische Aspekte des Repositories verwendet wird (z.B. "acme" oder "acme-bibliothek").
-        gtm_id: Die ID Ihres Google Tag Manager-Kontos
-        google_analytics_id: Die ID Ihres Google Analytics-Kontos
-        google_oauth_app_name: Der Name der Google-Anwendung in der Google API-Konsole
-        google_oauth_app_version: Die Version der Google-Anwendung in der Google API-Konsole
-        google_oauth_private_key_value: Der Wert der p12-Datei mit Base64-Verschlüsselung. (Sie können den privaten Schlüsselwert ODER den Pfad verwenden; der Wert hat Vorrang)
-        google_oauth_private_key_path: Der vollständige Pfad zu Ihrer p12-Schlüsseldatei. (Sie können den privaten Schlüsselwert ODER den Pfad verwenden; der Wert hat Vorrang)
-        google_oauth_private_key_secret: Das Geheimnis, das Sie beim Erstellen des p12-Schlüssels angegeben haben
-        google_oauth_client_email: OAuth-Client-E-Mail-Adresse
-        contact_email: Die E-Mail-Adresse, an die über die Kontaktseite gesendete Nachrichten gesendet werden
-        weekly_email_list: Liste von E-Mail-Adressen, an die der wöchentliche Bericht gesendet wird. Lassen Sie jeweils ein Leerzeichen zwischen den E-Mails
-        monthly_email_list: Liste von E-Mail-Adressen, an die der monatliche Bericht gesendet wird. Lassen Sie jeweils ein Leerzeichen zwischen den E-Mails
-        yearly_email_list: Liste von E-Mail-Adressen, an die der jährliche Bericht gesendet wird. Lassen Sie jeweils ein Leerzeichen zwischen den E-Mails
-        email_format: Legen Sie eine Liste von E-Mail-Domänen fest, die sich für dieses Repository anmelden dürfen, z. B. (@ubiquitypress.com @gmail.com). Lassen Sie jeweils ein Leerzeichen zwischen den Domänen.
-        allow_signup: Benutzern erlauben, sich für Ihr Repository anzumelden
-        enable_oai_metadata: OAI-Link aktivieren oder deaktivieren
-        shared_login: Gemeinsamen Login aktivieren oder deaktivieren
-        file_size_limit: Dies sollte mindestens auf 536870912000 eingestellt sein
-        locale_name: |
-          Der Name des mandantenspezifischen Gebietsschemasuffix, der ihren locale.yml-Dateien hinzugefügt wird. Es sollten nur alphabetische Zeichen hinzugefügt werden, keine Symbole oder Zahlen, diese werden dann großgeschrieben.
-        oai_admin_email: OAI-Endpunkt-Kontakt-E-Mail-Adresse
-        doi_reader: Zeigen Sie die Fähigkeit an, von Datacite zu lesen, um Datensätze zu füllen. WIP nicht verwenden
-        doi_writer: DOIs für Datensätze schreiben. WIP nicht verwenden
-        cache_api: Cache für API-Endpunkte aktivieren. Experimentell
-        email_subjet_prefix: Zeichenfolge, die vor System-E-Mail-Betreffs eingefügt wird.
-        contact_email_to: Die E-Mail-Adresse, von der Systembenachrichtigungen gesendet werden. Eine zusätzliche Konfiguration ist erforderlich, um eine Adresse von anderen Domänen als der Domäne der Website hinzuzufügen
-        geonames_username: Registrieren Sie sich unter http://www.geonames.org/manageaccount
         file_acl: Deaktivieren Sie dies, wenn Sie ein Dateisystem wie Samba oder NFS verwenden, das das Festlegen von Zugriffssteuerungslisten nicht unterstützt
+        file_size_limit: Dies sollte mindestens auf 536870912000 eingestellt sein
+        geonames_username: Registrieren Sie sich unter http://www.geonames.org/manageaccount
+        google_analytics_id: Die ID Ihres Google Analytics-Kontos
+        gtm_id: Die ID Ihres Google Tag Manager-Kontos
+        is_public: Können Benutzer Ihre Seite auf der Startseite entdecken oder auf Ihre Seiten zugreifen, ohne einen speziellen Benutzernamen / Passwort?
+        locale_name: 'Der Name des mandantenspezifischen Gebietsschemasuffix, der ihren locale.yml-Dateien hinzugefügt wird. Es sollten nur alphabetische Zeichen hinzugefügt werden, keine Symbole oder Zahlen, diese werden dann großgeschrieben.
+
+          '
+        monthly_email_list: Liste von E-Mail-Adressen, an die der monatliche Bericht gesendet wird. Lassen Sie jeweils ein Leerzeichen zwischen den E-Mails
+        name: Ein einzelner oder mit Bindestrichen versehener Name, der für technische Aspekte des Repositories verwendet wird (z.B. "acme" oder "acme-bibliothek").
+        oai_admin_email: OAI-Endpunkt-Kontakt-E-Mail-Adresse
+        shared_login: Gemeinsamen Login aktivieren oder deaktivieren
         ssl_configured: Setzen Sie es auf wahr, wenn Sie https verwenden
+        weekly_email_list: Liste von E-Mail-Adressen, an die der wöchentliche Bericht gesendet wird. Lassen Sie jeweils ein Leerzeichen zwischen den E-Mails
+        yearly_email_list: Liste von E-Mail-Adressen, an die der jährliche Bericht gesendet wird. Lassen Sie jeweils ein Leerzeichen zwischen den E-Mails
       hyku_group:
         description: Eine kurze Zusammenfassung der Rolle der Gruppe
       user:
@@ -87,11 +66,11 @@ de:
         email: E-Mail-Adresse
       user_search:
         uq: Benutzer suchen
-    'no': 'Nein'
+    'no': Nein
     placeholders:
       user_search:
         uq: Name oder Benutzername
     required:
       mark: "*"
       text: erforderlich
-    'yes': 'Ja'
+    'yes': Ja

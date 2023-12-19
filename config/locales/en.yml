@@ -1,5 +1,8 @@
 ---
 en:
+  errors:
+    messages:
+      valid_embed_url: "must be a valid YouTube or Vimeo Embed URL."
   single_signon:
    index:
      sign_in_with_provider: Sign in with %{provider}
@@ -9,7 +12,18 @@ en:
         institution_name_full: Full institution name
   application:
     tagline: The next-generation repository solution
+  activefedora:
+    models:
+      generic_work: "Work"
+      image: "Image"
+  devise:
+    mailer:
+      invitation_instructions:
+        ignore: "If you don't want to accept the invitation, please ignore this email. Your account won't be created until you access the link above and set your password."
+
   helpers:
+    action:
+      become: Become
     submit:
       add_role_to_group:
         submit: Add
@@ -199,6 +213,8 @@ en:
               hint: 'Applies to facets and additional section headers on the work pages in some themes.'
             facet_panel_text_color:
               hint: 'Also applies to the color of the caret next to the text and the work title on some themes.'
+            collection_banner_text_color:
+              hint: 'The color for the text (title, and last updated date) inside of the collection banner.'
           tabs:
             banner_image: "Banner Image"
             directory_image: "Directory Image"
@@ -208,14 +224,35 @@ en:
             favicon: Favicon
             fonts: "Fonts"
             themes: "Themes"
+      roles_service_jobs:
+        header: Data Repair Jobs
+        jobs:
+          create_admin_set_accesses:
+            label: Create Admin Set Accesses
+            description: "Creating a Hyrax::PermissionTemplateAccess record (combined with Ability#user_groups)
+            will allow Works in all AdminSets to show up in Blacklight / Solr queries."
+          create_collection_accesses:
+            label: Create Collection Accesses
+            description: "Because each collection role has some level of access to every Collection within a tenant,
+            creating a Hyrax::PermissionTemplateAccess record (combined with Ability#user_groups)
+            means all Collections will show up in Blacklight / Solr queries."
+          create_collection_type_participants:
+            label: Create Collection Type Participants
+            description: "Because some of the collection roles have access to every Collection within a tenant, create a
+            Hyrax::CollectionTypeParticipant record for them on every Hyrax::CollectionType (except the AdminSet)"
+          grant_workflow_roles_for_all_admin_sets:
+            label: Admin Set Workflow Roles
+            description: "Permissions to deposit Works are controlled by Workflow Roles on individual AdminSets.
+            In order for Hyrax::Group and User records who have either the 'Work Editor' or 'Work Depositor' Role
+            to have the correct permissions for Works, we grant them Workflow Roles for all AdminSets.
+            NOTE: All AdminSets must have a permission template or this will fail. Run 'Create Admin Set Accesses' first."
       sidebar:
-        account: Account
         accounts: Accounts
         activity_summary: Activity Summary
         labels: Labels
         manage_groups: Manage Groups
-        repository_activity: Repository Activity
         system_status: System Status
+        roles_service_jobs: Data Repair
       users:
         activate:
           confirmation: Are you sure you want to activate the user "%{user}"?
@@ -234,6 +271,9 @@ en:
             active: Active
             pending: Pending
           status_label: Status
+        roles:
+          remove:
+            confirmation: Are you sure you want to remove the role "%{role}" from the user "%{user}"?
   permissions:
     collections:
       cannot:
