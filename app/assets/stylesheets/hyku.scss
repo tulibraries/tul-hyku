@@ -27,6 +27,8 @@
   // allows full width if tabs are turned off with feature flipper
   .home-content {
     display: flex;
+    justify-content: normal;
+    padding: 0 20px;
   }
   .home-tabs-left {
     min-width: 50%;
@@ -413,7 +415,6 @@ a.btn.btn-default.restore-default-color.with-color-hint {
 nav.navbar.navbar-default.navbar-static-top .container-fluid .row {
   margin-left: 0;
   margin-right: 0;
-
   nav.navbar-nav.col-sm-5 {
     padding-right: 0;
   }
@@ -556,14 +557,6 @@ span.constraint-value p, .facet-values p {
 
   .hyc-bugs div, div {
     position: relative;
-  }
-}
-
-// date range limit - blacklight_range_limit gem
-form.range_limit.range_date_ssi {
-  line-height: 1.4;
-  input.range_begin, input.range_end {
-    width: auto;
   }
 }
 

@@ -5,6 +5,7 @@
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include PdfBehavior
+  include VideoEmbedBehavior
 
   if ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_IIIF_PRINT', false))
     include IiifPrint.model_configuration(

@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
-# OVERRIDE Hyrax 3.6.0 to add custom sort fields while in the dashboard for works
-
 module Hyrax
   module My
-    module WorksControllerDecorator
+    module CollectionsControllerDecorator
       def configure_facets
         configure_blacklight do |config|
           # clear facets copied from the CatalogController
           config.sort_fields.clear
-          config.add_sort_field "date_uploaded_dtsi desc", label: "date uploaded \u25BC"
-          config.add_sort_field "date_uploaded_dtsi asc", label: "date uploaded \u25B2"
-          config.add_sort_field "date_modified_dtsi desc", label: "date modified \u25BC"
-          config.add_sort_field "date_modified_dtsi asc", label: "date modified \u25B2"
+          # Collections don't seem to have a date_uploaded_dtsi nor date_modified_dtsi
+          # we can at least use the system_modified_dtsi instead of date_modified_dtsi
+          # but we will omit date_uploaded_dtsi
+          config.add_sort_field "system_modified_dtsi desc", label: "date modified \u25BC"
+          config.add_sort_field "system_modified_dtsi asc", label: "date modified \u25B2"
           config.add_sort_field "system_create_dtsi desc", label: "date created \u25BC"
           config.add_sort_field "system_create_dtsi asc", label: "date created \u25B2"
           config.add_sort_field "depositor_ssi asc, title_ssi asc", label: "depositor (A-Z)"
@@ -25,5 +24,5 @@ module Hyrax
   end
 end
 
-Hyrax::My::WorksController.singleton_class.send(:prepend, Hyrax::My::WorksControllerDecorator)
-Hyrax::My::WorksController.configure_facets
+Hyrax::My::CollectionsController.singleton_class.send(:prepend, Hyrax::My::CollectionsControllerDecorator)
+Hyrax::My::CollectionsController.configure_facets

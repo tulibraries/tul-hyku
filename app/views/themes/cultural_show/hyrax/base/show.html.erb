@@ -14,20 +14,24 @@
           <div class="col-sm-12">
             <%= render "show_actions", presenter: @presenter %>
           </div>
-          <% if @presenter.iiif_viewer? %>
-            <div class="col-sm-12 centered-media">
-              <%= render 'representative_media', presenter: @presenter, viewer: true %>
-            </div>
-          <% elsif @presenter.show_pdf_viewer? %>
-            <div class="col-sm-12">
-              <%= render 'pdf_js', file_set_presenter: pdf_file_set_presenter(@presenter) %>
-            </div>
+          <% if @presenter.video_embed_viewer? %>
+            <%= render 'video_embed_viewer', presenter: @presenter %>
           <% else %>
-            <div class="centered-media <%= !@presenter.viewer? ? 'col-sm-6 text-center' : '' %>">
-              <%= render 'representative_media', presenter: @presenter, viewer: false %>
-            </div>
+            <% if @presenter.iiif_viewer? %>
+              <div class="col-sm-12 centered-media">
+                <%= render 'representative_media', presenter: @presenter, viewer: true %>
+              </div>
+            <% elsif @presenter.show_pdf_viewer? %>
+              <div class="col-sm-12">
+                <%= render 'pdf_js', file_set_presenter: pdf_file_set_presenter(@presenter) %>
+              </div>
+            <% else %>
+              <div class="centered-media <%= !@presenter.viewer? ? 'col-sm-6 text-center' : '' %>">
+                <%= render 'representative_media', presenter: @presenter, viewer: false %>
+              </div>
+            <% end %>
           <% end %>
-          <div class="col-sm-8">
+          <div class="<%= @presenter.viewer? ? 'col-sm-8' : 'col-sm-8' %>">
             <%= render 'work_description', presenter: @presenter %>
             <%= render 'metadata', presenter: @presenter %>
           </div>
@@ -43,6 +47,10 @@
           <div class="col-sm-12 work-show-items">
             <%= render 'items', presenter: @presenter %>
           </div>
+          <span class='hide analytics-event' data-category="work" data-action="work-view" data-name="<%= @presenter.id %>" >
+          <% @presenter.member_of_collection_ids.each do |collection_id| %>
+            <span class='hide analytics-event' data-category="work-in-collection" data-action="work-in-collection-view" data-name="<%= collection_id %>" >
+          <% end %>
         </div>
       </div>
     </div>

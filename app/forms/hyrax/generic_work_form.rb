@@ -8,6 +8,7 @@ module Hyrax
     self.model_class = ::GenericWork
     include HydraEditor::Form::Permissions
     include PdfFormBehavior
+    include VideoEmbedFormBehavior
 
     self.terms += %i[resource_type bibliographic_citation]
   end

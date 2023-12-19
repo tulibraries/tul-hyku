@@ -73,6 +73,8 @@ module Hyrax
       end
 
       def show
+        configure_show_sort_fields
+
         # unused assignment to be removed in 4.0.0
         @banner_file = presenter.banner_file if collection_type.brandable?
 
@@ -732,6 +734,13 @@ module Hyrax
         end
       end
       ## END OVERRIDE
+
+      def configure_show_sort_fields
+        # In the CollectionsControllerDecorator, we clear the sort fields and add our own to have
+        # the ability to sort the index with custom fields. However, this also affects the show page.
+        # Here we set the sort fields back to the defaults for the show page.
+        blacklight_config.sort_fields = CatalogController.blacklight_config.sort_fields
+      end
     end
   end
 end

@@ -16,8 +16,15 @@
       <div class="panel-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% if @presenter.iiif_viewer? %>
+          <% if @presenter.video_embed_viewer? %>
+            <%= render 'video_embed_viewer', presenter: @presenter %>
             <div class="col-sm-12">
+              <div class="image-show-description">
+                <%= render 'work_description', presenter: @presenter %>
+              </div>
+            </div>
+          <% elsif @presenter.iiif_viewer? %>
+            <div class="col-sm-12 centered-media">
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
             <div class="col-sm-12">
@@ -60,5 +67,9 @@
         </div>
       </div>
     </div>
+    <span class='hide analytics-event' data-category="work" data-action="work-view" data-name="<%= @presenter.id %>" >
+    <% @presenter.member_of_collection_ids.each do |collection_id| %>
+      <span class='hide analytics-event' data-category="work-in-collection" data-action="work-in-collection-view" data-name="<%= collection_id %>" >
+    <% end %>
   </div>
 </div>

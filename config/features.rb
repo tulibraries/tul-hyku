@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Flipflop.configure do
+  feature :show_workflow_roles_menu_item_in_admin_dashboard_sidebar,
+          default: false,
+          description: "Shows the Workflow Roles menu item in the admin dashboard sidebar."
+
   feature :show_featured_researcher,
           default: true,
           description: "Shows the Featured Researcher tab on the homepage."
@@ -24,6 +28,9 @@ Flipflop.configure do
   # Flipflop.default_pdf_viewer? returning `true` means we use PDF.js and `false` means we use IIIF Print.
   feature :default_pdf_viewer,
           default: true,
-          description: "Choose PDF.js or Universal Viewer to render PDFs. UV uses IIIF Print and requires PDF spltting with OCR. Switching from PDF.js to the UV may require re-ingesting of the PDF."
+          description: "Choose PDF.js or Universal Viewer to render PDFs. UV uses IIIF Print and requires PDF splitting with OCR. Switching from PDF.js to the UV may require re-ingesting of the PDF."
 
+  feature :show_login_link,
+          default: true,
+          description: "Show General Login Link at Top Right of Page."
 end

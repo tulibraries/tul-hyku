@@ -7,6 +7,7 @@ module Hyrax
     include Hyrax::FormTerms
     self.model_class = ::Image
     include PdfFormBehavior
+    include VideoEmbedFormBehavior
 
     self.terms += %i[resource_type extent bibliographic_citation]
   end

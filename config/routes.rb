@@ -12,8 +12,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   mount Hyrax::IiifAv::Engine, at: '/'
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
 
-  authenticate :user, ->(u) { u.is_superadmin || u.is_admin } do
-    mount Sidekiq::Web => '/jobs'
+  authenticate :user, ->(u) { u.is_superadmin } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   if ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_MULTITENANT', false))
@@ -27,7 +27,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
       namespace :proprietor do
         resources :accounts
-        resources :users
+        resources :users do
+          member do
+            post :become
+          end
+        end
       end
     end
   end
@@ -35,6 +39,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get 'status', to: 'status#index'
 
   mount BrowseEverything::Engine => '/browse'
+
   resource :site, only: [:update] do
     resources :roles, only: %i[index update]
     resource :labels, only: %i[edit update]
@@ -70,6 +75,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   mount Qa::Engine => '/authorities'
 
   mount Blacklight::Engine => '/'
+
   mount Hyrax::Engine, at: '/'
   mount Bulkrax::Engine, at: '/' if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
 
@@ -102,6 +108,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resource :work_types, only: %i[edit update]
     resources :users, only: [:index, :destroy] do
       post 'activate', on: :member
+      delete 'remove_role/:role_id', on: :member, to: 'users#remove_role', as: :remove_role
     end
     resources :groups do
       member do
@@ -111,6 +118,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resources :users, only: %i[index create destroy], param: :user_id, controller: 'group_users'
       resources :roles, only: %i[index create destroy], param: :role_id, controller: 'group_roles'
     end
+    post "roles_service/:job_name_key", to: "roles_service#update_roles", as: :update_roles
+    get "roles_service", to: "roles_service#index", as: :roles_service_jobs
   end
 
   # OVERRIDE here to add featured collection routes

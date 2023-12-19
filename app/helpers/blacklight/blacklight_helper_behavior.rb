@@ -331,10 +331,10 @@ module Blacklight
     #
     # @param [String] format suffix
     # @yield
-    def with_format(format, _block)
+    def with_format(format)
       old_formats = formats
       self.formats = [format]
-      yield
+      yield if block_given?
       self.formats = old_formats
       nil
     end

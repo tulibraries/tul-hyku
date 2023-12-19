@@ -14,6 +14,7 @@ class AppIndexer < Hyrax::WorkIndexer
     super.tap do |solr_doc|
       solr_doc['account_cname_tesim'] = Site.instance&.account&.cname
       solr_doc['bulkrax_identifier_tesim'] = object.bulkrax_identifier if object.respond_to?(:bulkrax_identifier)
+      solr_doc['account_institution_name_ssim'] = Site.instance.institution_label
       solr_doc['all_text_tsimv'] = full_text(object.file_sets.first&.id)
       add_date(solr_doc)
     end
