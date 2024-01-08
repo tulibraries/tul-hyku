@@ -26,7 +26,7 @@ module ApplicationHelper
     locale             = t("hyrax.#{record_class}.#{type}.#{term}")
 
     if missing_translation(locale)
-      (t("simple_form.#{type}.#{work_or_collection}.#{term}")  || term.titleize) .html_safe
+      (t("simple_form.#{type}.#{work_or_collection}.#{term}") || term.titleize) .html_safe
     else
       locale.html_safe
     end

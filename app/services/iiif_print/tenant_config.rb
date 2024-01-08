@@ -191,7 +191,7 @@ module IiifPrint
       def iiif_presentable_member_presenters
         if TenantConfig.use_iiif_print?
           presentable_member_ids = Array.wrap(solr_document.try(:file_set_ids) || solr_document.try(:[], 'file_set_ids_ssim'))
-          member_presenters_for(presentable_member_ids)
+          member_presenters(presentable_member_ids)
         else
           file_set_presenters
         end
