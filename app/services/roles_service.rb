@@ -241,6 +241,7 @@ class RolesService # rubocop:disable Metrics/ClassLength
   end
 
   class CreateCollectionAccessesJob < Hyrax::ApplicationJob
+    # rubocop:disable Metrics/MethodLength
     def perform
       Collection.find_each do |c|
         pt = Hyrax::PermissionTemplate.find_or_create_by!(source_id: c.id)
@@ -273,9 +274,11 @@ class RolesService # rubocop:disable Metrics/ClassLength
         c.reset_access_controls! if pt.access_grants.count != original_access_grants_count
       end
     end
+    # rubocop:enable Metrics/MethodLength
   end
 
   class CreateAdminSetAccessesJob < Hyrax::ApplicationJob
+    # rubocop:disable Metrics/MethodLength
     def perform
       AdminSet.find_each do |as|
         pt = Hyrax::PermissionTemplate.find_or_create_by!(source_id: as.id)
@@ -308,6 +311,7 @@ class RolesService # rubocop:disable Metrics/ClassLength
         as.reset_access_controls! if pt.access_grants.count != original_access_grants_count
       end
     end
+    # rubocop:enable Metrics/MethodLength
   end
 
   class CreateCollectionTypeParticipantsJob < Hyrax::ApplicationJob
