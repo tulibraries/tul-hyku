@@ -20,18 +20,20 @@ module ApplicationHelper
   end
 
   def locale_for(type:, term:, record_class:)
-    @term              = term.to_s
-    @record_class      = record_class.to_s.downcase
-    work_or_collection = @record_class == 'collection' ? 'collection' : 'defaults'
-    default_locale     = t("simple_form.#{type}.#{work_or_collection}.#{@term}").html_safe
-    locale             = t("hyrax.#{@record_class}.#{type}.#{@term}").html_safe
+    term              = term.to_s
+    record_class      = record_class.to_s.downcase
+    work_or_collection = record_class == 'collection' ? 'collection' : 'defaults'
+    locale             = t("hyrax.#{record_class}.#{type}.#{term}")
 
-    return default_locale if missing_translation(locale)
-
-    locale
+    if missing_translation(locale)
+      (t("simple_form.#{type}.#{work_or_collection}.#{term}")  || term.titleize) .html_safe
+    else
+      locale.html_safe
+    end
   end
 
   def missing_translation(value, _options = {})
+    return true if value == false
     return true if value.try(:false?)
     false
   end
