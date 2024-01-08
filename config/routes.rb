@@ -78,11 +78,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   mount Qa::Engine => '/authorities'
 
   mount Blacklight::Engine => '/'
-<<<<<<< HEAD
   mount BlacklightAdvancedSearch::Engine => '/'
-=======
-
->>>>>>> pals-contribute-back-to-prime
   mount Hyrax::Engine, at: '/'
   mount Bulkrax::Engine, at: '/' if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
   mount HykuKnapsack::Engine, at: '/'
