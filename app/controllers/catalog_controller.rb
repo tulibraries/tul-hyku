@@ -92,7 +92,7 @@ class CatalogController < ApplicationController
       qf: (
         IiifPrint.config.metadata_fields.keys.map { |attribute| "#{attribute}_tesim" } +
         ["title_tesim", "description_tesim", "all_text_timv", "file_set_text_tsimv"]
-      ).join(' '),
+      ).uniq.join(' '),
       "hl": true,
       "hl.simple.pre": "<span class='highlight'>",
       "hl.simple.post": "</span>",

@@ -5,7 +5,7 @@ class ReindexWorksJob < ApplicationJob
     if work.present?
       work.update_index
     else
-      Hyrax.config.registered_curation_concern_types.each do |work_type|
+      Site.instance.available_works.each do |work_type|
         work_type.constantize.find_each do |w|
           ReindexItemJob.perform_later(w)
         end
