@@ -15,6 +15,12 @@
           <span class="fa fa-gear"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.account') %></span>
         <% end %>
 
+	<% if Flipflop.show_identity_provider_in_admin_dashboard? %>
+          <%= menu.nav_link(main_app.identity_providers_path, class: 'nav-link', title: t('hyrax.admin.sidebar.identity_providers') do %>
+            <span class="fa fa-key"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.identity_providers') %></span>
+          <% end %>
+        <% end %>
+
         <%= menu.nav_link(main_app.identity_providers_path, class: "nav-link") do %>
           <span class="fa fa-key"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.identity_provider') %></span>
         <% end %>
@@ -63,14 +69,17 @@
       <% end %>
     </li>
   <% end %>
-
-  <% if can?(:manage, Sipity::WorkflowResponsibility) %>
+  <% if Flipflop.show_workflow_roles_menu_item_in_admin_dashboard_sidebar? && can?(:manage, Sipity::WorkflowResponsibility) %>
     <%= menu.nav_link(hyrax.admin_workflow_roles_path,
                       class: "nav-link",
                       title: t('hyrax.admin.sidebar.workflow_roles')) do %>
        <span class="fa fa-users" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.workflow_roles') %></span>
     <% end %>
-  <% end # end of configuration block %>
-
+  <% end %>
   <%= render 'hyrax/dashboard/sidebar/menu_partials', menu: menu, section: :configuration %>
+  <% if can?(:update, RolesService) %>
+    <%= menu.nav_link(main_app.admin_roles_service_jobs_path) do %>
+      <span class="fa fa-users" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.roles_service_jobs') %></span>
+    <% end %>
+  <% end %>
 <% end %>

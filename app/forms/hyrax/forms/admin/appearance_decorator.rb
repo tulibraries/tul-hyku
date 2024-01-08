@@ -13,7 +13,7 @@ module Hyrax
 
         # rubocop:disable Metrics/BlockLength
         prepended do
-          delegate :banner_image, :banner_image?, to: :site
+          delegate :banner_image, :banner_image?, :banner_image=, to: :site
           delegate :logo_image, :logo_image?, to: :site
           delegate :favicon, :favicon?, to: :site
           delegate :directory_image, :directory_image?, to: :site
@@ -196,6 +196,14 @@ module Hyrax
 
         def navbar_background_color_active
           darken_color(navbar_background_color, 0.35)
+        end
+
+        def navbar_link_background_color
+          block_for('navbar_link_background_color')
+        end
+
+        def navbar_link_background_color_active
+          darken_color(navbar_link_background_color, 0.35)
         end
 
         def navbar_link_background_hover_color
