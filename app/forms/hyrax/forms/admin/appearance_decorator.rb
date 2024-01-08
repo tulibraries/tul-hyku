@@ -35,23 +35,24 @@ module Hyrax
           # @!attribute default_colors
           #   @return [Hash<String, String>]
           class_attribute :default_colors, default: {
-            'header_and_footer_background_color' => '#3c3c3c',
-            'header_and_footer_text_color' => '#dcdcdc',
-            'navbar_background_color' => '#000000',
-            'navbar_link_background_hover_color' => '#ffffff',
-            'navbar_link_text_color' => '#eeeeee',
-            'navbar_link_text_hover_color' => '#eeeeee',
-            'link_color' => '#2e74b2',
-            'link_hover_color' => '#215480',
-            'footer_link_color' => '#ffebcd',
-            'footer_link_hover_color' => '#ffffff',
-            'primary_button_hover_color' => '#286090',
+            'active_tabs_background_color' => '#337ab7',
             'default_button_background_color' => '#ffffff',
             'default_button_border_color' => '#cccccc',
             'default_button_text_color' => '#333333',
-            # 'active_tabs_background_color'     => '#337ab7',
             'facet_panel_background_color' => '#f5f5f5',
-            'facet_panel_text_color' => '#333333'
+            'facet_panel_text_color' => '#333333',
+            'footer_link_color' => '#ffebcd',
+            'footer_link_hover_color' => '#ffffff',
+            'header_and_footer_text_color' => '#dcdcdc',
+            'link_color' => '#2e74b2',
+            'link_hover_color' => '#215480',
+            'navbar_background_color' => '#000000',
+            'navbar_link_background_color' => '#375f8c',
+            'navbar_link_background_hover_color' => '#ffffff',
+            'navbar_link_text_color' => '#eeeeee',
+            'navbar_link_text_hover_color' => '#eeeeee',
+            'primary_button_hover_color' => '#286090',
+            'header_and_footer_background_color' => '#3c3c3c'
           }
           # @!endgroup Class Attributes
         end
