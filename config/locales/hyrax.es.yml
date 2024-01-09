@@ -699,6 +699,7 @@ es:
         sr:
           batch_checkbox: Marque para agregar a una colección o editar lista
           check_all_label: Seleccione todos los archivos para agregar a una colección o editar
+          collections_batch_checkbox: Marque para eliminar colecciones por lotes.
           detail_label: Mostrar detalles de resumen de
           listing: Listado de artículos que ha depositado en
           press_to: Presione para
@@ -1171,7 +1172,7 @@ es:
         default_button_background_color: Color de fondo predeterminado del botón
         default_button_border_color: Color predeterminado del borde del botón
         default_button_text_color: Color de texto de botón predeterminado
-        description: Resumen o resumen
+        description: Descripción
         embargo_release_date: hasta
         facet_panel_background_color: Color de fondo del panel de facetas
         facet_panel_text_color: Color del texto del panel de facetas

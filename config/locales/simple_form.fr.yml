@@ -3,7 +3,7 @@ fr:
   simple_form:
     cancel: Annuler
     error_notification:
-      default_message: 'Veuillez examiner les problèmes ci-dessous :'
+      default_message: 'Veuillez examiner les problèmes ci-dessous:'
     hints:
       account:
         admin_emails: Entrez une adresse e-mail à la fois
@@ -46,24 +46,24 @@ fr:
         fcrepo_endpoint:
           base_path: Chemin de base
           url: URL
+        gtm_id: Gestionnaire de balises Google
         name: Nom court
         solr_endpoint:
           url: URL
         tenant: UUID du locataire
-        gtm_id: Google Tag Manager
       add_user_to_group:
         user_ids: Identifiant d'utilisateur
       domain_names:
         cname: Nom de domaine
       group_search:
-        q: Recherche
+        q: Chercher
       hyku_group:
-        description: Description
+        description: La description
       page_size:
-        per: Afficher
+        per: Montrer
       user:
-        display_name: Votre nom
-        email: Adresse e-mail
+        display_name: votre nom
+        email: Adresse électronique
       user_search:
         uq: Recherche d'utilisateur
     'no': Non

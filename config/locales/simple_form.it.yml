@@ -47,10 +47,10 @@ it:
           base_path: Percorso base
           url: URL
         name: Nome breve
+        gtm_id: Gestore dei tag di Google
         solr_endpoint:
           url: URL
-        tenant: UUID del tenant
-        gtm_id: Google Tag Manager
+        tenant: UUID tenant
       add_user_to_group:
         user_ids: ID utente
       domain_names:

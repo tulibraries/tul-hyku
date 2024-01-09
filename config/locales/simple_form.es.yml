@@ -3,7 +3,7 @@ es:
   simple_form:
     cancel: Cancelar
     error_notification:
-      default_message: 'Por favor, revise los problemas a continuación:'
+      default_message: 'Repase los problemas abajo, por favor:'
     hints:
       account:
         admin_emails: Introduzca una dirección de correo electrónico a la vez
@@ -46,11 +46,11 @@ es:
         fcrepo_endpoint:
           base_path: Ruta base
           url: URL
+        gtm_id: Administrador de etiquetas de Google
         name: Nombre corto
         solr_endpoint:
           url: URL
-        tenant: UUID del inquilino
-        gtm_id: Google Tag Manager
+        tenant: Inquilino UUID
       add_user_to_group:
         user_ids: ID de usuario
       domain_names:

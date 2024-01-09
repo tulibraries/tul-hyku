@@ -224,6 +224,7 @@ es:
         activity_summary: Resumen de la actividad
         labels: Etiquetas
         manage_groups: Administrar Grupos
+        repository_activity: Actividad del repositorio
         system_status: Estado del sistema
       users:
         activate:
