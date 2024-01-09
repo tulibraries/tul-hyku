@@ -35,7 +35,7 @@
               <% features.each do |feature| %>
               <tr data-feature="<%= feature.name.dasherize.parameterize %>">
                 <td class="status">
-                  <span class="<%= @feature_set.status(feature) -%>"><%= status_for(feature) -%></span>
+		  <span class="badge badge-<%= @feature_set.status(feature) -%>"><%= status_for(feature) -%></span>
                 </td>
                 <td class="name"><%= feature.name.humanize -%></td>
                 <td class="description"><%= feature.description -%></td>
