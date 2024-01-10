@@ -95,8 +95,8 @@ GIT
 
 GIT
   remote: https://github.com/samvera-labs/hyku_knapsack.git
-  revision: 14f688b61afab9ee886f5f7fa26a76a37bced597
-  branch: upstream_main
+  revision: 418a390fad222120a36e29271ba6c80ff91b358c
+  branch: main
   specs:
     hyku_knapsack (0.0.1)
       rails (>= 5.2.0)

@@ -106,6 +106,13 @@ gem 'webmock', group: %i[test]
 
 # This gem does nothing by default, but is instead a tool to ease developer flow
 # and place overrides, themes and deployment code.
-gem 'hyku_knapsack', github: 'samvera-labs/hyku_knapsack', branch: 'upstream_main'
+#
+# When you use a knapsack for Hyku development, which we recommend, you'll want to ensure that your
+# local knapsack repository has a `main` branch (which it should by default).  Due to some
+# tomfoolery, of knapsack, the branch name (e.g. `main`) must be checked out locally in the knapsack
+# environment that you use to build Docker.
+#
+# tl;dr - Have a local main branch on your knapsack repository
+gem 'hyku_knapsack', github: 'samvera-labs/hyku_knapsack', branch: 'main'
 
 # rubocop:enable Layout/LineLength
