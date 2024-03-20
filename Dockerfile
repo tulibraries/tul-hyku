@@ -3,7 +3,7 @@ FROM harbor.k8s.temple.edu/ghcr-io-proxy/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_V
 
 USER root
 
-RUN apk add -U --no-cache && \
+RUN apk add -U --no-cache \
   bash=5.2.21-r0 \
   cmake=3.27.8-r0 \
   exiftool=12.70-r0 \
