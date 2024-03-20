@@ -13,7 +13,7 @@ variables:
   HELM_EXPERIMENTAL_OCI: "1"
 
 before_script:
-  - source .env
+  - source .env-temple
   - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
 stages:
