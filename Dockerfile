@@ -1,4 +1,4 @@
-ARG HYRAX_IMAGE_VERSION=hyrax-v4.0.0.rc1
+ARG HYRAX_IMAGE_VERSION=hyrax-v5.0.0.rc1
 FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as hyku-base
 
 USER root
@@ -81,18 +81,18 @@ COPY --chown=1001:101 ./ops/exiftool_image_to_fits.xslt /app/fits/xml/exiftool/e
 RUN ln -sf /usr/lib/libmediainfo.so.0 /app/fits/tools/mediainfo/linux/libmediainfo.so.0 && \
   ln -sf /usr/lib/libzen.so.0 /app/fits/tools/mediainfo/linux/libzen.so.0
 
+COPY --chown=1001:101 ./bin/db-migrate-seed.sh /app/samvera/
+
+ONBUILD ARG APP_PATH=.
+ONBUILD COPY --chown=1001:101 $APP_PATH/Gemfile* /app/samvera/hyrax-webapp/
+ONBUILD RUN git config --global --add safe.directory /app/samvera && \
+  bundle install --jobs "$(nproc)"
+
+ONBUILD COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
+
 FROM hyku-base as hyku-web
-
-COPY --chown=1001:101 $APP_PATH/Gemfile* /app/samvera/hyrax-webapp/
-RUN sh -l -c " \
-  bundle install --jobs "$(nproc)" && \
-  sed -i '/require .enumerator./d' /usr/local/bundle/gems/oai-1.1.0/lib/oai/provider/resumption_token.rb && \
-  sed -i '/require .enumerator./d' /usr/local/bundle/gems/edtf-3.0.8/lib/edtf.rb && \
-  sed -i '/require .enumerator./d' /usr/local/bundle/gems/csl-1.6.0/lib/csl.rb"
-COPY --chown=1001:101 $APP_PATH/bin/db-migrate-seed.sh /app/samvera/
-COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
-
 RUN RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DB_URL='postgresql://fake' bundle exec rake assets:precompile && yarn install
+
 CMD ./bin/web
 
 FROM hyku-web as hyku-worker
