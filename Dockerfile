@@ -4,29 +4,29 @@ FROM harbor.k8s.temple.edu/ghcr-io-proxy/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_V
 USER root
 
 RUN apk add -U --no-cache \
-  bash=5.2.21-r0 \
-  cmake=3.27.8-r0 \
-  exiftool=12.70-r0 \
-  ffmpeg=6.1.1-r0 \
-  git=2.43.0-r0 \
-  imagemagick=7.1.1.26-r0 \
-  less=643-r1 \
-  libreoffice=7.6.3.1-r0 \
-  libreoffice-lang-uk=7.6.3.1-r0 \
+  bash=5.2.15-r5 \
+  cmake=3.26.5-r0 \
+  exiftool=12.60-r0 \
+  ffmpeg=6.0.1-r0 \
+  git=2.40.1-r0 \
+  imagemagick=7.1.1.13-r0 \
+  less=633-r0 \
+  libreoffice=7.5.5.2-r0 \
+  libreoffice-lang-uk=7.5.5.2-r0 \
   libxml2-dev=2.11.7-r0 \
-  mediainfo=23.11-r0 \
-  nodejs=20.11.1-r0 \
+  mediainfo=23.07-r0 \
+  nodejs=18.17.1-r0 \
   openjdk17-jre=17.0.10_p7-r0 \
   openjpeg-dev=2.5.0-r3 \
   openjpeg-tools=2.5.0-r3 \
-  perl=5.38.2-r0 \
-  poppler=23.10.0-r0 \
-  poppler-utils=23.10.0-r0 \
-  postgresql16-client=16.2-r0 \
+  perl=5.36.2-r0 \
+  poppler=23.05.0-r0 \
+  poppler-utils=23.05.0-r0 \
+  postgresql16-client=15.6-r0 \
   rsync=3.2.7-r4 \
-  screen=4.9.1-r1 \
-  tesseract-ocr=5.3.3-r1 \
-  vim=9.0.2127-r0 \
+  screen=4.9.0-r3 \
+  tesseract-ocr=5.3.2-r0 \
+  vim=9.0.2073-r0 \
   yarn=1.22.19-r0 \
 && \
   # curl https://sh.rustup.rs -sSf | sh -s -- -y && \
