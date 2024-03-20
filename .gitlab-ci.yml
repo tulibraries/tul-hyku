@@ -10,7 +10,7 @@ variables:
   IMAGE: "tulibraries/tul-hyku"
   HARBOR: "harbor.k8s.temple.edu"
   HYKU: "ghcr.io/samvera/hyku"
-  HELM_EXPERIMENTAL_OCI: "1"  
+  HELM_EXPERIMENTAL_OCI: "1"
 
 before_script:
   - source .env
