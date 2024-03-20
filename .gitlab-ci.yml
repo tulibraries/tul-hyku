@@ -1,0 +1,49 @@
+include:
+  - project: "infrastructure-engineering-shared/gitlab-ci-templates"
+    file: 
+      - "lint_docker.yaml"
+      - "build_and_scan_docker.yaml"
+      - "kubectl_commands.yaml"
+      - "sast_scanning.yaml"
+
+variables:
+  IMAGE: "tulibraries/tul-hyku"
+  HARBOR: "harbor.k8s.temple.edu"
+  HYKU: "ghcr.io/samvera/hyku"
+  HELM_EXPERIMENTAL_OCI: "1"
+
+.export_variables: &export_variables
+  - source .env
+  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+
+before_script:
+  - *export_variables
+
+stages:
+  - lint
+  - build
+  - scan
+  - tag
+  - deploy
+
+build:
+  stage: build
+  extends: .build_and_scan_image
+  variables:
+    DF: "Dockerfile --no-cache"
+  except:
+    - tags
+
+# qa_deploy:
+#   variables:
+#     IMAGE: $HARBOR/tulibraries/tul-hyku
+#     RANCHER: rancher-np
+#     CLUSTER: dev-library0
+#   stage: deploy
+#   extends: .helm_setup
+#   only:
+#     - main
+#   script:
+#     - *export_variables
+#     - helm pull oci://$HARBOR/tulibraries/tul-hyku-charts/tul-hyku --untar
+#     - helm upgrade tul-hyku oci://$HARBOR/tulibraries/tul-hyku-charts/tul-hyku --history-max=5 --namespace=tul-hyku-qa --values tul-hyku/values.yaml --set image.repository=$IMAGE:$VERSION
