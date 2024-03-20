@@ -61,8 +61,8 @@ RUN wget -O- --progress=dot:giga https://github.com/libvips/libvips/releases/dow
     && make -s install-strip \
     && WORKDIR "$OLDPWD" \
     && rm -rf "/tmp/vips-${VIPS_VERSION}" \
-    && apk del --purge vips-dependencies \
-
+    && apk del --purge vips-dependencies
+    
 USER app
 
 RUN mkdir -p /app/fits && \
