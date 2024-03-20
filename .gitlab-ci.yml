@@ -12,6 +12,7 @@ variables:
   HYKU: "ghcr.io/samvera/hyku"
   HELM_EXPERIMENTAL_OCI: "1"
   SAST_EXCLUDED_PATHS: "app/controllers, lib"
+  IGNORE: "DL3047"
 
 before_script:
   - source .env-temple
