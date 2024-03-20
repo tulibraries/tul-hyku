@@ -202,6 +202,7 @@ fr:
         collections: Les collections
         configuration: Configuration
         contact: Contact
+        identity_provider: Fournisseur d'identité
         notifications: Notifications
         pages: Pages
         profile: Profil
@@ -241,9 +242,11 @@ fr:
             one: Il y a <b>un utilisateur %{count}</b> dans ce référentiel.
             other: Il y <b>a des utilisateurs %{count}</b> dans ce référentiel.
           group_label: Groupes
+          group_role_label: Rôles de groupe
           id_label: Nom d'utilisateur
           reader_title: Afficher les utilisateurs
           role_label: Les rôles
+          site_role_label: Rôles sur le site
           title: gérer les utilisateurs
       workflow_roles:
         header: Rôles de workflow
@@ -293,7 +296,7 @@ fr:
     background_attribution_html: ''
     base:
       citations:
-        header: 'Citations:'
+        header: Citation
       form_child_work_relationships:
         actions:
           remove: Supprimer de ce travail
@@ -356,6 +359,8 @@ fr:
         title: Titre
         unauthorized: Il n'y a aucun élément accessible au public dans ce %{type}.
         visibility: Visibilité
+      part_of:
+        label: 'Partie de:'
       relationships:
         empty: Ce %{type} n'est actuellement dans aucune collection.
         header: Des relations
@@ -692,6 +697,7 @@ fr:
         sr:
           batch_checkbox: Cocher pour ajouter à une collection ou modifier la liste
           check_all_label: Sélectionnez tous les fichiers à ajouter à une collection ou à modifier
+          collections_batch_checkbox: Cochez pour supprimer les collections par lots.
           detail_label: Afficher les détails du résumé de
           listing: Liste des articles dans lesquels vous avez déposé
           press_to: Appuyez sur pour
@@ -808,7 +814,7 @@ fr:
       groups_description:
         description_html: La liste des groupes dans la liste déroulante intitulée «Sélectionnez un groupe» est une liste des groupes gérés par l'utilisateur dont vous êtes membre. Vous pouvez sélectionner un groupe spécifique et attribuer un niveau d'accès à un fichier dans %{application_name}, de la même manière que l'ajout de niveaux d'accès utilisateur.
     footer:
-      copyright_html: "<strong>Copyright © 2017 Samvera</strong> Licence sous Licence Apache, Version 2.0"
+      copyright_html: "<strong>Copyright © 2019 - %{current_year} Samvera</strong> Licence sous Licence Apache, Version 2.0"
       service_html: Un service de <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a> .
     help:
       header: Support utilisateur
@@ -1135,6 +1141,7 @@ fr:
         resource_type: Catégories prédéfinies pour décrire le type de contenu en cours de téléchargement, telles que & quot; article & quot; ou & quot; ensemble de données. & quot; Plusieurs types peuvent être sélectionnés.
         subject: En-têtes ou termes d'index décrivant l'objet du travail; ceux-ci doivent se conformer à un vocabulaire existant.
         title: Un nom pour aider à identifier une œuvre.
+        video_embed: Si vous saisissez un lien d'intégration pour une vidéo, il doit s'agir d'une URL correctement formatée commençant par « http:// » ou « https:// ». Il doit également contenir un lien valide vers une vidéo hébergée pouvant apparaître dans une iframe. <br /><br /><i>Exemples :<br/>https://player.vimeo.com/video/467264493?h=b089de0eab<br/>https://www.youtube.com/embed/ Znf73dsFdC8</i>
       labels:
         extent: Ampleur
     labels:
@@ -1159,15 +1166,34 @@ fr:
         based_near: Emplacement
         creator: Créateur
         date_created: date créée
+        default_button_background_color: Couleur d'arrière-plan du bouton par défaut
+        default_button_border_color: Couleur de bordure de bouton par défaut
+        default_button_text_color: Couleur du texte du bouton par défaut
         description: Descripción
         embargo_release_date: jusqu'à ce que
+        facet_panel_background_color: Couleur d'arrière-plan du panneau de facettes
+        facet_panel_text_color: Couleur du texte du panneau des facettes
         files: Télécharger un fichier
+        footer_link_color: Couleur du lien de pied de page
+        footer_link_hover_color: Couleur de survol du lien de pied de page
+        header_and_footer_background_color: Couleur d'arrière-plan de l'en-tête et du pied de page
+        header_and_footer_text_color: Couleur du texte de l'en-tête et du pied de page
+        identifier: Identifiant
         keyword: Mot-clé
         lease_expiration_date: jusqu'à ce que
         license: Licence
+        link_color: Couleur du lien
+        link_hover_color: Couleur de survol du lien
         member_of_collection_ids: Ajouter à la collection
+        navbar_background_color: Couleur d'arrière-plan de la barre de navigation
+        navbar_link_background_hover_color: Couleur de survol de l'arrière-plan du lien de la barre de navigation
+        navbar_link_text_color: Couleur du texte du lien de la barre de navigation
+        navbar_link_text_hover_color: Couleur de survol du texte du lien de la barre de navigation
+        primary_button_hover_color: Couleur de survol du bouton principal
+        publisher: Éditeur
         related_url: URL associée
         rights_statement: Déclaration des droits
+        source: La source
         title: Titre
         visibility_after_embargo: puis ouvrez-le pour
         visibility_after_lease: puis limitez-le à
@@ -1180,5 +1206,3 @@ fr:
       defaults:
         find_child_work: Rechercher une œuvre…
         member_of_collection_ids: Sélectionnez une collection…
-    required:
-      html: <span class="label label-info required-tag">obligatoire</span>

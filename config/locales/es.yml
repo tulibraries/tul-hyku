@@ -1,5 +1,12 @@
 ---
 es:
+  errors:
+    messages:
+      valid_embed_url: "debe ser una URL de incrustación válida de YouTube o Vimeo."
+  activefedora:
+    models:
+      generic_work: Trabajar
+      image: Imagen
   activerecord:
     attributes:
       site:
@@ -7,6 +14,8 @@ es:
   application:
     tagline: La solución de repositorio de próxima generación
   helpers:
+    action:
+      become: Volverse
     submit:
       add_role_to_group:
         submit: Añadir
@@ -114,6 +123,14 @@ es:
       work_types: Tipos de trabajo disponibles
     footer:
       admin_login: Acceso del administrador
+    identity_provider:
+      header: Proveedor de identidad de autenticación
+      label:
+        logo_image: Imagen para la página SSO
+        logo_image_alt_text: Texto alternativo para imagen
+        name: Nombre o descripción
+        options: Opciones
+        provider: Proveedor
     proprietor:
       accounts:
         nav: Cuentas
@@ -155,18 +172,36 @@ es:
           forms:
             banner_image:
               hint: Para usar una imagen como fondo de cabecera, debe usar una imagen (JPG, GIF o PNG) que tenga al menos 120 píxeles de alto y 1200 píxeles de ancho. Para obtener mejores resultados, use una imagen de al menos 1800 píxeles de ancho.
+            collection_banner_text_color:
+              hint: El color del texto (título y fecha de última actualización) dentro del banner de la colección.
             custom_css:
               confirm: CSS personalizado siempre anulará otras selecciones de temas. ¿Continuar?
               warning: Si sus personalizaciones de temas no parecen aplicarse correctamente, verifique que CSS personalizado no las sobrescriba.
+            default_button_background_color:
+              hint: Botones de interacción de trabajo (editar, función, etc.); vistas de trabajo en la página de colección y botón de filtro de búsqueda.
             default_images:
               alert: Cargue al menos un archivo antes de enviarlo.
               hint: Para las imágenes predeterminadas, debe usar una imagen (JPG, GIF o PNG) que tenga las mismas dimensiones de alto y ancho (100 píxeles de ancho y 100 píxeles de alto)
             directory_image:
-              hint: Para usar una imagen como imagen de directorio, debe usar una imagen (JPG, GIF o PNG) que no sea más alta que el encabezado ni más ancha que 400 píxeles de ancho.
+              hint: La imagen del directorio debe usar una imagen (JPG, GIF o PNG). El ancho de la imagen no debe ser más ancho que el doble de la altura.
+            facet_panel_background_color:
+              hint: Se aplica a facetas y encabezados de sección adicionales en las páginas de trabajo en algunos temas.
+            facet_panel_text_color:
+              hint: También se aplica al color del símbolo de intercalación junto al texto y al título de la obra en algunos temas.
             favicon:
               hint: Los favicons deben ser archivos png y deben ser cuadrados. El tamaño máximo utilizado es 228px x 228px.
+            link_color:
+              hint: 'Afecta a los enlaces en las páginas de inicio y trabajo, incluidos: migas de pan, pestañas, títulos y términos de servicio.'
             logo_image:
               hint: Para usar una imagen como logotipo, debe usar una imagen (JPG, GIF o PNG) que no sea más alta que el encabezado ni más ancha que 400 píxeles de ancho.
+            navbar_background_color:
+              hint: Al 40% de opacidad.
+            navbar_link_background_color:
+              hint: Se aplica al color de fondo de los botones Inicio, Acerca de, Contacto y Ayuda.
+            navbar_link_background_hover_color:
+              hint: Se aplica a los botones Inicio, Acerca de, Contacto y Ayuda solo en esas páginas específicas (al 15 % de opacidad).
+            primary_button_hover_color:
+              hint: Botones para compartir, buscar e interactuar con la colección (editar, presentar, etc.). El borde de estos botones también será de este color.
             themes:
               confirm: Si su tema no parece aplicarse correctamente, verifique que no esté siendo sobrescrito por CSS personalizado.
           hints:
@@ -189,8 +224,13 @@ es:
         activity_summary: Resumen de la actividad
         labels: Etiquetas
         manage_groups: Administrar Grupos
+        repository_activity: Actividad del repositorio
         system_status: Estado del sistema
       users:
+        activate:
+          confirmation: ¿Estás seguro de que deseas activar el usuario "%{user}"?
+          failure: No se pudo activar el usuario "%{user}".
+          success: El usuario "%{user}" se ha activado correctamente.
         destroy:
           confirmation: ¿Estás seguro de que deseas eliminar el usuario "%{user}"? Esta acción es irreversible.
           failure: El usuario "%{user}" no pudo ser eliminado.
@@ -204,6 +244,9 @@ es:
             active: Activo
             pending: Pendiente
           status_label: Estado
+        roles:
+          remove:
+            confirmation: ¿Está seguro de que desea eliminar el rol "%{role}" del usuario "%{user}"?
   permissions:
     collections:
       cannot:
@@ -259,6 +302,9 @@ es:
         edit: Editar
         header: Administrar usuario
         update: Actualizar
+  single_signon:
+    index:
+      sign_in_with_provider: Iniciar sesión con %{provider}
   status:
     index:
       services: Servicios

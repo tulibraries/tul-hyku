@@ -62,16 +62,15 @@ Capybara.default_driver = :rack_test
 ENV['WEB_HOST'] ||= `hostname -s`.strip
 
 if ENV['CHROME_HOSTNAME'].present?
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: {
-      args: %w[headless disable-gpu no-sandbox whitelisted-ips window-size=1400,1400]
-    }
-  )
+  options = Selenium::WebDriver::Options.chrome(args: ["disable-gpu",
+                                                       "no-sandbox",
+                                                       "whitelisted-ips",
+                                                       "window-size=1920,1080"])
 
   Capybara.register_driver :chrome do |app|
     d = Capybara::Selenium::Driver.new(app,
                                        browser: :remote,
-                                       desired_capabilities: capabilities,
+                                       capabilities: options,
                                        url: "http://#{ENV['CHROME_HOSTNAME']}:4444/wd/hub")
     # Fix for capybara vs remote files. Selenium handles this for us
     d.browser.file_detector = lambda do |args|
@@ -84,17 +83,15 @@ if ENV['CHROME_HOSTNAME'].present?
   Capybara.server_port = 3001
   Capybara.app_host = "http://#{ENV['WEB_HOST']}:#{Capybara.server_port}"
 else
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: {
-      args: %w[headless disable-gpu]
-    }
-  )
+  options = Selenium::WebDriver::Options.chrome(args: ["headless",
+                                                       "disable-gpu",
+                                                       "window-size=1920,1080"])
 
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
-      desired_capabilities: capabilities
+      capabilities: options
     )
   end
 end
@@ -109,6 +106,7 @@ NegativeCaptcha.test_mode = true
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.file_fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -136,7 +134,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Fixtures::FixtureFileUpload
   config.include FactoryBot::Syntax::Methods
   config.include ApplicationHelper, type: :view
   config.include Warden::Test::Helpers, type: :feature
@@ -154,8 +151,14 @@ RSpec.configure do |config|
     # make sure we are on the default fedora config
     ActiveFedora::Fedora.reset!
     ActiveFedora::SolrService.reset!
-    # Pass `:clean' to destroy objects in fedora/solr and start from scratch
-    ActiveFedora::Cleaner.clean! if example.metadata[:clean]
+    # Pass `:clean' (or hyrax's convention of :clean_repo) to destroy objects in fedora/solr and
+    # start from scratch
+    if example.metadata[:clean] || example.metadata[:clean_repo] || example.metadata[:type] == :feature
+      ## We don't need to do `Hyrax::SolrService.wipe!` so long as we're using `ActiveFedora.clean!`;
+      ## but Valkyrie is coming so be prepared.
+      # Hyrax::SolrService.wipe!
+      ActiveFedora::Cleaner.clean!
+    end
     if example.metadata[:type] == :feature && Capybara.current_driver != :rack_test
       DatabaseCleaner.strategy = :truncation
     else
@@ -166,7 +169,7 @@ RSpec.configure do |config|
 
   config.after(:each, type: :feature) do |example|
     # rubocop:disable Lint/Debugger
-    save_and_open_page if example.exception.present?
+    save_and_open_page if example.exception.present? && !ENV['CI']
     # rubocop:enable Lint/Debugger
     Warden.test_reset!
     Capybara.reset_sessions!
@@ -174,11 +177,9 @@ RSpec.configure do |config|
   end
 
   config.after do
-    begin
-      DatabaseCleaner.clean
-    rescue NoMethodError
-      'This can happen which the database is gone, which depends on load order of tests'
-    end
+    DatabaseCleaner.clean
+  rescue NoMethodError
+    'This can happen which the database is gone, which depends on load order of tests'
   end
 end
 

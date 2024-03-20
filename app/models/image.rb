@@ -4,9 +4,15 @@
 #  `rails generate hyrax:work Image`
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include IiifPrint.model_configuration(
-    pdf_split_child_model: self
-  )
+  include PdfBehavior
+  include VideoEmbedBehavior
+
+  if ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_IIIF_PRINT', false))
+    include IiifPrint.model_configuration(
+      pdf_split_child_model: GenericWork,
+      pdf_splitter_service: IiifPrint::TenantConfig::PdfSplitter
+    )
+  end
 
   property :extent, predicate: ::RDF::Vocab::DC.extent, multiple: true do |index|
     index.as :stored_searchable
@@ -17,6 +23,8 @@ class Image < ActiveFedora::Base
   include ::Hyrax::BasicMetadata
 
   self.indexer = ImageIndexer
+  prepend OrderAlready.for(:creator)
+
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }

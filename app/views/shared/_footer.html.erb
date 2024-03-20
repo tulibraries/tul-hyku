@@ -1,14 +1,15 @@
-<footer class="navbar navbar-inverse site-footer">
+<% current_year = Time.now.year %>
+<footer class="navbar navbar-dark bg-dark site-footer">
   <div class="container-fluid">
-    <div class="navbar-text text-left">
-        <p><%= t('hyrax.footer.service_html') %></p>
-        <p>Hyku v<%= Hyku::VERSION %></p>
+    <div class="navbar-text d-flex justify-content-start">
+      <p><%= t('hyrax.footer.service_html') %></p>
+      <p>Hyku v<%= Hyku::VERSION %> with Hyrax v<%= Hyrax::VERSION %></p>
     </div>
-    <div class="navbar-right">
-      <div class="navbar-text text-right">
-        <p><%= t('hyrax.footer.copyright_html') %></p>
+    <div class="ml-auto">
+      <div class="navbar-text d-flex justify-content-end">
+        <p><%= t('hyrax.footer.copyright_html', current_year: current_year) %></p>
         <p><%= t('hyrax.background_attribution_html') %></p>
-        <% if admin_host? && !user_signed_in? %>
+        <% unless user_signed_in? %>
           <p><%= link_to t('hyku.footer.admin_login', default: [:'hyrax.toolbar.profile.login']), main_app.new_user_session_path %></p>
         <% end %>
       </div>

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
+  # rubocop:disable Metrics/BlockLength
   Bulkrax.setup do |config|
     # Add local parsers
     # config.parsers += [
@@ -54,29 +55,53 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
     #   config.field_mappings["Bulkrax::OaiDcParser"]["date"] = { from: ["date"], excluded: true  }
 
     default_field_mapping = {
+      'abstract' => { from: ['abstract'], split: true },
+      'alternative_title' => { from: ['alternative_title'], split: /\s*[|]\s*/ },
+      'based_near' => { from: ['based_near'], split: true },
+      'bibliographic_citation' => { from: ['bibliographic_citation'], split: true },
+      'contributor' => { from: ['contributor'], split: true },
+      'create_date' => { from: ['create_date'], split: true },
+      'children' => { from: ['children'], related_children_field_mapping: true },
+      'creator' => { from: ['creator'], split: true },
+      'date_created' => { from: ['date_created'], split: true },
+      'description' => { from: ['description'], split: true },
+      'extent' => { from: ['extent'], split: true },
+      'file' => { from: ['file'], split: /\s*[|]\s*/ },
+      'identifier' => { from: ['identifier'], split: true },
+      'keyword' => { from: ['keyword'], split: true },
+      'language' => { from: ['language'], split: true },
+      'license' => { from: ['license'], split: /\s*[|]\s*/ },
+      'modified_date' => { from: ['modified_date'], split: true },
       'parents' => { from: ['parents'], related_parents_field_mapping: true },
-      'children' => { from: ['children'], related_children_field_mapping: true }
+      'publisher' => { from: ['publisher'], split: true },
+      'related_url' => { from: ['related_url'], split: /\s* [|]\s*/ },
+      'remote_files' => { from: ['remote_files'], split: /\s*[|]\s*/ },
+      'resource_type' => { from: ['resource_type'], split: true },
+      'rights_notes' => { from: ['rights_notes'], split: true },
+      'source' => { from: ['source'], split: true },
+      'subject' => { from: ['subject'], split: true },
+      'title' => { from: ['title'], split: /\s*[|]\s*/ }
     }
 
     config.field_mappings["Bulkrax::BagitParser"] = default_field_mapping.merge({
-      # add or remove custom mappings for this parser here
-    })
+                                                                                  # add or remove custom mappings for this parser here
+                                                                                })
 
     config.field_mappings["Bulkrax::CsvParser"] = default_field_mapping.merge({
-      # add or remove custom mappings for this parser here
-    })
+                                                                                # add or remove custom mappings for this parser here
+                                                                              })
 
     config.field_mappings["Bulkrax::OaiDcParser"] = default_field_mapping.merge({
-      # add or remove custom mappings for this parser here
-    })
+                                                                                  # add or remove custom mappings for this parser here
+                                                                                })
 
     config.field_mappings["Bulkrax::OaiQualifiedDcParser"] = default_field_mapping.merge({
-      # add or remove custom mappings for this parser here
-    })
+                                                                                           # add or remove custom mappings for this parser here
+                                                                                         })
 
     config.field_mappings["Bulkrax::XmlParser"] = default_field_mapping.merge({
-      # add or remove custom mappings for this parser here
-    })
+                                                                                # add or remove custom mappings for this parser here
+                                                                              })
 
     # To duplicate a set of mappings from one parser to another
     #   config.field_mappings["Bulkrax::OaiOmekaParser"] = {}
@@ -84,6 +109,12 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', 'true') == 'true'
 
     # Properties that should not be used in imports/exports. They are reserved for use by Hyrax.
     # config.reserved_properties += ['my_field']
+  end
+  # rubocop:enable Metrics/BlockLength
+
+  # Sidebar for hyrax 3+ support
+  if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
+    Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions"
   end
 
   Bulkrax::CreateRelationshipsJob.update_child_records_works_file_sets = true

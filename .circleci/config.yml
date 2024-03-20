@@ -1,19 +1,22 @@
 version: 2.1
 orbs:
-  samvera: samvera/circleci-orb@0
-  browser-tools: circleci/browser-tools@1.1
+  samvera: samvera/circleci-orb@1
+  browser-tools: circleci/browser-tools@1.4.6
+  ruby: circleci/ruby@2
+  node: circleci/node@5
+
 jobs:
-  bundle_lint_test:
+  bundle:
     parameters:
       ruby_version:
         type: string
-        default: 2.7.6
+        default: 3.2.2
       bundler_version:
         type: string
-        default: '2.0.1'
+        default: 2.4.8
       rails_version:
         type: string
-        default: '5.1.6'
+        default: '6.1.7.6'
       solr_config_path:
         type: string
       fcrepo_version:
@@ -58,6 +61,7 @@ jobs:
       BUNDLE_PATH: vendor/bundle
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
+      HYKU_CACHE_ROOT: /tmp/hyku-cache
       HYKU_RESTRICT_CREATE_AND_DESTROY_PERMISSIONS: 'true'
       SOLR_ADMIN_USER: admin
       SOLR_ADMIN_PASSWORD: admin
@@ -75,12 +79,16 @@ jobs:
       - samvera/bundle:
           ruby_version: << parameters.ruby_version >>
           bundler_version: << parameters.bundler_version >>
-      - run: |
-            sed -i '/require .enumerator./d' /home/circleci/project/vendor/bundle/gems/oai-1.1.0/lib/oai/provider/resumption_token.rb && \
-            sed -i '/require .enumerator./d' /home/circleci/project/vendor/bundle/gems/edtf-3.0.8/lib/edtf.rb && \
-            sed -i '/require .enumerator./d' /home/circleci/project/vendor/bundle/gems/csl-1.6.0/lib/csl.rb
       - samvera/rubocop
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome:
+          chrome-version: 114.0.5735.90 # see https://github.com/CircleCI-Public/browser-tools-orb/pull/96
+          replace-existing: true
+      - browser-tools/install-chromedriver
+      - run:
+          name: Check Chrome install
+          command: |
+            google-chrome --version
+            chromedriver --version
       - run: bundle exec rake db:create db:schema:load
       - run: bin/solrcloud-upload-configset.sh solr/conf
       - samvera/parallel_rspec
@@ -89,7 +97,7 @@ jobs:
 workflows:
   ci:
     jobs:
-      - bundle_lint_test:
-          ruby_version: "2.7.6"
-          name: "ruby2-7-6"
+      - bundle:
+          ruby_version: "3.2.2"
+          name: "ruby3-2-2"
           solr_config_path: 'solr/conf'

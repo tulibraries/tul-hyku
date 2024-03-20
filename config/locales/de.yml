@@ -1,5 +1,12 @@
 ---
 de:
+  errors:
+    messages:
+      valid_embed_url: "muss eine gültige YouTube- oder Vimeo-Einbettungs-URL sein."
+  activefedora:
+    models:
+      generic_work: Arbeiten
+      image: Bild
   activerecord:
     attributes:
       site:
@@ -7,6 +14,8 @@ de:
   application:
     tagline: Die Next-Generation Repository-Lösung
   helpers:
+    action:
+      become: Werden
     submit:
       add_role_to_group:
         submit: Hinzufügen
@@ -114,6 +123,14 @@ de:
       work_types: Verfügbare Arbeitstypen
     footer:
       admin_login: Administratorenlogin
+    identity_provider:
+      header: Authentifizierungsidentitätsanbieter
+      label:
+        logo_image: Bild für die SSO-Seite
+        logo_image_alt_text: Alternativtext für Bild
+        name: Name oder Beschreibung
+        options: Optionen
+        provider: Anbieter
     proprietor:
       accounts:
         nav: Konten
@@ -154,18 +171,36 @@ de:
           forms:
             banner_image:
               hint: Um ein Bild als Masthead-Hintergrund zu verwenden, sollten Sie ein Bild (JPG, GIF oder PNG) verwenden, das mindestens 120 Pixel hoch und 1200 Pixel breit ist. Verwenden Sie für optimale Ergebnisse ein Bild mit einer Breite von mindestens 1800 Pixel.
+            collection_banner_text_color:
+              hint: Die Farbe für den Text (Titel und Datum der letzten Aktualisierung) im Sammlungsbanner.
             custom_css:
               confirm: Benutzerdefiniertes CSS überschreibt immer andere Themenauswahlen. Vorgehen?
               warning: Wenn Ihre Themenanpassungen nicht korrekt angewendet werden, stellen Sie sicher, dass sie nicht von benutzerdefiniertem CSS überschrieben werden.
+            default_button_background_color:
+              hint: Schaltflächen für die Arbeitsinteraktion (Bearbeiten, Funktionen usw.); Arbeitsansichten auf der Sammlungsseite und Suchfilterschaltfläche.
             default_images:
               alert: Bitte laden Sie vor dem Absenden mindestens eine Datei hoch.
               hint: Für Standardbilder sollten Sie ein Bild (JPG, GIF oder PNG) verwenden, das die gleichen Abmessungen für Höhe und Breite aufweist (100 Pixel breit und 100 Pixel hoch).
             directory_image:
-              hint: Um ein Bild als Verzeichnisbild zu verwenden, sollten Sie ein Bild (JPG, GIF oder PNG) verwenden, das nicht höher als der Header und nicht breiter als 400 Pixel ist.
+              hint: Das Verzeichnisbild sollte ein Bild (JPG, GIF oder PNG) verwenden. Die Breite des Bildes sollte nicht größer als die doppelte Höhe sein.
+            facet_panel_background_color:
+              hint: Gilt für Facetten und zusätzliche Abschnittsüberschriften auf den Arbeitsseiten einiger Themen.
+            facet_panel_text_color:
+              hint: Gilt bei einigen Themen auch für die Farbe des Caretzeichens neben dem Text und den Werktitel.
             favicon:
               hint: Favicons müssen PNG-Dateien und quadratisch sein. Die maximal verwendete Größe beträgt 228 x 228 Pixel.
+            link_color:
+              hint: 'Betrifft Links auf der Startseite und der Arbeitsseite, einschließlich: Breadcrumbs, Tabs, Titel und Nutzungsbedingungen.'
             logo_image:
               hint: Um ein Bild als Logo zu verwenden, sollten Sie ein Bild (JPG, GIF oder PNG) verwenden, das nicht höher als der Header und nicht breiter als 400 Pixel ist.
+            navbar_background_color:
+              hint: Bei 40 % Deckkraft.
+            navbar_link_background_color:
+              hint: Gilt für die Hintergrundfarbe der Schaltflächen „Startseite“, „Info“, „Kontakt“ und „Hilfe“.
+            navbar_link_background_hover_color:
+              hint: Gilt nur für die Schaltflächen „Startseite“, „Info“, „Kontakt“ und „Hilfe“ auf diesen spezifischen Seiten (bei 15 % Deckkraft).
+            primary_button_hover_color:
+              hint: Schaltflächen zum Teilen, Suchen und Sammeln von Interaktionen (Bearbeiten, Funktionen usw.). Der Rand dieser Schaltflächen wird ebenfalls diese Farbe haben.
             themes:
               confirm: Wenn Ihr Thema nicht richtig angewendet wird, stellen Sie sicher, dass es nicht von benutzerdefiniertem CSS überschrieben wird.
           hints:
@@ -195,6 +230,10 @@ de:
         roles_and_permissions: Benutzer und Gruppen
         system_status: Systemstatus
       users:
+        activate:
+          confirmation: Sind Sie sicher, dass Sie den Benutzer „%{user}“ aktivieren möchten?
+          failure: Benutzer „%{user}“ konnte nicht aktiviert werden.
+          success: Benutzer „%{user}“ wurde erfolgreich aktiviert.
         destroy:
           confirmation: Möchten Sie den Benutzer "%{user}" wirklich löschen? Diese Aktion lässt sich nicht rückgängig machen.
           failure: Benutzer "%{user}" konnte nicht gelöscht werden.
@@ -208,6 +247,9 @@ de:
             active: Aktiv
             pending: noch ausstehend
           status_label: Status
+        roles:
+          remove:
+            confirmation: Sind Sie sicher, dass Sie die Rolle „%{role}“ vom Benutzer „%{user}“ entfernen möchten?
   permissions:
     collections:
       cannot:
@@ -263,6 +305,9 @@ de:
         edit: Bearbeiten
         header: Benutzer verwalten
         update: Aktualisieren
+  single_signon:
+    index:
+      sign_in_with_provider: Melden Sie sich mit %{provider} an
   status:
     index:
       services: Dienste

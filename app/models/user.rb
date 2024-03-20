@@ -9,13 +9,11 @@ class User < ApplicationRecord
   include Hyrax::User
   include Hyrax::UserUsageStats
 
-  attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :invitable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise(*Hyku::Application.user_devise_parameters)
 
   after_create :add_default_group_membership!
 
@@ -24,11 +22,23 @@ class User < ApplicationRecord
     where(guest: false)
   end
 
-  scope :for_repository, -> {
+  scope :for_repository, lambda {
     joins(:roles)
   }
 
   scope :registered, -> { for_repository.group(:id).where(guest: false) }
+
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+      user.email = auth&.info&.email || [auth.uid, '@', Site.instance.account.email_domain].join if user.email.blank?
+      user.password = Devise.friendly_token[0, 20]
+      user.display_name = auth&.info&.name # assuming the user model has a name
+      # user.image = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails,
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
+    end
+  end
 
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier.
@@ -36,14 +46,18 @@ class User < ApplicationRecord
     email
   end
 
-  def is_superadmin
+  def admin?
+    has_role?(:admin) || has_role?(:admin, Site.instance)
+  end
+
+  def superadmin?
     has_role? :superadmin
   end
 
   # This comes from a checkbox in the proprietor interface
   # Rails checkboxes are often nil or "0" so we handle that
   # case directly
-  def is_superadmin=(value)
+  def superadmin=(value)
     value = ActiveModel::Type::Boolean.new.cast(value)
     if value
       add_role :superadmin
@@ -82,7 +96,8 @@ class User < ApplicationRecord
   #   u.hyrax_groups
   #   => [#<Hyrax::Group id: 2, name: "registered", description: nil,...>]
   def hyrax_groups
-    roles.where(name: 'member', resource_type: 'Hyrax::Group').map(&:resource).uniq
+    # Why compact?  In theory we shouldn't need this.  But in tests we're seeing a case
+    roles.where(name: 'member', resource_type: 'Hyrax::Group').map(&:resource).uniq.compact
   end
 
   # Override method from hydra-access-controls v11.0.0 to use Hyrax::Groups.
@@ -90,6 +105,13 @@ class User < ApplicationRecord
   # @return [Array] Hyrax::Group names the User is a member of
   def groups
     hyrax_groups.map(&:name)
+  rescue NoMethodError
+    # Not quite raising the same exception, but this code is here to catch a flakey spec.  What we're
+    # seeing is that an element in `hyrax_groups` is `nil` and which does not respond to `#name`.
+    # Looking at `#hyrax_groups` method, it's unclear how we'd find `nil`.
+    #
+    # Perhaps the `Hyrax::Group` is in a tenant and `Role` is not?  Hmm.
+    raise "Hyrax::Groups: #{roles.where(name: 'member', resource_type: 'Hyrax::Group').all.inspect}\nRoles: #{roles.all.inspect}"
   end
 
   # NOTE: This is an alias for #groups to clarify what the method is doing.
