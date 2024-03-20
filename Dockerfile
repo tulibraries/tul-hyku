@@ -22,7 +22,7 @@ RUN apk add -U --no-cache \
   perl=5.36.2-r0 \
   poppler=23.05.0-r0 \
   poppler-utils=23.05.0-r0 \
-  postgresql16-client=15.6-r0 \
+  postgresql15-client=15.6-r0 \
   rsync=3.2.7-r4 \
   screen=4.9.0-r3 \
   tesseract-ocr=5.3.2-r0 \
