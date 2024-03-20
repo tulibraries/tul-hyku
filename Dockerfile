@@ -34,7 +34,7 @@ RUN apk add -U --no-cache \
   # cargo install rbspy && \
   echo "******** Packages Installed *********"
 
-RUN wget --progress=dot:giga https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-57.tar.gz \
+RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-57.tar.gz \
     && tar xf 7.1.0-57.tar.gz \
     && apk --no-cache add \
       libjpeg-turbo=3.0.1-r0 openjpeg=2.5.0-r3 libpng=1.6.40-r0 tiff=4.6.0-r0 librsvg=2.57.1-r0 libgsf=1.14.51-r0 libimagequant=4.2.2-r0 poppler-qt5-dev=23.10.0-r0 \
@@ -48,7 +48,7 @@ RUN wget --progress=dot:giga https://github.com/ImageMagick/ImageMagick/archive/
 ARG VIPS_VERSION=8.11.3
 
 SHELL ["/bin/bash", "-xo", "pipefail"]
-RUN wget -O- --progress=dot:giga https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp \
+RUN wget -O- https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp \
     && apk --no-cache add \
      libjpeg-turbo=3.0.1-r0 openjpeg=2.5.0-r3 libpng=1.6.40-r0 tiff=4.6.0-r0 librsvg=2.57.1-r0 libgsf=1.14.51-r0 libimagequant=4.2.2-r0 poppler-qt5-dev=23.10.0-r0 \
     && apk add --no-cache --virtual vips-dependencies build-base=0.5-r3 \
@@ -67,7 +67,7 @@ USER app
 
 RUN mkdir -p /app/fits && \
     WORKDIR /app/fits && \
-    wget --progress=dot:giga https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip -O fits.zip && \
+    wget https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip -O fits.zip && \
     unzip fits.zip && \
     rm fits.zip && \
     chmod a+x /app/fits/fits.sh
