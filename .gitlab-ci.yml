@@ -10,27 +10,34 @@ variables:
   IMAGE: "tulibraries/tul-hyku"
   HARBOR: "harbor.k8s.temple.edu"
   HYKU: "ghcr.io/samvera/hyku"
-  HELM_EXPERIMENTAL_OCI: "1"
-
-.export_variables: &export_variables
-  - source .env
-  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+  HELM_EXPERIMENTAL_OCI: "1"  
 
 before_script:
-  - *export_variables
+  - source .env
+  - export VERSION="${DOCKER_IMAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
 
 stages:
   - lint
   - build
-  - scan
-  - tag
-  - deploy
+
+lint:
+  extends: .lint_docker
+  variables:
+    DF: "Dockerfile"
+  except:
+    - tags
 
 build:
   stage: build
   extends: .build_and_scan_image
   variables:
     DF: "Dockerfile --no-cache"
+  except:
+    - tags
+
+tag:
+  stage: tag
+  extends: .tag_image
   except:
     - tags
 
