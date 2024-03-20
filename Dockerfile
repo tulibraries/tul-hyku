@@ -3,73 +3,71 @@ FROM harbor.k8s.temple.edu/ghcr-io-proxy/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_V
 
 USER root
 
-RUN apk --no-cache upgrade && \
-  apk --no-cache add \
-    bash \
-    cmake \
-    exiftool \
-    ffmpeg \
-    git \
-    imagemagick \
-    less \
-    libreoffice \
-    libreoffice-lang-uk \
-    libxml2-dev \
-    mediainfo \
-    nodejs \
-    openjdk17-jre \
-    openjpeg-dev \
-    openjpeg-tools \
-    perl \
-    poppler \
-    poppler-utils \
-    postgresql-client \
-    rsync \
-    screen \
-    tesseract-ocr \
-    vim \
-    yarn \
-  && \
+RUN apk add -U --no-cache && \
+  bash=5.2.21-r0 \
+  cmake=3.27.8-r0 \
+  exiftool=12.70-r0 \
+  ffmpeg=6.1.1-r0 \
+  git=2.43.0-r0 \
+  imagemagick=7.1.1.26-r0 \
+  less=643-r1 \
+  libreoffice=7.6.3.1-r0 \
+  libreoffice-lang-uk=7.6.3.1-r0 \
+  libxml2-dev=2.11.7-r0 \
+  mediainfo=23.11-r0 \
+  nodejs=20.11.1-r0 \
+  openjdk17-jre=17.0.10_p7-r0 \
+  openjpeg-dev=2.5.0-r3 \
+  openjpeg-tools=2.5.0-r3 \
+  perl=5.38.2-r0 \
+  poppler=23.10.0-r0 \
+  poppler-utils=23.10.0-r0 \
+  postgresql16-client=16.2-r0 \
+  rsync=3.2.7-r4 \
+  screen=4.9.1-r1 \
+  tesseract-ocr=5.3.3-r1 \
+  vim=9.0.2127-r0 \
+  yarn=1.22.19-r0 \
+&& \
   # curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   # source "$HOME/.cargo/env" && \
   # cargo install rbspy && \
   echo "******** Packages Installed *********"
 
-RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-57.tar.gz \
+RUN wget --progress=dot:giga https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-57.tar.gz \
     && tar xf 7.1.0-57.tar.gz \
     && apk --no-cache add \
-      libjpeg-turbo openjpeg libpng tiff librsvg libgsf libimagequant poppler-qt5-dev \
-    && cd ImageMagick* \
+      libjpeg-turbo=3.0.1-r0 openjpeg=2.5.0-r3 libpng=1.6.40-r0 tiff=4.6.0-r0 librsvg=2.57.1-r0 libgsf=1.14.51-r0 libimagequant=4.2.2-r0 poppler-qt5-dev=23.10.0-r0 \
+    && WORKDIR ImageMagick* \
     && ./configure \
     && make install \
-    && cd $OLDPWD \
+    && WORKDIR "$OLDPWD" \
     && rm -rf ImageMagick* \
     && rm -rf /var/cache/apk/*
 
 ARG VIPS_VERSION=8.11.3
 
-RUN set -x -o pipefail \
-    && wget -O- https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp \
+SHELL ["/bin/bash", "-xo", "pipefail"]
+RUN wget -O- --progress=dot:giga https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp \
     && apk --no-cache add \
-     libjpeg-turbo openjpeg libpng tiff librsvg libgsf libimagequant poppler-qt5-dev \
-    && apk add --virtual vips-dependencies build-base \
-     libjpeg-turbo-dev libpng-dev tiff-dev librsvg-dev libgsf-dev libimagequant-dev \
-    && cd /tmp/vips-${VIPS_VERSION} \
+     libjpeg-turbo=3.0.1-r0 openjpeg=2.5.0-r3 libpng=1.6.40-r0 tiff=4.6.0-r0 librsvg=2.57.1-r0 libgsf=1.14.51-r0 libimagequant=4.2.2-r0 poppler-qt5-dev=23.10.0-r0 \
+    && apk add --no-cache --virtual vips-dependencies build-base=0.5-r3 \
+     libjpeg-turbo-dev=3.0.1-r0 libpng-dev=1.6.40-r0 tiff-dev=4.6.0-r0 librsvg-dev=2.57.1-r0 libgsf-dev=1.14.51-r0 libimagequant-dev=4.2.2-r0 \
+    && WORKDIR "/tmp/vips-${VIPS_VERSION}" \
     && ./configure --prefix=/usr \
                    --disable-static \
                    --disable-dependency-tracking \
                    --enable-silent-rules \
     && make -s install-strip \
-    && cd $OLDPWD \
-    && rm -rf /tmp/vips-${VIPS_VERSION} \
+    && WORKDIR "$OLDPWD" \
+    && rm -rf "/tmp/vips-${VIPS_VERSION}" \
     && apk del --purge vips-dependencies \
-    && rm -rf /var/cache/apk/*
 
 USER app
 
 RUN mkdir -p /app/fits && \
-    cd /app/fits && \
-    wget https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip -O fits.zip && \
+    WORKDIR /app/fits && \
+    wget --progress=dot:giga https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip -O fits.zip && \
     unzip fits.zip && \
     rm fits.zip && \
     chmod a+x /app/fits/fits.sh
@@ -90,10 +88,12 @@ ONBUILD RUN git config --global --add safe.directory /app/samvera && \
 
 ONBUILD COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
 
-FROM hyku-base as hyku-web
-RUN RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DB_URL='postgresql://fake' bundle exec rake assets:precompile && yarn install
+USER nobody
 
-CMD ./bin/web
+FROM hyku-base as hyku-web
+RUN RAILS_ENV=production SECRET_KEY_BASE=$(bin/rake secret) DB_ADAPTER=nulldb DB_URL='postgresql://fake' bundle exec rake assets:precompile && yarn install
+
+CMD ["./bin/web"]
 
 FROM hyku-web as hyku-worker
-CMD ./bin/worker
+CMD ["./bin/worker"]
