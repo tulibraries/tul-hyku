@@ -54,8 +54,9 @@ RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-57.t
 
 ARG VIPS_VERSION=8.11.3
 
-SHELL ["/bin/bash", "-xo", "pipefail"]
-RUN wget -O- https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp \
+
+RUN  set -x -o pipefail \
+    && wget -O- https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp \
     && apk --no-cache add \
      libjpeg-turbo=2.1.5.1-r3 \
      openjpeg=2.5.0-r3  \
