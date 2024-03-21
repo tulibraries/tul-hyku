@@ -20,13 +20,6 @@ stages:
   - build
   - tag
 
-lint:
-  extends: .lint_docker
-  variables:
-    DF: "Dockerfile"
-  except:
-    - tags
-
 build:
   stage: build
   extends: .build_and_scan_image
