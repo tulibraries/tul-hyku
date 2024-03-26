@@ -1,15 +1,15 @@
 #Defaults
-include .env
+include .env-temple
 export #exports the .env variables
 
 IMAGE ?= tulibraries/tul-hyku
 VERSION ?= $(DOCKER_IMAGE_VERSION)
 HARBOR ?= harbor.k8s.temple.edu
 HYKU ?= ghcr.io/samvera/hyku
+HYRAX_IMAGE_VERSION=hyrax-v5.0.0.rc1
 
 build:
-	docker-compose build web --no-cache
-	docker-compose build worker
+	@docker build --no-cache --file Dockerfile .
 	@docker tag $(HYKU)  $(HARBOR)/$(IMAGE)/web:$(VERSION)
 	@docker tag $(HYKU)/worker $(HARBOR)/$(IMAGE)/worker:$(VERSION)
 	@docker tag $(HYKU)  $(HARBOR)/$(IMAGE)/web:latest
