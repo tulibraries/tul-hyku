@@ -889,7 +889,7 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.7.0)
+    nio4r (2.7.1)
     noid (0.9.0)
     noid-rails (3.1.0)
       actionpack (>= 5.0.0, < 7.1)
@@ -976,7 +976,7 @@ GEM
       pry (>= 0.13, < 0.15)
     psych (3.3.4)
     public_suffix (4.0.7)
-    puma (5.6.7)
+    puma (6.4.2)
       nio4r (~> 2.0)
     qa (5.11.0)
       activerecord-import
@@ -999,8 +999,8 @@ GEM
       rack (>= 2.1.0)
     rack-protection (3.1.0)
       rack (~> 2.2, >= 2.2.4)
-    rack-test (0.7.0)
-      rack (>= 1.0, < 3)
+    rack-test (2.1.0)
+      rack (>= 1.3)
     rails-controller-testing (1.0.5)
       actionpack (>= 5.0.1.rc1)
       actionview (>= 5.0.1.rc1)
@@ -1402,6 +1402,7 @@ GEM
 
 PLATFORMS
   aarch64-linux-musl
+  x86_64-darwin-22
   x86_64-linux-musl
 
 DEPENDENCIES
@@ -1423,7 +1424,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot (~> 1.0)
-  carrierwave-aws (~> 1.3)
+  carrierwave-aws (~> 1.4)
   cocoon
   codemirror-rails
   coffee-rails (~> 4.2)
@@ -1465,8 +1466,8 @@ DEPENDENCIES
   pg
   postrank-uri (>= 1.0.24)
   pry-byebug
-  puma (~> 5.6)
-  rack-test (= 0.7.0)
+  puma (~> 6.4)
+  rack-test (= 2.1.0)
   rails (~> 6.0)!
   rails-controller-testing
   rdf (~> 3.2)
@@ -1505,4 +1506,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.4.21
+   2.4.19

@@ -33,7 +33,7 @@ gem 'bulkrax', '~> 5.4'
 gem 'byebug', group: %i[development test]
 gem 'capybara', group: %i[test]
 gem 'capybara-screenshot', '~> 1.0', group: %i[test]
-gem 'carrierwave-aws', '~> 1.3', group: %i[aws test]
+gem 'carrierwave-aws', '~> 1.4', group: %i[aws test]
 gem 'cocoon'
 gem 'codemirror-rails'
 gem 'coffee-rails', '~> 4.2' # Use CoffeeScript for .coffee assets and views
@@ -75,8 +75,8 @@ gem 'parser', '>= 3.1.0.0'
 gem 'pg'
 gem 'postrank-uri', '>= 1.0.24'
 gem 'pry-byebug', group: %i[development test]
-gem 'puma', '~> 5.6' # Use Puma as the app server
-gem 'rack-test', '0.7.0', group: %i[test] # rack-test >= 0.71 does not work with older Capybara versions (< 2.17). See #214 for more details
+gem 'puma', '~> 6.4' # Use Puma as the app server
+gem 'rack-test', '2.1.0', group: %i[test] # rack-test >= 0.71 does not work with older Capybara versions (< 2.17). See #214 for more details
 gem 'rails-controller-testing', group: %i[test]
 gem 'rdf', '~> 3.2'
 gem 'redcarpet' # for Markdown constant
