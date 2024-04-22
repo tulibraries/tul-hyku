@@ -47,5 +47,5 @@ tag:
 #     - main
 #   script:
 #     - *export_variables
-#     - helm pull oci://$HARBOR/tulibraries/tul-hyku-charts/tul-hyku --untar
-#     - helm upgrade tul-hyku oci://$HARBOR/tulibraries/tul-hyku-charts/tul-hyku --history-max=5 --namespace=tul-hyku-qa --values tul-hyku/values.yaml --set image.repository=$IMAGE:$VERSION
+#     - helm pull oci://$HARBOR/tulibraries/charts/tul-hyku --untar
+#     - helm upgrade tul-hyku oci://$HARBOR/tulibraries/charts/tul-hyku --history-max=5 --namespace=tul-hyku-qa --values tul-hyku/values.yaml --set image.repository=$IMAGE:$VERSION
