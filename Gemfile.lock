@@ -124,11 +124,33 @@ GIT
       rails (>= 5.1, < 8.0)
 
 GIT
+  remote: https://github.com/samvera/bulkrax.git
+  revision: 1048453a4d99a6fba4b10531c2dc3a67a51c4c50
+  branch: main
+  specs:
+    bulkrax (8.0.0)
+      bagit (~> 0.4.6)
+      coderay
+      denormalize_fields
+      iso8601 (~> 0.9.0)
+      kaminari
+      language_list (~> 1.2, >= 1.2.1)
+      libxml-ruby (~> 3.2.4)
+      loofah (>= 2.2.3)
+      marcel
+      oai (>= 0.4, < 2.x)
+      rack (>= 2.0.6)
+      rails (>= 5.1.6)
+      rdf (>= 2.0.2, < 4.0)
+      rubyzip
+      simple_form
+
+GIT
   remote: https://github.com/samvera/hyrax.git
-  revision: cc86fa88456b2d5021e52f8d8842128f960215d0
+  revision: 54bb7b22aaf44dcdda76e05fb88b65095b2e899f
   branch: double_combo
   specs:
-    hyrax (5.0.0.rc3)
+    hyrax (5.0.1)
       active-fedora (~> 14.0)
       almond-rails (~> 0.1)
       awesome_nested_set (~> 3.1)
@@ -179,7 +201,7 @@ GIT
       sass-rails (~> 6.0)
       select2-rails (~> 3.5)
       signet
-      sprockets (~> 3.7)
+      sprockets (= 3.7.2)
       tinymce-rails (~> 5.10)
       valkyrie (~> 3.1.1)
       view_component (~> 2.74.1)
@@ -197,8 +219,8 @@ GIT
 
 GIT
   remote: https://github.com/scientist-softserv/iiif_print.git
-  revision: cad2cf33fc07ec2abb5b6834a858b5ed74903c12
-  branch: rails_hyrax_upgrade
+  revision: eed88649c00e7b78f33425151fafe793db75ac82
+  branch: main
   specs:
     iiif_print (1.0.0)
       blacklight_iiif_search (>= 1.0, < 3.0)
@@ -383,20 +405,6 @@ GEM
       signet (~> 0.8)
       typhoeus
     builder (3.2.4)
-    bulkrax (5.5.0)
-      bagit (~> 0.4)
-      coderay
-      iso8601 (~> 0.9.0)
-      kaminari
-      language_list (~> 1.2, >= 1.2.1)
-      libxml-ruby (~> 3.2.4)
-      loofah (>= 2.2.3)
-      oai (>= 0.4, < 2.x)
-      rack (>= 2.0.6)
-      rails (>= 5.1.6)
-      rdf (>= 2.0.2, < 4.0)
-      rubyzip
-      simple_form
     byebug (11.1.3)
     cancancan (3.5.0)
     capybara (3.39.2)
@@ -454,6 +462,8 @@ GEM
     database_cleaner-core (2.0.1)
     date (3.3.4)
     declarative (0.0.20)
+    denormalize_fields (1.3.0)
+      activerecord (>= 4.1.14, < 8.0.0)
     deprecation (1.1.0)
       activesupport
     derivative-rodeo (0.5.3)
@@ -559,7 +569,7 @@ GEM
       ffi (>= 1.15.0)
     excon (0.71.1)
     execjs (2.9.1)
-    factory_bot (6.4.2)
+    factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.2)
       factory_bot (~> 6.4)
@@ -1146,7 +1156,7 @@ GEM
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-rails (6.1.0)
+    rspec-rails (6.1.1)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
@@ -1346,7 +1356,7 @@ GEM
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
-    valkyrie (3.1.1)
+    valkyrie (3.1.4)
       activemodel
       activesupport
       dry-struct
@@ -1402,6 +1412,8 @@ GEM
 
 PLATFORMS
   aarch64-linux-musl
+  arm64-darwin-23
+  ruby
   x86_64-darwin-22
   x86_64-linux-musl
 
@@ -1420,7 +1432,7 @@ DEPENDENCIES
   bolognese (>= 1.9.10)
   bootstrap (~> 4.6)
   bootstrap-datepicker-rails
-  bulkrax (~> 5.4)
+  bulkrax!
   byebug
   capybara
   capybara-screenshot (~> 1.0)
@@ -1501,6 +1513,7 @@ DEPENDENCIES
   tether-rails
   turbolinks (~> 5)
   twitter-typeahead-rails (= 0.11.1.pre.corejavascript)
+  valkyrie (~> 3.0, >= 3.1.4)
   web-console (>= 3.3.0)
   webdrivers (~> 4.7.0)
   webmock
